@@ -12,7 +12,7 @@ function rockPaperScissors(hand1, hand2) {
   let p1 = hand1.toLowerCase().trim()
   let p2 = hand2.toLowerCase().trim()
 
-   if (p1 === p2) {
+  if (p1 === p2) {
      return "It's a tie!";
    }
   if (p1 === 'rock'){
