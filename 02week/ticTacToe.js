@@ -24,15 +24,66 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
+  // Code Below Works
+  if((board[0][0] == 'x') && (board[0][1] == 'x') && (board[0][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[1][0] == 'x') && (board[1][1] == 'x') && (board[1][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[2][0] == 'x') && (board[2][1] == 'x') && (board[2][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+
+  if((board[0][0] == 'y') && (board[0][1] == 'y') && (board[0][2] == 'y')){
+    console.log('Player y Wins!')
+  }
+  if((board[1][0] == 'y') && (board[1][1] == 'y') && (board[1][2] == 'y')){
+    console.log('Player Y Wins!')
+  }
+  if((board[2][0] == 'y') && (board[2][1] == 'y') && (board[2][2] == 'y')){
+    console.log('Player Y Wins!')
+  }
 }
 
 function verticalWin() {
-  // Your code here
+  // Code Below Works
+  if((board[0][0] == 'x') && (board[1][0] == 'x') && (board[2][0] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][1] == 'x') && (board[1][1] == 'x') && (board[2][1] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][2] == 'x') && (board[1][2] == 'x') && (board[2][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+
+  if((board[0][0] == 'y') && (board[1][0] == 'y') && (board[2][0] == 'y')){
+    console.log('Player Y Wins!')
+  }
+  if((board[0][1] == 'y') && (board[1][1] == 'y') && (board[2][1] == 'y')){
+    console.log('Player Y Wins!')
+  }
+  if((board[0][2] == 'y') && (board[1][2] == 'y') && (board[2][2] == 'y')){
+    console.log('Player Y Wins!')
+  }
 }
 
 function diagonalWin() {
-  // Your code here
+  // Code Below Works!
+  if((board[0][0] == 'x') && (board[1][1] == 'x') && (board[2][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][2] == 'x') && (board[1][1] == 'x') && (board[2][0] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][0] == 'y') && (board[1][1] == 'y') && (board[2][2] == 'y')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][2] == 'y') && (board[1][1] == 'y') && (board[2][0] == 'y')){
+    console.log('Player Y Wins!')
+  }
+  
 }
 
 function checkForWin() {
