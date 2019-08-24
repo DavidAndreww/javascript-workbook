@@ -12,15 +12,7 @@ let board = [
   [' ', ' ', ' ']
 ];
 
-let playerTurn = 'X';
-
-function switch() {
-  if (playerTurn === 'X') {
-    playerTurn ='O';
-  } else if (playerTurn === 'O') {
-    playerTurn === 'X';
-  }
-}
+let playerTurn = 'x';
 
 function printBoard() {
   console.log('   0  1  2');
@@ -43,14 +35,14 @@ function horizontalWin() {
     console.log('Player X Wins!')
   }
 
-  if((board[0][0] == 'y') && (board[0][1] == 'y') && (board[0][2] == 'y')){
-    console.log('Player y Wins!')
+  if((board[0][0] == 'o') && (board[0][1] == 'o') && (board[0][2] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[1][0] == 'y') && (board[1][1] == 'y') && (board[1][2] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[1][0] == 'o') && (board[1][1] == 'o') && (board[1][2] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[2][0] == 'y') && (board[2][1] == 'y') && (board[2][2] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[2][0] == 'o') && (board[2][1] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
   }
 }
 
@@ -66,14 +58,14 @@ function verticalWin() {
     console.log('Player X Wins!')
   }
 
-  if((board[0][0] == 'y') && (board[1][0] == 'y') && (board[2][0] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[0][0] == 'o') && (board[1][0] == 'o') && (board[2][0] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[0][1] == 'y') && (board[1][1] == 'y') && (board[2][1] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[0][1] == 'o') && (board[1][1] == 'o') && (board[2][1] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[0][2] == 'y') && (board[1][2] == 'y') && (board[2][2] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[0][2] == 'o') && (board[1][2] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
   }
 }
 
@@ -85,48 +77,17 @@ function diagonalWin() {
   if((board[0][2] == 'x') && (board[1][1] == 'x') && (board[2][0] == 'x')){
     console.log('Player X Wins!')
   }
-  if((board[0][0] == 'y') && (board[1][1] == 'y') && (board[2][2] == 'y')){
-    console.log('Player X Wins!')
+  if((board[0][0] == 'o') && (board[1][1] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[0][2] == 'y') && (board[1][1] == 'y') && (board[2][0] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[0][2] == 'o') && (board[1][1] == 'o') && (board[2][0] == 'o')){
+    console.log('Player O Wins!')
   }
   
 }
 
 function checkForWin() {
-  // Your code here
-  if((board[0][0] == 'x') && (board[1][1] == 'x') && (board[2][2] == 'x')){
-    console.log('Player X Wins!')
-  }
-  if((board[0][2] == 'x') && (board[1][1] == 'x') && (board[2][0] == 'x')){
-    console.log('Player X Wins!')
-  }
-  if((board[0][0] == 'y') && (board[1][1] == 'y') && (board[2][2] == 'y')){
-    console.log('Player X Wins!')
-  }
-  if((board[0][2] == 'y') && (board[1][1] == 'y') && (board[2][0] == 'y')){
-    console.log('Player Y Wins!')
-  }
-  if((board[0][0] == 'x') && (board[1][0] == 'x') && (board[2][0] == 'x')){
-    console.log('Player X Wins!')
-  }
-  if((board[0][1] == 'x') && (board[1][1] == 'x') && (board[2][1] == 'x')){
-    console.log('Player X Wins!')
-  }
-  if((board[0][2] == 'x') && (board[1][2] == 'x') && (board[2][2] == 'x')){
-    console.log('Player X Wins!')
-  }
-
-  if((board[0][0] == 'y') && (board[1][0] == 'y') && (board[2][0] == 'y')){
-    console.log('Player Y Wins!')
-  }
-  if((board[0][1] == 'y') && (board[1][1] == 'y') && (board[2][1] == 'y')){
-    console.log('Player Y Wins!')
-  }
-  if((board[0][2] == 'y') && (board[1][2] == 'y') && (board[2][2] == 'y')){
-    console.log('Player Y Wins!')
-  }
+  
   if((board[0][0] == 'x') && (board[0][1] == 'x') && (board[0][2] == 'x')){
     console.log('Player X Wins!')
   }
@@ -137,19 +98,55 @@ function checkForWin() {
     console.log('Player X Wins!')
   }
 
-  if((board[0][0] == 'y') && (board[0][1] == 'y') && (board[0][2] == 'y')){
-    console.log('Player y Wins!')
+  if((board[0][0] == 'o') && (board[0][1] == 'o') && (board[0][2] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[1][0] == 'y') && (board[1][1] == 'y') && (board[1][2] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[1][0] == 'o') && (board[1][1] == 'o') && (board[1][2] == 'o')){
+    console.log('Player O Wins!')
   }
-  if((board[2][0] == 'y') && (board[2][1] == 'y') && (board[2][2] == 'y')){
-    console.log('Player Y Wins!')
+  if((board[2][0] == 'o') && (board[2][1] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
+  }
+
+  if((board[0][0] == 'x') && (board[1][0] == 'x') && (board[2][0] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][1] == 'x') && (board[1][1] == 'x') && (board[2][1] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][2] == 'x') && (board[1][2] == 'x') && (board[2][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+
+  if((board[0][0] == 'o') && (board[1][0] == 'o') && (board[2][0] == 'o')){
+    console.log('Player O Wins!')
+  }
+  if((board[0][1] == 'o') && (board[1][1] == 'o') && (board[2][1] == 'o')){
+    console.log('Player O Wins!')
+  }
+  if((board[0][2] == 'o') && (board[1][2] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
+  }
+
+  if((board[0][0] == 'x') && (board[1][1] == 'x') && (board[2][2] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][2] == 'x') && (board[1][1] == 'x') && (board[2][0] == 'x')){
+    console.log('Player X Wins!')
+  }
+  if((board[0][0] == 'o') && (board[1][1] == 'o') && (board[2][2] == 'o')){
+    console.log('Player O Wins!')
+  }
+  if((board[0][2] == 'o') && (board[1][1] == 'o') && (board[2][0] == 'o')){
+    console.log('Player O Wins!')
   }
 }
 
 function ticTacToe(row, column) {
   // Your code here
+  board[row][column] = playerTurn;
+  if (playerTurn === 'x') {playerTurn ='o';}
+  else if (playerTurn === 'o') {playerTurn = 'x';}
 }
 
 function getPrompt() {
