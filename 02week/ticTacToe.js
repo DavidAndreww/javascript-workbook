@@ -95,7 +95,7 @@ function checkForWin() {
 function ticTacToe(row, column) {
   // Your code here
   board[row][column] = playerTurn;
-
+  
   if(checkForWin() == true){console.log('Player ' + playerTurn + ' Wins!');}
 
   if (playerTurn === 'x') {playerTurn ='o';}
