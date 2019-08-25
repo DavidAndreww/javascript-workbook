@@ -111,10 +111,6 @@ function ticTacToe(row, column) {
     console.log('Please make valid move');
     console.log(' ');
   }
-
-  function newFunction() {
-    return 0;
-  }
 }
 
 function getPrompt() {
