@@ -6,14 +6,14 @@
 // Only one piece may be moved at a time
 // Make sure there is a piece on the array to be moved
 
-//  -- if ((stacks.a.length > 0) || (stacks.b.length > 0) || (stacks.b.length >0))
+//  -- if ((stacks.a.length > 0) || (stacks.b.length > 0) || (stacks.b.length > 0))
 //    
 
 // Pass array value into towersOfHanoi to give input for the startStack value. This value will 
 // then pop the last element from that array and store as a new variable while determining
 // where to place it 
 
-//  -- var pieceHolder = startStack.pop()
+//  -- var pieceHolder = stacks.startStack.pop()
 
 
 // Pushing the piece back to the end of the array:
@@ -72,7 +72,7 @@ function checkForWin() {
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
-
+ 
 }
 
 function getPrompt() {
