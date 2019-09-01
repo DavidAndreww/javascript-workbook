@@ -77,6 +77,8 @@ let stacks = {
   c: []
 };
 
+let number = 14;
+
 function printStacks() {
   console.log("a: " + stacks.a);
   console.log("b: " + stacks.b);
@@ -93,7 +95,9 @@ function isValid(startStack, endStack){
   if ((startStack == 'a') || (startStack == 'b') || (startStack == 'c') && (endStack == 'a') || (endStack == 'b') || (endStack == 'c')){
     return true;      
   } else {
-    console.log('Not valid');
+    console.log('------------------------------');
+    console.log('Please select a valid input...');
+    console.log('------------------------------');
     return false;
   };
 }
@@ -105,7 +109,9 @@ function isLegal(startStack, endStack) {
   if ((endKey[endKey.length -1] > startKey[startKey.length -1]) || (endKey.length == 0)){
     return true;
   } else {
-    console.log('NO')
+    console.log('---------------------------');
+    console.log('Please play a valid move...');
+    console.log('---------------------------');
     return false
   }
 };
@@ -113,13 +119,32 @@ function isLegal(startStack, endStack) {
 function checkForWin() {
   // Your code here
   if ((stacks.b.length === 4) || (stacks.c.length === 4)){
-    console.log('');
+    console.log('---------');
     console.log('You Win!!');
-    console.log('');
+    console.log('---------');
+    console.log('')
     return true;
   } else {
     return false;
   }
+}
+function turnCounter(){
+  if (number == 0){
+    console.log('--------------------------------');
+    console.log('You ran out of turns! Try again!');
+    console.log('--------------------------------');
+    console.log('');
+    stacks = {
+      a: [4, 3, 2, 1],
+      b: [],
+      c: []
+    };
+    number = 15;
+  } 
+  console.log('--------------');
+  console.log(`Turns left: ${number}`);
+  console.log('--------------');
+  number--;
 }
 
 function towersOfHanoi(startStack, endStack) {
@@ -132,7 +157,9 @@ function towersOfHanoi(startStack, endStack) {
         b: [],
         c: []
       };
+      number = 15;
     }
+    turnCounter();
   }
 }
 
