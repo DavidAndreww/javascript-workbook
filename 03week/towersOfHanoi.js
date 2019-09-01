@@ -39,7 +39,7 @@
 // up and hold the next value input
 
 //        --   pieceHolder = '';
-//                         = null"
+//                         = null;
 //                         = undefined;
 
 
@@ -89,23 +89,51 @@ function movePiece(startStack, endStack) {
   stacks[endStack].push(pieceHolder);
 }
 
-
-function isLegal() {
-  // Your code here
-
+function isValid(startStack, endStack){
+  if ((startStack == 'a') || (startStack == 'b') || (startStack == 'c') && (endStack == 'a') || (endStack == 'b') || (endStack == 'c')){
+    return true;      
+  } else {
+    console.log('Not valid');
+    return false;
+  };
 }
+
+function isLegal(startStack, endStack) {
+  // Your code here
+  let endKey = stacks[endStack];
+  let startKey = stacks[startStack];
+  if ((endKey[endKey.length -1] > startKey[startKey.length -1]) || (endKey.length == 0)){
+    return true;
+  } else {
+    console.log('NO')
+    return false
+  }
+};
 
 function checkForWin() {
   // Your code here
   if ((stacks.b.length === 4) || (stacks.c.length === 4)){
-    console.log('You win!');
+    console.log('');
+    console.log('You Win!!');
+    console.log('');
+    return true;
+  } else {
+    return false;
   }
 }
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
-  movePiece(startStack, endStack);
-  // checkForWin();
+  if(isValid(startStack, endStack) && isLegal(startStack, endStack)){
+    movePiece(startStack, endStack);
+    if(checkForWin()){
+      stacks = {
+        a: [4, 3, 2, 1],
+        b: [],
+        c: []
+      };
+    }
+  }
 }
 
 function getPrompt() {
