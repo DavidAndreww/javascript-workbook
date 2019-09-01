@@ -1,37 +1,66 @@
 //                   GAME START
 // check to see that the game board is set up correctly
-// all 4 pieces are aligned largest to smallest in array A
+// all 4 pieces are lined up largest to smallest in array A
+
+
 
 //                   MOVING PIECES
-// Only one piece may be moved at a time
-// Make sure there is a piece on the array to be moved
+// Only one piece may be moved at a time, and the entry must be a valid entry
+
+// --  if ((startStack == 'a') || (startStack == 'b') || (startStack == 'c') && (endStack == 'a') || (endStack == 'b') || (endStack == 'c')){
+//      *all other logic goes inside of here*
+//    } else {return 'Please select a valid input'};
+
+
+// Make sure the array you're looking to pop from (startStack), has an element in it
 
 //  -- if ((stacks.a.length > 0) || (stacks.b.length > 0) || (stacks.b.length > 0))
-//    
 
-// Pass array value into towersOfHanoi to give input for the startStack value. This value will 
-// then pop the last element from that array and store as a new variable while determining
-// where to place it 
+
+// The towersOfHanoi startStack argument will select which array in the stacks variable to pull the
+// first piece from. Its value must be stored in a variable. 
 
 //  -- var pieceHolder = stacks.startStack.pop()
 
 
-// Pushing the piece back to the end of the array:
-//    -- Last value in the stack that you are pushing to, must be greater than the value of the 
-//    -- piece that is to be pushed
+// The towersOfHanoi endStack agument selects where you want to drop the piece that was just
+// pulled from the startStack.
+//                              AND!
 
-//       if (endStack[endStack.length -1] > pieceHolder)
+// The value of the last element in the stack you are pushing to, must be of higher value than
+// the piece you are currently holding.
 
-// Value of pieceHolder must reset back to nothing once it has been pushed, to prepare to pick
+//    -- if ((stacks.endStack[stacks.endStack.length -1] > pieceHolder) || stacks.endStack['']){
+//           stacks.endStack.push(pieceHolder);
+//          }
+//                              AND!        
+
+// The value of pieceHolder must reset back to nothing, or empty, once it has been pushed, to prepare to pick
 // up and hold the next value input
+
+//        --   pieceHolder = '';
+//                         = null"
+//                         = undefined;
+
 
 //                  CHECK FOR WIN
 // If the number of elements in array B or C are equal to 4, and ordered from highest number
 // to lowest, the game has been won
 
-//    if ((stacks.b.length === 4) || (stacks.c.length === 4)){
-//      return 'You win!';
-//    }
+//   -- if ((stacks.b.length === 4) || (stacks.b.length === 4)){
+//        return 'You win!';
+//      }
+
+//  Reset the game by returning the stacks object back to its original values at start of game.
+
+//  Add inside of the checkForWin function
+//  --  let stacks = {
+//        a: [4, 3, 2, 1],
+//        b: [],
+//        c: []
+//      };
+
+
 
 'use strict';
 
