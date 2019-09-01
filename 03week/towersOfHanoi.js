@@ -20,7 +20,7 @@
 // The towersOfHanoi startStack argument will select which array in the stacks variable to pull the
 // first piece from. Its value must be stored in a variable. 
 
-//  -- var pieceHolder = stacks.startStack.pop()
+//  -- var pieceHolder = stacks.startStack.pop();
 
 
 // The towersOfHanoi endStack agument selects where you want to drop the piece that was just
@@ -47,7 +47,7 @@
 // If the number of elements in array B or C are equal to 4, and ordered from highest number
 // to lowest, the game has been won
 
-//   -- if ((stacks.b.length === 4) || (stacks.b.length === 4)){
+//   -- if ((stacks.b.length === 4) || (stacks.c.length === 4)){
 //        return 'You win!';
 //      }
 
@@ -83,11 +83,12 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
+function movePiece(startStack, endStack) {
   // Your code here
-
-
+  var pieceHolder = stacks[startStack].pop();
+  stacks[endStack].push(pieceHolder);
 }
+
 
 function isLegal() {
   // Your code here
@@ -96,12 +97,15 @@ function isLegal() {
 
 function checkForWin() {
   // Your code here
-
+  if ((stacks.b.length === 4) || (stacks.c.length === 4)){
+    console.log('You win!');
+  }
 }
 
 function towersOfHanoi(startStack, endStack) {
   // Your code here
- 
+  movePiece(startStack, endStack);
+  // checkForWin();
 }
 
 function getPrompt() {
