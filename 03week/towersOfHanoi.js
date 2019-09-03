@@ -71,12 +71,14 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+// Sets initial values for board at start of game
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
   c: []
 };
 
+// Sets max number of turns for turn counter
 let number = 14;
 
 function printStacks() {
@@ -85,12 +87,13 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
+// Creates a variable to hold the piece that is being moved, and then places it upon user input
 function movePiece(startStack, endStack) {
-  // Your code here
   var pieceHolder = stacks[startStack].pop();
   stacks[endStack].push(pieceHolder);
 }
 
+// Restricts user input if they do not select a proper stack value, either A, B or C
 function isValid(startStack, endStack){
   if ((startStack == 'a') || (startStack == 'b') || (startStack == 'c') && (endStack == 'a') || (endStack == 'b') || (endStack == 'c')){
     return true;      
@@ -102,10 +105,13 @@ function isValid(startStack, endStack){
   };
 }
 
+// Restricts placement of the piece to the stack, if the value of the last piece in the stack is lesser than the piece being moved
 function isLegal(startStack, endStack) {
-  // Your code here
+
+  // Creating two variables to hold values key array values for easier syntax below
   let endKey = stacks[endStack];
   let startKey = stacks[startStack];
+
   if ((endKey[endKey.length -1] > startKey[startKey.length -1]) || (endKey.length == 0)){
     return true;
   } else {
@@ -116,9 +122,9 @@ function isLegal(startStack, endStack) {
   }
 };
 
-function checkForWin() {
-  // Your code here
-  if ((stacks.b.length === 4) || (stacks.c.length === 4)){
+// Checks for win: If length of stacks B or C are equal to 4, the player wins.
+function checkForWin() {  
+    if ((stacks.b.length === 4) || (stacks.c.length === 4)){
     console.log('---------');
     console.log('You Win!!');
     console.log('---------');
@@ -128,12 +134,16 @@ function checkForWin() {
     return false;
   }
 }
+
+// Function to reset the game if the player takes more than the allotted 15 moves to complete the game.
 function turnCounter(){
   if (number == 0){
     console.log('--------------------------------');
     console.log('You ran out of turns! Try again!');
     console.log('--------------------------------');
     console.log('');
+
+    // Resets game board and turn counter to start of game values
     stacks = {
       a: [4, 3, 2, 1],
       b: [],
@@ -148,9 +158,11 @@ function turnCounter(){
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
+  // Runs the game only if player enters a valid value for stacks, and the movement of the pieces is legal as defined above
   if(isValid(startStack, endStack) && isLegal(startStack, endStack)){
     movePiece(startStack, endStack);
+    
+    // Continues to check for player win, or expiration of available turns. When one is triggered, the game resets
     if(checkForWin()){
       stacks = {
         a: [4, 3, 2, 1],
@@ -163,6 +175,9 @@ function towersOfHanoi(startStack, endStack) {
   }
 }
 
+// printStacks() = prints the board
+// question() = takes user input
+// towersOfHanoi() checks for valid moves, places pieces, and checks for win or expiriation of available moves
 function getPrompt() {
   printStacks();
   rl.question('start stack: ', (startStack) => {
