@@ -133,7 +133,7 @@ function checkForWin() {
   } else {
     return false;
   }
-}
+};
 
 // Function to reset the game if the player takes more than the allotted 15 moves to complete the game.
 function turnCounter(){
