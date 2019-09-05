@@ -2,22 +2,36 @@
 
 // User gets 10 GUESSES, or chances to guess the correct sequence, or SOLUTION.
 
+
 // User has to pick a valid character 4 times per turn
-/*let string = guess.split('');
-if (string.length !== 4) {
-  console.log('Input must be 4 characters')
-  return false;
-} else {
-  console.log('thanks you')
-  return true;
-}*/
+/*
+function validInput() {
+  if (guessArray.length !== 4) {
+    console.log('Input must be 4 characters');
+    return false;
+  } else {
+    console.log('thanks you');
+    return true;
+  }
+}
+*/
+
+// If guess is equal to solution, player wins the game
+/*
+if (guess === solution) {
+  console.log('You Win!');
+}
+
+*/
+
 // If any character value is equal to one in the sequence, but not to the same index, return halfTrue
 // If a character 
 
 
 // Step 1:
 //            User inputs 4 values into each GUESS, using the values 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'.
-//            guess gets returned as a string           board = guess.split('');
+//            guess gets returned as a string ------ guess = guess.split('');
+//            guess gets pushed to board ----------- board.push(guess);
 
 // Step 2:
 //            Program compares the 4 user inputs against the current SOLUTION
@@ -56,7 +70,7 @@ function generateSolution() {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+}  
 
 function generateHint() {
   // your code here
@@ -64,9 +78,9 @@ function generateHint() {
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
-  // your code here
-
-  
+  let guessArray = guess.split('');
+  let solutionArray = solution.split('');
+  board.push(guessArray);
 }
 
 
