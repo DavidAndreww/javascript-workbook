@@ -2,7 +2,6 @@
 
 // User gets 10 GUESSES, or chances to guess the correct sequence, or SOLUTION.
 
-
 // User has to pick a valid character 4 times per turn
 /*
 function validInput() {
@@ -16,16 +15,23 @@ function validInput() {
 }
 */
 
-// If guess is equal to solution, player wins the game
+// GUESS and SOLUTION are converted to arrays to compare.
 /*
-if (guess === solution) {
-  console.log('You Win!');
-}
-
+let guessArray = guess.split('');
+let solutionArray = solution.split('');
 */
 
-// If any character value is equal to one in the sequence, but not to the same index, return halfTrue
-// If a character 
+
+
+
+
+// If guess is equal to solution, player wins the game
+/*
+if (guessArray === solutionArray) {
+  console.log('You Win!');
+}
+*/
+
 
 
 // Step 1:
