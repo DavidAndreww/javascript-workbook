@@ -1,14 +1,20 @@
 //                             RULES
 
-// User gets 10 GUESSES, or chances to guess the correct sequence
-// 
+// User gets 10 GUESSES, or chances to guess the correct sequence, or SOLUTION.
+// User has to pick a valid character 4 times per turn
+// If any character value is equal to one in the sequence, but not to the same index, return halfTrue
+// If a character 
 
 
 // Step 1:
-//            User inputs 4 values into each GUESS, using the values 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'
+//            User inputs 4 values into each GUESS, using the values 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'.
+//            guess gets returned as a string           board = guess.split('');
 
 // Step 2:
 //            Program compares the 4 user inputs against the current SOLUTION
+//                  board.map(function(input, index) {
+//                    
+//                  })
 // Step 2A:
 //            
 
