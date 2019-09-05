@@ -1,7 +1,16 @@
 //                             RULES
 
 // User gets 10 GUESSES, or chances to guess the correct sequence, or SOLUTION.
+
 // User has to pick a valid character 4 times per turn
+/*let string = guess.split('');
+if (string.length !== 4) {
+  console.log('Input must be 4 characters')
+  return false;
+} else {
+  console.log('thanks you')
+  return true;
+}*/
 // If any character value is equal to one in the sequence, but not to the same index, return halfTrue
 // If a character 
 
@@ -56,6 +65,8 @@ function generateHint() {
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   // your code here
+
+  
 }
 
 
