@@ -1,3 +1,18 @@
+//                             RULES
+
+// User gets 10 GUESSES, or chances to guess the correct sequence
+// 
+
+
+// Step 1:
+//            User inputs 4 values into each GUESS, using the values 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'
+
+// Step 2:
+//            Program compares the 4 user inputs against the current SOLUTION
+// Step 2A:
+//            
+
+
 'use strict';
 
 const assert = require('assert');
