@@ -7,11 +7,49 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
 function rockPaperScissors(hand1, hand2) {
 
-  // Write code here
+  let p1 = hand1.toLowerCase().trim()
+  let p2 = hand2.toLowerCase().trim()
 
+  var inputCheck = true;
+
+  while (inputCheck) {
+    if (p1 == 'rock' || p1 == 'paper' || p1 == 'scissors') {
+      inputCheck = false;
+    } else {
+      return ' Sorry, Player 1, please choose a valid input';
+    }
+  }
+
+  var inputCheck = true;
+
+  while (inputCheck) {
+    if (p2 == 'rock' || p2 == 'paper' || p2 == 'scissors') {
+      inputCheck = false;
+    } else {
+      return ' Sorry, Player 2, please choose a valid input';
+    }
+  }
+
+  if (p1 === p2) {
+    return "It's a tie!";
+  }
+  if (p1 === 'rock'){
+    if (p2 === 'paper') {
+      return 'Hand two wins!';
+    } else return 'Hand one wins!';
+  }
+  if (p1 === 'scissors') {
+    if (p2 === 'paper') {
+      return 'Hand one wins!';
+    } else return 'Hand two wins!';
+  }
+  if (p1 === 'paper') {
+    if (p2 === 'scissors') {
+      return 'Hand two wins!'; 
+    } else return 'Hand one wins!';
+  }
 }
 
 function getPrompt() {
@@ -23,7 +61,7 @@ function getPrompt() {
   });
 }
 
-// Tests
+//Tests
 
 if (typeof describe === 'function') {
 
