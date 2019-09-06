@@ -34,7 +34,7 @@ let solutionArray = solution.split('');
 
 // If guess is equal to solution, player wins the game.
 /*
-if (guessArray === solutionArray) {
+if (guess === solution) {
   console.log('You Win!');
 }
 */
@@ -74,10 +74,19 @@ function generateHint() {
   // your code here
 }
 
+function validInput(guessArray) {
+  if (guessArray.length !== 4) {
+    console.log('Input must be 4 characters');
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   let guessArray = guess.split('');
-  let solutionArray = solution.split('');
+  validInput(guessArray);
   board.push(guessArray);
 }
 
