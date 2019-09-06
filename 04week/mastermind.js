@@ -2,14 +2,21 @@
 
 // User gets 10 GUESSES, or chances to guess the correct sequence, or SOLUTION.
 
-// User has to pick a valid character 4 times per turn
+// Guessed characters must be valid characters, A, B, C, D, E, F, G or H. (switch function?)
+/*
+if (guess !== 'a' || 'b' || 'c' || 'd' || 'e' || 'f' || 'g' || 'h') {
+  console.log('Please select character A thru H');
+  return false;
+}
+*/
+
+// User has to enter 4 characters for each guess
 /*
 function validInput() {
   if (guessArray.length !== 4) {
     console.log('Input must be 4 characters');
     return false;
   } else {
-    console.log('thanks you');
     return true;
   }
 }
@@ -22,30 +29,15 @@ let solutionArray = solution.split('');
 */
 
 
+// If any of the characters in guessArray is also present in solutionArray, 
 
 
-
-// If guess is equal to solution, player wins the game
+// If guess is equal to solution, player wins the game.
 /*
 if (guessArray === solutionArray) {
   console.log('You Win!');
 }
 */
-
-
-
-// Step 1:
-//            User inputs 4 values into each GUESS, using the values 'A' 'B' 'C' 'D' 'E' 'F' 'G' 'H'.
-//            guess gets returned as a string ------ guess = guess.split('');
-//            guess gets pushed to board ----------- board.push(guess);
-
-// Step 2:
-//            Program compares the 4 user inputs against the current SOLUTION
-//                  board.map(function(input, index) {
-//                    
-//                  })
-// Step 2A:
-//            
 
 
 'use strict';
@@ -91,7 +83,7 @@ function mastermind(guess) {
 
 
 function getPrompt() {
-  rl.question('guess: ', (guess) => {
+  rl.question('Guess: ', (guess) => {
     mastermind(guess);
     printBoard();
     getPrompt();
