@@ -86,8 +86,9 @@ function validInput(guessArray) {
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   let guessArray = guess.split('');
-  validInput(guessArray);
-  board.push(guessArray);
+  if (validInput(guessArray)) {
+    board.push(guessArray);
+  } 
 }
 
 
