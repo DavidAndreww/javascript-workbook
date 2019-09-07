@@ -57,6 +57,10 @@ function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
   }
+  if (board.length === 10){
+    console.log('You\'re out of turns!');
+    return false;
+  }
 }
 
 function generateSolution() {
@@ -70,27 +74,56 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }  
 
-function generateHint() {
-  // your code here
+function generateHint(guess) {
+  let guessArray = guess.split('');
+  let solutionArray = solution.split('');
+  
+  let indexMatch = 0;
+   solutionArray.map((input, index) => {
+     if (guessArray[index] == input) {
+       indexMatch++;
+       solutionArray[index] = null;
+      }
+    });
+
+  let letterMatch = 0;
+  guessArray.map((input) => {
+    let target = solutionArray.indexOf(input);
+    if (target !== -1){
+      letterMatch++;
+      solutionArray[target] = null;
+    }
+  });
+  console.log(`${indexMatch} - ${letterMatch}`);
+  return indexMatch + '-' + letterMatch;
 }
 
-function validInput(guessArray) {
+function validInput(guess) {
+  let guessArray = guess.split('');
+
   if (guessArray.length !== 4) {
     console.log('Input must be 4 characters');
     return false;
   } else {
     return true;
-  }
+  };
 }
 
 function mastermind(guess) {
   solution = 'abcd'; // Comment this out to generate a random solution
   let guessArray = guess.split('');
-  if (validInput(guessArray)) {
-    board.push(guessArray);
-  } 
-}
 
+  if (validInput(guess)) {
+    generateHint(guess);
+    board.push(guessArray);
+  };
+
+  if (solution == guess) {
+    let winner ='You guessed it!';
+    console.log(winner);
+    return winner;
+  };
+}
 
 function getPrompt() {
   rl.question('Guess: ', (guess) => {
