@@ -37,15 +37,16 @@ function generateHint(guess) {
   let guessArray = guess.split('');
   let solutionArray = solution.split('');
 
-  //
+  // indexMatch holds # of correctly placed letters. if value at the index of the guessArray is equal to value at the same index of solutionArray, then that index of the solutionArray is set to null, so that it may no longer be compared. indexMatch is increased by 1 each time this happens. 
   let indexMatch = 0;
     solutionArray.map((input, index) => {
-      if (guessArray[index] == input) {
+      if (guessArray[index] === input) {
         solutionArray[index] = null;
         indexMatch++;
       }
     });
 
+  // letterMatch holds # of shared letters between solutionArray and guessArray. if solutionArray shares an input value with guessArray, that index is stored in the target variable. If the input is not shared, the value of target will be -1. If target is equal to any index that isn't -1, then that index in the solution will be set to null so as to not be compared again, and the letterMatch variable will increase by 1. 
   let letterMatch = 0;
   guessArray.map((input) => {
     let target = solutionArray.indexOf(input);
@@ -54,7 +55,7 @@ function generateHint(guess) {
       letterMatch++;
     }
   });
-  
+
   console.log('');
   console.log(`${indexMatch} correctly placed letters`);
   console.log(`${letterMatch} shared letters`);
@@ -71,6 +72,7 @@ function turnCounter(){
     board = [];
     turnCount = 10;
   } 
+
   console.log('--------------');
   console.log(`Turns left: ${turnCount}`);
   console.log('--------------');
@@ -78,10 +80,9 @@ function turnCounter(){
   turnCount--;
 }
 
+// Stops game from progressing if player enters a guess that is not equal to 4 characters
 function validInput(guess) {
-  let guessArray = guess.split('');
-
-  if (guessArray.length !== 4) {
+  if (guess.length !== 4) {
     console.log('--------------------------');
     console.log('Input must be 4 characters');
     console.log('--------------------------');
@@ -91,9 +92,10 @@ function validInput(guess) {
   };
 }
 
+// Restricts the user to choosing a character A, B, C, D, E, F, G or H.
 function validEntry(letters, guess) {
-  let guessArray = guess.split('');
-  
+
+  // The loop iterates through each index in the guessArray, and pulls back the value at that index. That value is then compared to the values of the letters variable. letters.indexOf will pull the index at that shared value. If shared, then the check variable will set as equal to that index, being zero, or a positive integer. If not shared, check will be set to -1.  
   for (let num = 0; num < guess.length; num++){
     let check = letters.indexOf(guess[num]);
     if (check === -1) {
@@ -110,15 +112,18 @@ function mastermind(guess) {
   // solution = 'abcd'; // Comment this out to generate a random solution
   let guessArray = guess.split('');
 
+  // If validInput and validEntry are both true, then that guess will be run in the program.
   if (validInput(guess) && validEntry(letters, guess)) {
     
+    // The current guess is pushed to the board variable as an array to be printed, a hint will be generated if there are any matching letters and the turn counter will decrease by 1.
     board.push(guessArray);
     printBoard();
     generateHint(guess);
     turnCounter();
   };
 
-  if (solution == guess) {
+  // If the player guesses the solution then the board and turn counter are reset.
+  if (solution === guess) {
     board = [];
     turnCount = 9;
     console.log('You win! Great work!')
@@ -128,10 +133,10 @@ function mastermind(guess) {
   };
 }
 
+// Prompts the player for their guess, then runs the program.
 function getPrompt() {
   rl.question('Guess: ', (guess) => {
     mastermind(guess);
-    
     getPrompt();
   });
 }
