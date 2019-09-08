@@ -12,16 +12,19 @@ let board = [];
 let solution = '';
 let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
+// Prints game board at start of each turn
 function printBoard() {
   for (let i = 0; i < board.length; i++) {
     console.log(board[i]);
   }
 }
 
+// Creates random integers to be used in generating random solution
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// Creates a random solution of 4 characters
 function generateSolution() {
   for (let i = 0; i < 4; i++) {
     const randomIndex = getRandomInt(0, letters.length);
@@ -29,15 +32,17 @@ function generateSolution() {
   }
 }
 
+// Generates hints to help player solve puzzle, based off of their most recent input
 function generateHint(guess) {
   let guessArray = guess.split('');
   let solutionArray = solution.split('');
-  
+
+  //
   let indexMatch = 0;
-   solutionArray.map((input, index) => {
-     if (guessArray[index] == input) {
-       indexMatch++;
-       solutionArray[index] = null;
+    solutionArray.map((input, index) => {
+      if (guessArray[index] == input) {
+        solutionArray[index] = null;
+        indexMatch++;
       }
     });
 
@@ -45,14 +50,31 @@ function generateHint(guess) {
   guessArray.map((input) => {
     let target = solutionArray.indexOf(input);
     if (target !== -1){
-      letterMatch++;
       solutionArray[target] = null;
+      letterMatch++;
     }
   });
   console.log('');
   console.log(`${indexMatch} correctly placed letters`);
   console.log(`${letterMatch} shared letters`);
   return indexMatch + '-' + letterMatch;
+}
+
+// Tracks number of remaining turns, and resets game if turns left = 0.
+function turnCounter(){
+  if (turnCount === 0){
+    console.log('--------------------------------');
+    console.log('You ran out of turns! Try again!');
+    console.log('--------------------------------');
+    console.log('');
+    board = [];
+    turnCount = 10;
+  } 
+  console.log('--------------');
+  console.log(`Turns left: ${turnCount}`);
+  console.log('--------------');
+  console.log('');
+  turnCount--;
 }
 
 function validInput(guess) {
@@ -84,7 +106,7 @@ function validEntry(letters, guess) {
 }
 
 function mastermind(guess) {
-  solution = 'abcd'; // Comment this out to generate a random solution
+  // solution = 'abcd'; // Comment this out to generate a random solution
   let guessArray = guess.split('');
 
   if (validInput(guess) && validEntry(letters, guess)) {
@@ -103,23 +125,6 @@ function mastermind(guess) {
     let winner ='You guessed it!';
     return winner;
   };
-}
-
-// Tracks number of remaining turns, and resets game if turns left = 0.
-function turnCounter(){
-  if (turnCount === 0){
-    console.log('--------------------------------');
-    console.log('You ran out of turns! Try again!');
-    console.log('--------------------------------');
-    console.log('');
-    board = [];
-    turnCount = 10;
-  } 
-  console.log('--------------');
-  console.log(`Turns left: ${turnCount}`);
-  console.log('--------------');
-  console.log('');
-  turnCount--;
 }
 
 function getPrompt() {
