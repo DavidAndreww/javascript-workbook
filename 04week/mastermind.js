@@ -54,6 +54,7 @@ function generateHint(guess) {
       letterMatch++;
     }
   });
+  
   console.log('');
   console.log(`${indexMatch} correctly placed letters`);
   console.log(`${letterMatch} shared letters`);
