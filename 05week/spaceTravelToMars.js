@@ -39,12 +39,14 @@ class Ship {
 }
 
 
-let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit', [crewMember1])
+let mav = new Ship('Mars Ascent Vehicle', 'MAV', 'Ascend into low orbit')
 var crewMember1 = new CrewMember ('Rick Martinez', 'pilot', 'chemistry', mav);
 let hermes = new Ship('Hermes', 'Main Ship', 'Interplanetary Space Travel', [crewMember2]);
 var crewMember2 = new CrewMember('Commander Lewis', 'commander', 'geology', hermes);
 
 console.log(mav)
+console.log(' ')
+console.log(crewMember1)
 
 
 //tests
