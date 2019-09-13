@@ -38,7 +38,7 @@ class Board {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
           // push the symbol of the check in that location into the array
-          rowOfCheckers.push(this.grid[row][column].symbol);
+          rowOfCheckers.push(this.grid[whichPiece][toWhere].symbol);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
