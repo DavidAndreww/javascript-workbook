@@ -13,8 +13,9 @@ function Checker() {
 }
 
 class Board {
-  constructor() {
+  constructor(checkers) {
     this.grid = []
+    this.checkers = []
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -38,7 +39,7 @@ class Board {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
           // push the symbol of the check in that location into the array
-          rowOfCheckers.push(this.grid[whichPiece][toWhere].symbol);
+          rowOfCheckers.push(this.grid[row][column].symbol);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
@@ -53,6 +54,7 @@ class Board {
   }
 
   // Your code here
+  
 }
 
 class Game {
