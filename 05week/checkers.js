@@ -15,8 +15,8 @@ function Checker() {
 class Board {
   constructor(checkers) {
     this.grid = []
-    this.checkers = []
-    this.redPiece = 'R';
+    // this.checkers = [] //Don't need this?
+    this.whitePiece = 'W';
     this.blackPiece = 'B';
   }
   // method that creates an 8x8 array, filled with null values
@@ -30,6 +30,8 @@ class Board {
       }
     }
   }
+
+  // Popuates board with checker pieces at game start
   viewGrid() {
     // add our column numbers
     let string = "  0 1 2 3 4 5 6 7\n";
@@ -54,19 +56,21 @@ class Board {
     }
     console.log(string);
   }
+
+  // Creates checkers and populates board
   createCheckers(){
-    //Create red pieces
+    //Create white pieces
     for(let row1 = 0; row1 < 3; row1++){
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
-          this.grid[row1][col1] = this.redPiece;
+          this.grid[row1][col1] = this.blackPiece;
         }
       }
     }
     for(let row1 = 0; row1 < 3; row1++){
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
-          this.grid[row1][col1] = this.redPiece;
+          this.grid[row1][col1] = this.blackPiece;
         }
       }
     }
@@ -75,20 +79,22 @@ class Board {
     for(let row1 = 5; row1 < 8; row1++){
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
-          this.grid[row1][col1] = this.blackPiece;
+          this.grid[row1][col1] = this.whitePiece;
         }
       }
     }
     for(let row1 = 5; row1 < 8; row1++){
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
-          this.grid[row1][col1] = this.blackPiece;
+          this.grid[row1][col1] = this.whitePiece;
         }
       }
     }
   }
+
+  // Selects Checker location? // CHECK FOR ACCURACY
   selectChecker(row, column){
-    // Enter code
+    return this.grid([row][column])
   }
   killChecker(position){
     // Enter Code
