@@ -55,9 +55,6 @@ class Board {
     console.log(string);
   }
   createCheckers(){
-    let red = 'r';
-    let black = 'b';
-
     //Create red pieces
     for(let row1 = 0; row1 < 3; row1++){
       for(let col1 = 0; col1 < 8; col1++){
@@ -107,6 +104,7 @@ class Game {
   start() {
     this.board.createGrid();
     this.board.createCheckers()
+    
   }
 }
 
