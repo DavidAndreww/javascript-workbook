@@ -16,6 +16,8 @@ class Board {
   constructor(checkers) {
     this.grid = []
     this.checkers = []
+    this.redPiece = 'R';
+    this.blackPiece = 'B';
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -39,7 +41,7 @@ class Board {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
           // push the symbol of the check in that location into the array
-          rowOfCheckers.push(this.grid[row][column].symbol);
+          rowOfCheckers.push(this.grid[row][column]);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
@@ -52,7 +54,48 @@ class Board {
     }
     console.log(string);
   }
+  createCheckers(){
+    let red = 'r';
+    let black = 'b';
 
+    //Create red pieces
+    for(let row1 = 0; row1 < 3; row1++){
+      for(let col1 = 0; col1 < 8; col1++){
+        if(row1 % 2 == 0 && col1 % 2 == 1){
+          this.grid[row1][col1] = this.redPiece;
+        }
+      }
+    }
+    for(let row1 = 0; row1 < 3; row1++){
+      for(let col1 = 0; col1 < 8; col1++){
+        if(row1 % 2 == 1 && col1 % 2 == 0){
+          this.grid[row1][col1] = this.redPiece;
+        }
+      }
+    }
+
+    // Create black pieces
+    for(let row1 = 5; row1 < 8; row1++){
+      for(let col1 = 0; col1 < 8; col1++){
+        if(row1 % 2 == 0 && col1 % 2 == 1){
+          this.grid[row1][col1] = this.blackPiece;
+        }
+      }
+    }
+    for(let row1 = 5; row1 < 8; row1++){
+      for(let col1 = 0; col1 < 8; col1++){
+        if(row1 % 2 == 1 && col1 % 2 == 0){
+          this.grid[row1][col1] = this.blackPiece;
+        }
+      }
+    }
+  }
+  selectCheckers(position){
+    // Enter code
+  }
+  killChecker(position){
+    // Enter Code
+  }
   // Your code here
   
 }
@@ -63,6 +106,7 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers()
   }
 }
 
