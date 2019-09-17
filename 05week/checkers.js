@@ -87,7 +87,7 @@ class Board {
       }
     }
   }
-  selectCheckers(position){
+  selectChecker(row, column){
     // Enter code
   }
   killChecker(position){
@@ -102,6 +102,8 @@ class Game {
   start() {
     this.board.createGrid();
     this.board.createCheckers()
+  }
+  moveChecker(start, end){
     
   }
 }
