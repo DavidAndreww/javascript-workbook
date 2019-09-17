@@ -92,9 +92,7 @@ class Board {
   }
   killChecker(position){
     // Enter Code
-  }
-  // Your code here
-  
+  }  
 }
 
 class Game {
