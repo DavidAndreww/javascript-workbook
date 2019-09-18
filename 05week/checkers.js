@@ -15,11 +15,11 @@ function Checker() {
 class Board {
   constructor(checkers) {
     this.grid = []
-    // this.checkers = [] //Don't need this?
+    this.checkers = [] //Don't need this?
     this.whitePiece = 'W';
     this.blackPiece = 'B';
   }
-  // method that creates an 8x8 array, filled with null values
+  // Creates an 8x8 array, filled with null values. No return value
   createGrid() {
     // loop to create the 8 rows
     for (let row = 0; row < 8; row++) {
@@ -31,7 +31,7 @@ class Board {
     }
   }
 
-  // Popuates board with checker pieces at game start
+  // Prints the grid. No return value.
   viewGrid() {
     // add our column numbers
     let string = "  0 1 2 3 4 5 6 7\n";
@@ -57,7 +57,7 @@ class Board {
     console.log(string);
   }
 
-  // Creates checkers and populates board
+  // Creates checkers at game start and populates board. No return value.
   createCheckers(){
     //Create white pieces
     for(let row1 = 0; row1 < 3; row1++){
@@ -90,6 +90,10 @@ class Board {
         }
       }
     }
+  }
+
+  validateInput(whichPiece, toWhere){
+    
   }
 
   // Selects Checker location? // CHECK FOR ACCURACY
