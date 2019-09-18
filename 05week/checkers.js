@@ -127,34 +127,36 @@ class Game {
     return true;
   }
 
-  // Piece must be present at start position, end position must be empty
+  // Ensures that the move is a valid move
   validMove(start, end){
+    // Ensures that the selected start square contains a game piece
     let startValue = start.split('');
     let isPiece = this.board.grid[startValue[0]][startValue[1]];
     if(isPiece == null){
       console.log(`There is no piece at square ${start}`)
       return false;
     } 
-
+    //ensure that square to be moved to is empty
     let endValue = end.split('');
     let isEmpty = this.board.grid[endValue[0]][endValue[1]];
-    if(isEmpty !== null){ // need to add logic to restrict moving onto square occupied by own piece
+    if(isEmpty !== null){
       console.log(`Square at ${end} is already occupied`)
       return false;
   }
 
   if(isPiece == this.board.whitePiece){
-    if((start - end !== 9)){
+    if((parseInt(start) - parseInt(end) !== 9) && (parseInt(start) - parseInt(end) !== 11)){
       console.log(`Square ${end} is not a valid move.`);
       return false;
     }
   }
 
-  // if(isPiece == this.board.blackPiece){
-  //   if((start - end !== -9) || (start - end !== -11)){
-
-  //   }
-  // }
+  if(isPiece == this.board.blackPiece){
+    if((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)){
+      console.log(`Square ${end} is not a valid move.`);
+      return false;
+    }
+  }
   return true;
 }
 
