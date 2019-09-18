@@ -64,7 +64,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
           this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.whitePiece);
+          this.checkers.push(this.blackPiece);
         }
       }
     }
@@ -72,7 +72,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
           this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.whitePiece);
+          this.checkers.push(this.blackPiece);
         }
       }
     }
@@ -110,6 +110,8 @@ class Game {
   constructor() {
     this.board = new Board;
   }
+
+  // Must enter 2 numbers which have values equal to a number from 0-7.
   validateInput(whichPiece, toWhere){
     let reg = /[0-7]/g;
     let startCheck = whichPiece.match(reg);
@@ -125,12 +127,30 @@ class Game {
     return true;
   }
 
+  // Piece must be present at start position, end position must be empty
+  validMove(start, end){
+    let startValue = start.split('');
+    let isPiece = this.board.grid[startValue[0]][startValue[1]];
+    if(isPiece == null){
+      console.log(`There is no piece at square ${start}`)
+      return false;
+    } 
+
+    let endValue = end.split('');
+    let isEmpty = this.board.grid[endValue[0]][endValue[1]];
+    if(isEmpty !== null){ // need to add logic to restrict moving onto square occupied by own piece
+      console.log(`Square at ${end} is already occupied`)
+      return false;
+  }
+  return true;
+}
+
   start() {
     this.board.createGrid();
     this.board.createCheckers()
   }
   moveChecker(start, end){
-    if(this.validateInput(start, end)){
+    if(this.validateInput(start, end) && this.validMove(start, end)){
       let startValue = start.split('');
       let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
