@@ -15,7 +15,7 @@ function Checker() {
 class Board {
   constructor(checkers) {
     this.grid = []
-    this.checkers = [] //Don't need this?
+    this.checkers = [] 
     this.whitePiece = 'W';
     this.blackPiece = 'B';
   }
@@ -64,6 +64,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
           this.grid[row1][col1] = this.blackPiece;
+          this.checkers.push(this.whitePiece);
         }
       }
     }
@@ -71,6 +72,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
           this.grid[row1][col1] = this.blackPiece;
+          this.checkers.push(this.whitePiece);
         }
       }
     }
@@ -80,6 +82,8 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
           this.grid[row1][col1] = this.whitePiece;
+          this.checkers.push(this.whitePiece);
+
         }
       }
     }
@@ -87,13 +91,10 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
           this.grid[row1][col1] = this.whitePiece;
+          this.checkers.push(this.whitePiece);
         }
       }
     }
-  }
-
-  validateInput(whichPiece, toWhere){
-    
   }
 
   // Selects Checker location? // CHECK FOR ACCURACY
@@ -109,12 +110,33 @@ class Game {
   constructor() {
     this.board = new Board;
   }
+  validateInput(whichPiece, toWhere){
+    let reg = /[0-7]/g;
+    let startCheck = whichPiece.match(reg);
+    let endCheck = toWhere.match(reg);
+    if(whichPiece.length !== 2 || toWhere.length !== 2){
+      console.log('please 2 numbers only')
+      return false;
+    }
+    if(startCheck === null || endCheck === null || startCheck.length != 2 || endCheck.length != 2){
+      console.log('please enter number 0-7')
+      return false;
+    }
+    return true;
+  }
+
   start() {
     this.board.createGrid();
     this.board.createCheckers()
   }
   moveChecker(start, end){
-    
+    if(this.validateInput(start, end)){
+      let startValue = start.split('');
+      let endValue = end.split('');
+      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+      this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+      this.board.grid[startValue[0]][startValue[1]] = null;
+    }    
   }
 }
 
