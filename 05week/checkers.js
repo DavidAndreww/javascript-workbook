@@ -117,11 +117,11 @@ class Game {
     let startCheck = whichPiece.match(reg);
     let endCheck = toWhere.match(reg);
     if(whichPiece.length !== 2 || toWhere.length !== 2){
-      console.log('please 2 numbers only')
+      console.log('Please select two numbers')
       return false;
     }
     if(startCheck === null || endCheck === null || startCheck.length != 2 || endCheck.length != 2){
-      console.log('please enter number 0-7')
+      console.log('Valind numbers must range from 0-7')
       return false;
     }
     return true;
@@ -142,6 +142,19 @@ class Game {
       console.log(`Square at ${end} is already occupied`)
       return false;
   }
+
+  if(isPiece == this.board.whitePiece){
+    if((start - end !== 9)){
+      console.log(`Square ${end} is not a valid move.`);
+      return false;
+    }
+  }
+
+  // if(isPiece == this.board.blackPiece){
+  //   if((start - end !== -9) || (start - end !== -11)){
+
+  //   }
+  // }
   return true;
 }
 
