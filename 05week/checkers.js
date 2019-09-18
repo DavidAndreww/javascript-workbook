@@ -136,22 +136,22 @@ class Game {
       console.log(`There is no piece at square ${start}`)
       return false;
     } 
-    //ensure that square to be moved to is empty
+    // Ensure that square to be moved to is empty
     let endValue = end.split('');
     let isEmpty = this.board.grid[endValue[0]][endValue[1]];
     if(isEmpty !== null){
       console.log(`Square at ${end} is already occupied`)
       return false;
-  }
-
-  if(isPiece == this.board.whitePiece){
-    if((parseInt(start) - parseInt(end) !== 9) && (parseInt(start) - parseInt(end) !== 11)){
-      console.log(`Square ${end} is not a valid move.`);
-      return false;
     }
-  }
-
-  if(isPiece == this.board.blackPiece){
+    // Ensure white can only make legal diagonal moves
+    if(isPiece == this.board.whitePiece){
+      if((parseInt(start) - parseInt(end) !== 9) && (parseInt(start) - parseInt(end) !== 11)){
+        console.log(`Square ${end} is not a valid move.`);
+        return false;
+      }
+    }
+    // Ensure white can only make legal diagonal moves
+    if(isPiece == this.board.blackPiece){
     if((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)){
       console.log(`Square ${end} is not a valid move.`);
       return false;
