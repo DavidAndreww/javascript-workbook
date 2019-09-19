@@ -128,29 +128,35 @@ class Game {
 
   // Ensures that the move is a valid move
   validMove(start, end){
-    // Ensures that the selected start square contains a game piece
+    // Splits string entry into array and stores in variable
     let startValue = start.split('');
+    // Var isPiece is equal to the value in location piece is to be picked up from
     let isPiece = this.board.grid[startValue[0]][startValue[1]];
+    // If isPiece is null, no piece is present in that location
     if(isPiece == null){
       console.log(`There is no piece at square ${start}`)
       return false;
     } 
-    // Ensure that square to be moved to is empty
+    // Splits string entry into array and stores in variable
     let endValue = end.split('');
+    // Var isEmpty equals to value in location piece is to be placed
     let isEmpty = this.board.grid[endValue[0]][endValue[1]];
+    // If isEmpty is not empty, piece cannot be placed here
     if(isEmpty !== null){
       console.log(`Square at ${end} is already occupied`)
       return false;
     }
-    // Ensure white can only make legal diagonal moves
+    // Verifies that piece to be moved is white
     if(isPiece == this.board.whitePiece){
+      // Ensures that white piece is making diagonal move in correct direction
       if((parseInt(start) - parseInt(end) !== 9) && (parseInt(start) - parseInt(end) !== 11)){
         console.log(`Square ${end} is not a valid move.`);
         return false;
       }
     }
-    // Ensure white can only make legal diagonal moves
+    // Verifies that piece to be moved is black
     if(isPiece == this.board.blackPiece){
+      // Ensure that black piece is making diagonal moves in correct direction
     if((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)){
       console.log(`Square ${end} is not a valid move.`);
       return false;
@@ -161,12 +167,14 @@ class Game {
   
   turnCounter(){
     console.log(`Turn ${this.counter}`);
+    console.log('');
   }
 
   // Turn counter and tracking player turn
   changePlayer(start){
     let startValue = start.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+
     if(this.counter % 2 !== 0){
       if(currentPiece !== this.board.whitePiece){
         console.log('It is whites move')
@@ -183,6 +191,16 @@ class Game {
       return true;
     }
   }
+
+  piecesLeft(){
+    let whiteReg = /[w]/g
+    let blackReg = /[b]/g
+    let whiteCount = this.board.grid.join('').match(whiteReg).length;
+    let blackCount = this.board.grid.join('').match(blackReg).length;
+    console.log(`White Pieces: ${whiteCount}`);
+    console.log(`Black Pieces: ${blackCount}`);
+    console.log('');
+  };
 
   start() {
     this.board.createGrid();
@@ -206,6 +224,7 @@ class Game {
 function getPrompt() {
   game.board.viewGrid();
   game.turnCounter();
+  game.piecesLeft();
   rl.question('which piece?: ', (whichPiece) => {
     rl.question('to where?: ', (toWhere) => {
       game.moveChecker(whichPiece, toWhere);
