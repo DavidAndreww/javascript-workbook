@@ -161,23 +161,19 @@ class Game {
   
   turnCounter(){
     console.log(`Turn ${this.counter}`);
-    this.counter++;
+    // this.counter++;
   }
 
   // Turn counter and tracking player turn
   changePlayer(start){
     let startValue = start.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-    if(this.counter % 2 === 1){
-      if(currentPiece === this.whitePiece){
-        return true;
-      } else {
-        console.log('It is Whites turn')
-        return false
-      }
-    }
+    if(this.counter % 2 == 1 && currentPiece !== this.whitePiece){
+      console.log('It is Whites turn');
+      return false;
+    };
 
-    if(this.counter %2 === 0){
+    if(this.counter %2 == 0){
       if(currentPiece === this.blackPiece){
         return true;
       } else {
@@ -200,13 +196,14 @@ class Game {
       this.changePlayer(start);
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
-      this.turnCounter();
+      this.counter++;
     }    
   }
 }
 
 function getPrompt() {
   game.board.viewGrid();
+  game.turnCounter();
   rl.question('which piece?: ', (whichPiece) => {
     rl.question('to where?: ', (toWhere) => {
       game.moveChecker(whichPiece, toWhere);
