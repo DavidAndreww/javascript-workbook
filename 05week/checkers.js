@@ -171,8 +171,7 @@ class Game {
     if(this.validateInput(start, end) && this.validMove(start, end)){
       let startValue = start.split('');
       let endValue = end.split('');
-      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-      this.changePlayer(start, end);
+      let currentPiece = this.board.grid[startValue[0]][startValue[1]];;
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
     }    
