@@ -105,6 +105,7 @@ class Board {
 class Game {
   constructor() {
     this.board = new Board;
+    this.counter = 1;
   }
 
   // Ensures that user input is valid
@@ -158,9 +159,33 @@ class Game {
   return true;
   }
   
-  changePlayer(start, end){
+  turnCounter(){
+    console.log(`Turn ${this.counter}`);
+    this.counter++;
+  }
 
-  };
+  // Turn counter and tracking player turn
+  changePlayer(start){
+    let startValue = start.split('');
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+    if(this.counter % 2 === 1){
+      if(currentPiece === this.whitePiece){
+        return true;
+      } else {
+        console.log('It is Whites turn')
+        return false
+      }
+    }
+
+    if(this.counter %2 === 0){
+      if(currentPiece === this.blackPiece){
+        return true;
+      } else {
+        console.log('It is blacks turn')
+        return false;
+      }
+    }
+  }
 
   start() {
     this.board.createGrid();
@@ -171,9 +196,11 @@ class Game {
     if(this.validateInput(start, end) && this.validMove(start, end)){
       let startValue = start.split('');
       let endValue = end.split('');
-      let currentPiece = this.board.grid[startValue[0]][startValue[1]];;
+      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+      this.changePlayer(start);
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
+      this.turnCounter();
     }    
   }
 }
