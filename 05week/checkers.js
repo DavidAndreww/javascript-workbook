@@ -13,11 +13,11 @@ function Checker() {
 }
 
 class Board {
-  constructor(checkers) {
+  constructor() {
     this.grid = []
     this.checkers = [] 
-    this.whitePiece = 'W';
-    this.blackPiece = 'B';
+    this.whitePiece = 'w';
+    this.blackPiece = 'b';
   }
   // Creates an 8x8 array, filled with null values. No return value
   createGrid() {
@@ -97,10 +97,6 @@ class Board {
     }
   }
 
-  // Selects Checker location? // CHECK FOR ACCURACY
-  selectChecker(row, column){
-    return this.grid([row][column])
-  }
   killChecker(position){
     // Enter Code
   }  
@@ -159,6 +155,11 @@ class Game {
   }
   return true;
 }
+
+changePlayer(){
+  if (moveChecker() &&){
+
+  };
 
   start() {
     this.board.createGrid();
