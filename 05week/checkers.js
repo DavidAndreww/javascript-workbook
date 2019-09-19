@@ -161,25 +161,26 @@ class Game {
   
   turnCounter(){
     console.log(`Turn ${this.counter}`);
-    // this.counter++;
   }
 
   // Turn counter and tracking player turn
   changePlayer(start){
     let startValue = start.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-    if(this.counter % 2 == 1 && currentPiece !== this.whitePiece){
-      console.log('It is Whites turn');
-      return false;
-    };
-
-    if(this.counter %2 == 0){
-      if(currentPiece === this.blackPiece){
-        return true;
-      } else {
-        console.log('It is blacks turn')
+    if(this.counter % 2 !== 0){
+      if(currentPiece !== this.board.whitePiece){
+        console.log('It is whites move')
         return false;
-      }
+        } 
+      return true;
+    }
+
+    if(this.counter % 2 !== 1){
+      if(currentPiece !== this.board.blackPiece){
+        console.log('It is blacks move')
+        return false;
+      } 
+      return true;
     }
   }
 
@@ -193,10 +194,11 @@ class Game {
       let startValue = start.split('');
       let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-      this.changePlayer(start);
-      this.board.grid[endValue[0]][endValue[1]] = currentPiece;
-      this.board.grid[startValue[0]][startValue[1]] = null;
-      this.counter++;
+        if(this.changePlayer(start)){
+        this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+        this.board.grid[startValue[0]][startValue[1]] = null;
+        this.counter++;
+      }
     }    
   }
 }
