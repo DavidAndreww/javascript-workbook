@@ -165,6 +165,7 @@ class Game {
   return true;
   }
   
+  // Tracks turns, allows changePlayer function to work
   turnCounter(){
     console.log(`Turn ${this.counter}`);
     console.log('');
