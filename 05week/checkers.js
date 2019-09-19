@@ -64,7 +64,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
           this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.blackPiece);
+          this.checkers.push(this.blackPiece); // only purpose is to pass test
         }
       }
     }
@@ -72,7 +72,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
           this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.blackPiece);
+          this.checkers.push(this.blackPiece); // only purpose is to pass test
         }
       }
     }
@@ -82,7 +82,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 0 && col1 % 2 == 1){
           this.grid[row1][col1] = this.whitePiece;
-          this.checkers.push(this.whitePiece);
+          this.checkers.push(this.whitePiece); // only purpose is to pass test
 
         }
       }
@@ -91,7 +91,7 @@ class Board {
       for(let col1 = 0; col1 < 8; col1++){
         if(row1 % 2 == 1 && col1 % 2 == 0){
           this.grid[row1][col1] = this.whitePiece;
-          this.checkers.push(this.whitePiece);
+          this.checkers.push(this.whitePiece); // only purpose is to pass test
         }
       }
     }
@@ -107,17 +107,19 @@ class Game {
     this.board = new Board;
   }
 
-  // Must enter 2 numbers which have values equal to a number from 0-7.
+  // Ensures that user input is valid
   validateInput(whichPiece, toWhere){
     let reg = /[0-7]/g;
     let startCheck = whichPiece.match(reg);
     let endCheck = toWhere.match(reg);
+    // Restricts entry if input is not two characters
     if(whichPiece.length !== 2 || toWhere.length !== 2){
       console.log('Please select two numbers')
       return false;
     }
-    if(startCheck === null || endCheck === null || startCheck.length != 2 || endCheck.length != 2){
-      console.log('Valind numbers must range from 0-7')
+    // Limits user input to integer values between 0 and 7
+    if(startCheck.length != 2 || endCheck.length != 2){
+      console.log('Valid numbers must range from 0-7')
       return false;
     }
     return true;
@@ -154,10 +156,9 @@ class Game {
     }
   }
   return true;
-}
-
-changePlayer(){
-  if (moveChecker() &&){
+  }
+  
+  changePlayer(start, end){
 
   };
 
@@ -167,6 +168,7 @@ changePlayer(){
   }
   moveChecker(start, end){
     if(this.validateInput(start, end) && this.validMove(start, end)){
+      this.changePlayer(start, end)
       let startValue = start.split('');
       let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
