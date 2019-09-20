@@ -142,8 +142,8 @@ class Game {
     let endValue = end.split('');
     let selectPiece = this.board.grid[startValue[0]][startValue[1]];
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
-    let jumpCheckRow;
-    let jumpCheckCol;
+    let removeBlack;
+    let removeWhite;
 
     // Ensures there is a piece to be moved at 'start' location
     if (selectPiece == null) {
@@ -156,21 +156,23 @@ class Game {
       return false;
     }
 
-    // Verifies that piece to be moved is white
+    // Allows white to play moves and perform jumps
     if (selectPiece == this.board.whitePiece) {
       if ((parseInt(start) - parseInt(end) == 9) || (parseInt(start) - parseInt(end) == 11)) {
         return true;
       } else if (parseInt(start) - parseInt(end) == 18) {
-        jumpCheckRow = parseInt(start) - 9;
-        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+        removeBlack = parseInt(start) - 9;
+        let nullBlack = removeBlack.toString().split('').map(Number); // research THIS
+        if (this.board.grid[nullBlack[0]][nullBlack[1]] == this.board.blackPiece) {
+          this.board.killChecker(nullBlack[0], nullBlack[1]);
+          return true;
         }
       } else if (parseInt(start) - parseInt(end) == 22) {
-        jumpCheckRow = parseInt(start) - 11;
-        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+        removeBlack = parseInt(start) - 11;
+        let nullWhite = removeBlack.toString().split('').map(Number); // research THIS
+        if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.blackPiece) {
+          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          return true;
         }
       }
     }
@@ -178,17 +180,19 @@ class Game {
     if (selectPiece == this.board.blackPiece) {
       if ((parseInt(start) - parseInt(end) == -9) || (parseInt(start) - parseInt(end) == -11)) {
         return true;
-      } else if (parseInt(start) - parseInt(end) == 18) {
-        jumpCheckRow = parseInt(start) - 9;
-        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+      } else if (parseInt(start) - parseInt(end) == -18) {
+        removeWhite = parseInt(start) + 9;
+        let nullWhite = removeWhite.toString().split('').map(Number); // research THIS
+        if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.whitePiece) {
+          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          return true;
         }
-      } else if (parseInt(start) - parseInt(end) == 22) {
-        jumpCheckRow = parseInt(start) - 11;
-        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+      } else if (parseInt(start) - parseInt(end) == -22) {
+        removeWhite = parseInt(start) + 11;
+        let nullWhite = removeWhite.toString().split('').map(Number); // research THIS
+        if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.whitePiece) {
+          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          return true;
         }
       }
     }
