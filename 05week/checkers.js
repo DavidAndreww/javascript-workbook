@@ -98,6 +98,7 @@ class Board {
 
   killChecker(index1, index2) {
     this.grid[index1][index2] = null;
+    return true;
   }
 }
 
@@ -128,41 +129,47 @@ class Game {
   // Ensures that the move is a valid move
   validMove(start, end) {
     let startValue = start.split('');
+    let endValue = end.split('');
+    let selectPiece = this.board.grid[startValue[0]][startValue[1]];
+    let placePiece = this.board.grid[endValue[0]][endValue[1]];
     let jumpCheckRow;
     let jumpCheckCol;
 
-    // Var isPiece is equal to the value in location piece is to be picked up from
-    let isPiece = this.board.grid[startValue[0]][startValue[1]];
-    if (isPiece == null) {
+    // Ensures there is a piece to be moved at 'start' location
+    if (selectPiece == null) {
       console.log(`There is no piece at square ${start}`)
       return false;
     }
-    // Splits string entry into array and stores in variable
-    let endValue = end.split('');
-    let isEmpty = this.board.grid[endValue[0]][endValue[1]];
-    if (isEmpty !== null) {
+    // Ensures that 'end' locations is empty
+    if (placePiece !== null) {
       console.log(`Square at ${end} is already occupied`);
       return false;
     }
 
     // Verifies that piece to be moved is white
-    if (isPiece == this.board.whitePiece) {
-      // Ensures that white piece is making diagonal move in correct direction
+    if (selectPiece == this.board.whitePiece) {
       if ((parseInt(start) - parseInt(end) == 9) || (parseInt(start) - parseInt(end) == 11)) {
         return true;
       } else if (parseInt(start) - parseInt(end) == 18) {
         jumpCheckRow = parseInt(start) - 9;
         let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
-        console.log(this.board.grid[3][2])
-        console.log('spot to be jumped' + this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]]);
         if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
           this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
         }
       }
     }
 
+
+
+
+
+
+
+
+
+
     // Verifies that piece to be moved is black
-    if (isPiece == this.board.blackPiece) {
+    if (selectPiece == this.board.blackPiece) {
       // Ensure that black piece is making diagonal moves in correct direction
       if ((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)) {
         console.log(`Square ${end} is not a valid move.`);
