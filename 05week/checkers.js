@@ -126,6 +126,16 @@ class Game {
     return true;
   }
 
+  // whiteMove(start, end) {
+  //   let startValue = start.split('');
+  //   let selectPiece = this.board.grid[startValue[0]][startValue[1]];
+  //   if (selectPiece == this.board.whitePiece) {
+  //     if ((parseInt(start) - parseInt(end) == 9) || (parseInt(start) - parseInt(end) == 11)) {
+  //       return true;
+  //     }
+  //   }
+  // }
+
   // Ensures that the move is a valid move
   validMove(start, end) {
     let startValue = start.split('');
@@ -156,6 +166,12 @@ class Game {
         if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
           this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
         }
+      } else if (parseInt(start) - parseInt(end) == 22) {
+        jumpCheckRow = parseInt(start) - 11;
+        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
+        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
+          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+        }
       }
     }
 
@@ -167,74 +183,73 @@ class Game {
 
 
 
-
-    // Verifies that piece to be moved is black
-    if (selectPiece == this.board.blackPiece) {
-      // Ensure that black piece is making diagonal moves in correct direction
-      if ((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)) {
-        console.log(`Square ${end} is not a valid move.`);
-        return false;
-      }
-    }
-    return true;
-  }
-
-  // Tracks turns, allows changePlayer function to work
-  turnCounter() {
-    console.log(`Turn ${this.counter}`);
-    console.log('');
-  }
-
-  // Turn counter and tracking player turn
-  changePlayer(start) {
-    let startValue = start.split('');
-    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-
-    if (this.counter % 2 !== 0) {
-      if (currentPiece !== this.board.whitePiece) {
-        console.log('It is whites move')
-        return false;
+      // Verifies that piece to be moved is black
+      if (selectPiece == this.board.blackPiece) {
+        // Ensure that black piece is making diagonal moves in correct direction
+        if ((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)) {
+          console.log(`Square ${end} is not a valid move.`);
+          return false;
+        }
       }
       return true;
     }
 
-    if (this.counter % 2 !== 1) {
-      if (currentPiece !== this.board.blackPiece) {
-        console.log('It is blacks move')
-        return false;
-      }
-      return true;
+    // Tracks turns, allows changePlayer function to work
+    turnCounter() {
+      console.log(`Turn ${this.counter}`);
+      console.log('');
     }
-  }
 
-  piecesLeft() {
-    let whiteReg = /[w]/g;
-    let blackReg = /[b]/g;
-    let whiteCount = this.board.grid.join('').match(whiteReg).length;
-    let blackCount = this.board.grid.join('').match(blackReg).length;
-    console.log(`White Pieces: ${whiteCount}`);
-    console.log(`Black Pieces: ${blackCount}`);
-    console.log('');
-  };
-
-  start() {
-    this.board.createGrid();
-    this.board.createCheckers()
-  }
-  // All game logic passed through here to play the game
-  moveChecker(start, end) {
-    if (this.validateInput(start, end) && this.validMove(start, end)) {
+    // Turn counter and tracking player turn
+    changePlayer(start) {
       let startValue = start.split('');
-      let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-      if (this.changePlayer(start)) {
-        this.board.grid[endValue[0]][endValue[1]] = currentPiece;
-        this.board.grid[startValue[0]][startValue[1]] = null;
-        this.counter++;
+
+      if (this.counter % 2 !== 0) {
+        if (currentPiece !== this.board.whitePiece) {
+          console.log('It is whites move')
+          return false;
+        }
+        return true;
+      }
+
+      if (this.counter % 2 !== 1) {
+        if (currentPiece !== this.board.blackPiece) {
+          console.log('It is blacks move')
+          return false;
+        }
+        return true;
+      }
+    }
+
+    piecesLeft() {
+      let whiteReg = /[w]/g;
+      let blackReg = /[b]/g;
+      let whiteCount = this.board.grid.join('').match(whiteReg).length;
+      let blackCount = this.board.grid.join('').match(blackReg).length;
+      console.log(`White Pieces: ${whiteCount}`);
+      console.log(`Black Pieces: ${blackCount}`);
+      console.log('');
+    };
+
+    start() {
+      this.board.createGrid();
+      this.board.createCheckers()
+    }
+    // All game logic passed through here to play the game
+    moveChecker(start, end) {
+      if (this.validateInput(start, end) && this.validMove(start, end)) {
+        let startValue = start.split('');
+        let endValue = end.split('');
+        let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+        if (this.changePlayer(start)) {
+          this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+          this.board.grid[startValue[0]][startValue[1]] = null;
+          this.counter++;
+        }
       }
     }
   }
-}
 
 function getPrompt() {
   game.board.viewGrid();
