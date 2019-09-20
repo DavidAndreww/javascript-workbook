@@ -98,10 +98,10 @@ class Board {
     }
   }
 
-  // killChecker(x, y) {
-  //   this.grid[x][y] = null;
-  //   console.log('why you no work');
-  // }
+  killChecker(x, y) {
+    this.grid[x][y] = null;
+    console.log('why you no work');
+  }
 }
 
 class Game {
@@ -162,19 +162,13 @@ class Game {
         return true;
       } else if (parseInt(start) - parseInt(end) == 18) {
         jumpCheckRow = parseInt(start) - 9;
-        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number);
+        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
         console.log(this.board.grid[3][2])
         console.log('spot to be jumped' + this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]]);
         if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] = null;
+          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
         } 
-      } else if (parseInt(start) - parseInt(end) == 22) {
-           
-        
-        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
-          // this.board.killChecker(jumpCheckRow + 1, jumpCheckCol + 1);
-        }
-      }
+      } 
     }
 
       // Verifies that piece to be moved is black
