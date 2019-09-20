@@ -175,11 +175,23 @@ class Game {
       }
     }
 
-
-
-
-
-
+    if (selectPiece == this.board.blackPiece) {
+      if ((parseInt(start) - parseInt(end) == -9) || (parseInt(start) - parseInt(end) == -11)) {
+        return true;
+      } else if (parseInt(start) - parseInt(end) == 18) {
+        jumpCheckRow = parseInt(start) - 9;
+        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
+        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
+          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+        }
+      } else if (parseInt(start) - parseInt(end) == 22) {
+        jumpCheckRow = parseInt(start) - 11;
+        let jumpCheckRow2 = jumpCheckRow.toString().split('').map(Number); // research THIS
+        if (this.board.grid[jumpCheckRow2[0]][jumpCheckRow2[1]] == this.board.blackPiece) {
+          this.board.killChecker(jumpCheckRow2[0], jumpCheckRow2[1]);
+        }
+      }
+    }
 
 
 
