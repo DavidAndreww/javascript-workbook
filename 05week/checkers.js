@@ -95,11 +95,6 @@ class Board {
       }
     }
   }
-
-  killChecker(index1, index2) {
-    this.grid[index1][index2] = null;
-    return true;
-  }
 }
 
 class Game {
@@ -164,14 +159,14 @@ class Game {
         removeBlack = parseInt(start) - 9;
         let nullBlack = removeBlack.toString().split('').map(Number); // research THIS
         if (this.board.grid[nullBlack[0]][nullBlack[1]] == this.board.blackPiece) {
-          this.board.killChecker(nullBlack[0], nullBlack[1]);
+          this.killChecker(nullBlack[0], nullBlack[1]);
           return true;
         }
       } else if (parseInt(start) - parseInt(end) == 22) {
         removeBlack = parseInt(start) - 11;
         let nullWhite = removeBlack.toString().split('').map(Number); // research THIS
         if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.blackPiece) {
-          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          this.killChecker(nullWhite[0], nullWhite[1]);
           return true;
         }
       }
@@ -184,14 +179,14 @@ class Game {
         removeWhite = parseInt(start) + 9;
         let nullWhite = removeWhite.toString().split('').map(Number); // research THIS
         if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.whitePiece) {
-          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          this.killChecker(nullWhite[0], nullWhite[1]);
           return true;
         }
       } else if (parseInt(start) - parseInt(end) == -22) {
         removeWhite = parseInt(start) + 11;
         let nullWhite = removeWhite.toString().split('').map(Number); // research THIS
         if (this.board.grid[nullWhite[0]][nullWhite[1]] == this.board.whitePiece) {
-          this.board.killChecker(nullWhite[0], nullWhite[1]);
+          this.killChecker(nullWhite[0], nullWhite[1]);
           return true;
         }
       }
@@ -199,73 +194,90 @@ class Game {
 
 
 
-      // Verifies that piece to be moved is black
-      if (selectPiece == this.board.blackPiece) {
-        // Ensure that black piece is making diagonal moves in correct direction
-        if ((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)) {
-          console.log(`Square ${end} is not a valid move.`);
-          return false;
-        }
+    // Verifies that piece to be moved is black
+    if (selectPiece == this.board.blackPiece) {
+      // Ensure that black piece is making diagonal moves in correct direction
+      if ((parseInt(start) - parseInt(end) !== -9) && (parseInt(start) - parseInt(end) !== -11)) {
+        console.log(`Square ${end} is not a valid move.`);
+        return false;
       }
-      return true;
+    }
+    return true;
+  }
+
+  killChecker(index1, index2) {
+    this.board.grid[index1][index2] = null;
+    return true;
+  }
+
+  // Tracks turns, allows validatePlayer function to work
+  turnCounter() {
+    console.log(`Turn ${this.counter}`);
+    console.log('');
+  }
+
+  // Turn counter and tracking player turn
+  validatePlayer(start) {
+    let startValue = start.split('');
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+
+    if (this.counter % 2 == 1) {
+      if (currentPiece == this.board.whitePiece) {
+        return true
+      } else {
+        console.log('It is whites move')
+        return false;
+      }
     }
 
-    // Tracks turns, allows changePlayer function to work
-    turnCounter() {
-      console.log(`Turn ${this.counter}`);
-      console.log('');
-    }
-
-    // Turn counter and tracking player turn
-    changePlayer(start) {
-      let startValue = start.split('');
-      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-
-      if (this.counter % 2 !== 0) {
-        if (currentPiece !== this.board.whitePiece) {
-          console.log('It is whites move')
-          return false;
-        }
+    if (this.counter % 2 == 0) {
+      if (currentPiece == this.board.blackPiece) {
         return true;
-      }
-
-      if (this.counter % 2 !== 1) {
-        if (currentPiece !== this.board.blackPiece) {
-          console.log('It is blacks move')
-          return false;
-        }
-        return true;
-      }
-    }
-
-    piecesLeft() {
-      let whiteReg = /[w]/g;
-      let blackReg = /[b]/g;
-      let whiteCount = this.board.grid.join('').match(whiteReg).length;
-      let blackCount = this.board.grid.join('').match(blackReg).length;
-      console.log(`White Pieces: ${whiteCount}`);
-      console.log(`Black Pieces: ${blackCount}`);
-      console.log('');
-    };
-
-    start() {
-      this.board.createGrid();
-      this.board.createCheckers()
-    }
-    // All game logic passed through here to play the game
-    moveChecker(start, end) {
-      if (this.validateInput(start, end) && this.validMove(start, end)) {
-        let startValue = start.split('');
-        let endValue = end.split('');
-        let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-        if (this.changePlayer(start)) {
-          this.board.grid[endValue[0]][endValue[1]] = currentPiece;
-          this.board.grid[startValue[0]][startValue[1]] = null;
-          this.counter++;
-        }
+      } else {
+        console.log('It is blacks move');
+        return false;
       }
     }
   }
+
+  piecesLeft() {
+    let whiteReg = /[w]/g;
+    let blackReg = /[b]/g;
+    let whiteCount = this.board.grid.join('').match(whiteReg).length;
+    let blackCount = this.board.grid.join('').match(blackReg).length;
+    console.log(`White Pieces: ${whiteCount}`);
+    console.log(`Black Pieces: ${blackCount}`);
+    console.log('');
+  }
+
+  checkForWin() {
+    if (this.whiteCount == 0) {
+      console.log('Black Wins!');
+    }
+    if (this.blackCount == 0) {
+      console.log('Black Wins');
+    }
+  }
+
+  start() {
+    this.board.createGrid();
+    this.board.createCheckers()
+  }
+  // All game logic passed through here to play the game
+  moveChecker(start, end) {
+    if (this.validateInput(start, end) && this.validMove(start, end) && this.validatePlayer(start)) {
+      let startValue = start.split('');
+      let endValue = end.split('');
+      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+      // if (this.validatePlayer(start)) {
+        this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+        this.board.grid[startValue[0]][startValue[1]] = null;
+        this.checkForWin()
+        this.counter++;
+      // }
+    }
+  }
+}
 
 function getPrompt() {
   game.board.viewGrid();
