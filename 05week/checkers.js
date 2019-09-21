@@ -186,10 +186,12 @@ class Game {
     } else if (startEntry - endEntry == 22) {
       jumpStr = startEntry - 11;
     }
-    jumpStrCoords = jumpStr.toString().split('').map(Number);
-    if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.blackPiece) {
-      this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
-      return true;
+    if (jumpStr) {
+      jumpStrCoords = jumpStr.toString().split('').map(Number);
+      if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.blackPiece) {
+        this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
+        return true;
+      }
     }
     console.log(`Square ${end} is not a valid move`);
   }
@@ -207,10 +209,12 @@ class Game {
     } else if (startEntry - endEntry == -22) {
       jumpStr = startEntry + 11;
     }
-    jumpStrCoords = jumpStr.toString().split('').map(Number);
-    if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
-      this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
-      return true;
+    if (jumpStr) {
+      jumpStrCoords = jumpStr.toString().split('').map(Number);
+      if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
+        this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
+        return true;
+      }
     }
     console.log(`Square ${end} is not a valid move`);
   }
@@ -226,8 +230,7 @@ class Game {
     console.log('');
   }
 
-
-
+  // Tracks number of pieces on the board for each player
   gamePieceCounter() {
     let whiteReg = /[w]/g;
     let blackReg = /[b]/g;
@@ -238,6 +241,7 @@ class Game {
     console.log('');
   }
 
+  // If number of pieces for either player reaches zero, game is over and winner is declared (need to reset board)
   checkForWin() {
     if (this.whiteCount == 0) {
       console.log('Black Wins!');
