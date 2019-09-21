@@ -153,7 +153,7 @@ class Game {
   validatePlayerTurn(start) {
     let startValue = start.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-
+    // If this.counter is odd number, only white may play a move
     if (this.counter % 2 == 1) {
       if (currentPiece == this.board.whitePiece) {
         return true
@@ -162,7 +162,7 @@ class Game {
         return false;
       }
     };
-
+    // If this.counter is even number, only black may play a move
     if (this.counter % 2 == 0) {
       if (currentPiece == this.board.blackPiece) {
         return true;
