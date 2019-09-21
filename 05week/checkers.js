@@ -274,6 +274,7 @@ class Game {
     this.board.createGrid();
     this.board.createCheckers()
   }
+  
   // All game logic passed through here to play the game
   moveChecker(start, end) {
     if (this.validateInput(start, end) && this.validateMove(start, end) && this.validatePlayerTurn(start)) {
@@ -282,7 +283,7 @@ class Game {
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
-      this.checkForWin()
+      this.checkForWin();
       this.counter++;
     }
   }
