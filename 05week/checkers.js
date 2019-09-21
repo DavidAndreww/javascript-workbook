@@ -221,7 +221,7 @@ class Game {
 
   killChecker(index1, index2) {
     this.board.grid[index1][index2] = null;
-    this.board.checkers--;
+    this.board.checkers.length--;
     return true;
   }
 
