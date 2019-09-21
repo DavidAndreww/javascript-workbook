@@ -104,18 +104,13 @@ class Game {
   }
 
   // Ensures that user input is valid
-  validateInput(whichPiece, toWhere) {
+  validateInput(startInput, endInput) {
     let reg = /[0-7]/g;
-    let startCheck = whichPiece.match(reg);
-    let endCheck = toWhere.match(reg);
-    // Restricts entry if input is not two characters
-    if (whichPiece.length !== 2 || toWhere.length !== 2) {
-      console.log('Please select two numbers')
-      return false;
-    }
+    let startCheck = startInput.match(reg);
+    let endCheck = endInput.match(reg);
     // Limits user input to integer values between 0 and 7
     if (startCheck.length != 2 || endCheck.length != 2) {
-      console.log('Valid numbers must range from 0-7')
+      console.log('Select two numbers from 0-7')
       return false;
     }
     return true;
@@ -139,36 +134,16 @@ class Game {
       return false;
     }
 
-    // Allows white to play moves and perform jumps
+    //Allows white to play moves and perform jumps
     if (selectPiece == this.board.whitePiece) {
       if (this.whiteLogic(start, end)) {
         return true;
       }
-
-      if (selectPiece == this.board.blackPiece) {
-        if (this.blackLogic(start, end)) {
-          return true;
-        }
-      }
     }
-
+    // Allow black to play moves and perform jumps
     if (selectPiece == this.board.blackPiece) {
-      if ((parseInt(start) - parseInt(end) == -9) || (parseInt(start) - parseInt(end) == -11)) {
+      if (this.blackLogic(start, end)) {
         return true;
-      } else if (parseInt(start) - parseInt(end) == -18) {
-        jumpStr = parseInt(start) + 9;
-        jumpStrCoords = jumpStr.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
-          this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
-          return true;
-        }
-      } else if (parseInt(start) - parseInt(end) == -22) {
-        jumpStr = parseInt(start) + 11;
-        jumpStrCoords = jumpStr.toString().split('').map(Number); // research THIS
-        if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
-          this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
-          return true;
-        }
       }
     }
     console.log(`Square ${end} is not a valid move`);
@@ -198,6 +173,7 @@ class Game {
     };
   };
 
+  // Checks white move logic before moving (contains jump logic and killChecker function)
   whiteLogic(start, end) {
     let jumpStr;
     let jumpStrCoords;
@@ -218,6 +194,7 @@ class Game {
     console.log(`Square ${end} is not a valid move`);
   }
 
+  // Checks black move logic before moving (contains jump logic and killChecker function)
   blackLogic(start, end) {
     let jumpStr;
     let jumpStrCoords;
@@ -231,11 +208,10 @@ class Game {
       jumpStr = startEntry + 11;
     }
     jumpStrCoords = jumpStr.toString().split('').map(Number);
-    if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.blackPiece) {
+    if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
       this.killChecker(jumpStrCoords[0], jumpStrCoords[1]);
       return true;
     }
-
     console.log(`Square ${end} is not a valid move`);
   }
 
@@ -278,6 +254,8 @@ class Game {
   // All game logic passed through here to play the game
   moveChecker(start, end) {
     if (this.validateInput(start, end) && this.validateMove(start, end) && this.validatePlayerTurn(start)) {
+      // this.whiteLogic(start, end)
+      // this.blackLogic(start, end)
       let startValue = start.split('');
       let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
