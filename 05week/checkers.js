@@ -120,7 +120,10 @@ class Game {
   validateMove(start, end) {
     let startValue = start.split('');
     let endValue = end.split('');
+
+    // selectPiece is equal to square to pick up piece from
     let selectPiece = this.board.grid[startValue[0]][startValue[1]];
+    // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
 
     // Ensures there is a piece to be moved at 'start' location
@@ -153,18 +156,20 @@ class Game {
   validatePlayerTurn(start) {
     let startValue = start.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+
     // If this.counter is odd number, only white may play a move
     if (this.counter % 2 == 1) {
-      if (currentPiece == this.board.whitePiece) {
+      if (currentPiece == this.board.whitePiece){
         return true
       } else {
         console.log('It is whites move')
         return false;
       }
     };
+
     // If this.counter is even number, only black may play a move
     if (this.counter % 2 == 0) {
-      if (currentPiece == this.board.blackPiece) {
+      if (currentPiece == this.board.blackPiece){
         return true;
       } else {
         console.log('It is blacks move');
@@ -177,8 +182,12 @@ class Game {
   whiteLogic(start, end) {
     let jumpStr;
     let jumpStrCoords;
+
+    // start and end values are parsed from strings to integers to allow equations to run below
     let startEntry = parseInt(start);
     let endEntry = parseInt(end);
+
+    // looking to see if white coordinates are valid moves, as well as check for jump ability
     if (startEntry - endEntry == 9 || startEntry - endEntry == 11) {
       return true;
     } else if (startEntry - endEntry == 18) {
@@ -186,6 +195,8 @@ class Game {
     } else if (startEntry - endEntry == 22) {
       jumpStr = startEntry - 11;
     }
+
+    // If trying to jump, following code will run to check and see if the jump is valid
     if (jumpStr) {
       jumpStrCoords = jumpStr.toString().split('').map(Number);
       if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.blackPiece) {
@@ -200,8 +211,12 @@ class Game {
   blackLogic(start, end) {
     let jumpStr;
     let jumpStrCoords;
+
+    // start and end values are parsed from strings to integers to allow equations to run below
     let startEntry = parseInt(start);
     let endEntry = parseInt(end);
+
+    // looking to see if white coordinates are valid moves, as well as check for jump ability
     if (startEntry - endEntry == -9 || startEntry - endEntry == -11) {
       return true;
     } else if (startEntry - endEntry == -18) {
@@ -209,6 +224,8 @@ class Game {
     } else if (startEntry - endEntry == -22) {
       jumpStr = startEntry + 11;
     }
+
+    // If trying to jump, following code will run to check and see if the jump is valid
     if (jumpStr) {
       jumpStrCoords = jumpStr.toString().split('').map(Number);
       if (this.board.grid[jumpStrCoords[0]][jumpStrCoords[1]] == this.board.whitePiece) {
@@ -219,9 +236,10 @@ class Game {
     console.log(`Square ${end} is not a valid move`);
   }
 
+  // Removes checker from board when jumped
   killChecker(index1, index2) {
     this.board.grid[index1][index2] = null;
-    this.board.checkers.length--;
+    this.board.checkers.length--; // decrements # of checkers to pass test
     return true;
   }
 
