@@ -221,6 +221,7 @@ class Game {
 
   killChecker(index1, index2) {
     this.board.grid[index1][index2] = null;
+    this.board.checkers--;
     return true;
   }
 
@@ -258,8 +259,6 @@ class Game {
   // All game logic passed through here to play the game
   moveChecker(start, end) {
     if (this.validateInput(start, end) && this.validateMove(start, end) && this.validatePlayerTurn(start)) {
-      // this.whiteLogic(start, end)
-      // this.blackLogic(start, end)
       let startValue = start.split('');
       let endValue = end.split('');
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
