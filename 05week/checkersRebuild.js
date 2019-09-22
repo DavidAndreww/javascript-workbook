@@ -103,21 +103,25 @@ class Game {
     console.log('');
   }
 
-  validateInput() {
-
+  validateInput(start, end) {
+    let reg = /[0-7]/g;
+    let startCheck = start.match(reg);
+    let endCheck = end.match(reg);
+    return (startCheck.length !=2 || endCheck.length !=2 ? false : true)
   };
 
+ // method that if returns true, allows white to move. if returns false, black moves.
   validatePlayerTurn(pieceCoords) {
     let startValue = pieceCoords.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
-    // If this.counter is odd number, only white may play a move
+    // If this.counter is an even number, only white may play a move
     if (this.counter % 2 == 0) {
       return (currentPiece == this.board.whitePiece ? true : false)
     }
-    // If this.counter is even number, only black may play a move
+    // If this.counter is an odd number, only black may play a move
     if (this.counter % 2 == 1) {
-      return (currentPiece == this.board.blackPiece ? true : false);
+      return (currentPiece == this.board.blackPiece ? false : true);
     }
   };
 
@@ -127,9 +131,18 @@ class Game {
 
   moveChecker(start, end) {
 
+    this.turnCounter++
   }
 };
 
+
+/*
+1: if validateInput() is true, run validatePlayerTurn(). 
+2: if true, run whiteMove(). If false, run blackMove().
+3: whiteMove() and blackMove() check for regular moves and jumps. Return true if they jump a piece
+4: if true, whiteDoubleJump() and blackDoubleJump() check to see if a second jump can be made. 
+5: turn counter increments and getPrompt() runs again
+*/
 
 
 
