@@ -79,6 +79,7 @@ class Board {
   // Tracks turns, allows validatePlayerTurn function to work
   turnCounter() {
     console.log(`Turn ${this.counter}`)
+    this.counter++;
   };
 
   // Tracks number of pieces on the board for each player
@@ -107,7 +108,12 @@ class Game {
     let reg = /[0-7]/g;
     let startCheck = start.match(reg);
     let endCheck = end.match(reg);
-    return (startCheck.length != 2 || endCheck.length != 2 ? false : true)
+    if(startCheck != undefined && endCheck != undefined){
+    return (startCheck.length !=2 || endCheck.length !=2 ? (console.log('Select two numbers between 0-7'), false) : true)
+    } else {
+      console.log('Select two numbers between 0-7');
+      return false;
+    }
   };
 
   // method to make sure that user input looks to select a square that has a piece, and move it to an empty square
@@ -119,7 +125,7 @@ class Game {
     // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
     // if start square is empty, or square to place piece is occupied, return false
-    return (selectPiece == null || placePiece != null ? false : true)
+    return (selectPiece == null || placePiece != null ? (console.log('Select valid piece and move to empty square'), false) : true)
   };
 
   // method that if returns true, allows white to move. if returns false, black moves.
@@ -128,12 +134,10 @@ class Game {
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
     // If this.counter is an even number, only white may play a move
-    if (this.counter % 2 == 0) {
-      return (currentPiece == this.board.whitePiece ? true : false)
-    }
-    // If this.counter is an odd number, only black may play a move
-    if (this.counter % 2 == 1) {
-      return (currentPiece == this.board.blackPiece ? false : true);
+    if (this.board.counter % 2 == 0 && currentPiece == this.board.whitePiece) {
+      return true;
+    } else if (this.board.counter % 2 == 1 && currentPiece == this.board.blackPiece){
+      return false;
     }
   };
 
@@ -183,16 +187,11 @@ class Game {
   }
 
   moveChecker(whichPiece, toWhere) {
-    if (this.validateInput(whichPiece, toWhere)) {
-      if(this.validatePlayerTurn){
-        this.whiteMove(whichPiece, toWhere)
-      } else {
-        this.blackMove(whichPiece, toWhere)
-      }
-    } else {
-      console.log('For each input, enter two numbers from 0-7 to move a piece to an empty square');
+    if (this.validateInput(whichPiece, toWhere) && this.validatePlayerTurn(whichPiece) && this.validateMove(whichPiece, toWhere)) {
+      this.whiteMove(whichPiece, toWhere);
+      this.blackMove(whichPiece, toWhere);
     }
-    this.board.turnCounter++ // FINAL STEP before getPrompt() runs again
+    // this.board.turnCounter++ // FINAL STEP before getPrompt() runs again
   }
 };
 
@@ -211,7 +210,7 @@ class Game {
 function getPrompt() {
   game.board.viewGrid();
   // added turnCounter() to console.log turn and increment immediately after printing grid
-  // game.board.turnCounter();
+  game.board.turnCounter();
   // added gamePieceCounter() to console.log number of pieces left in play
   game.board.gamePieceCounter()
   rl.question('which piece?: ', (whichPiece) => {

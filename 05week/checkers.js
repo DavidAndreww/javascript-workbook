@@ -113,6 +113,7 @@ class Game {
     //   console.log('Select two numbers from 0-7')
     //   return false;
     // }
+    if(startCheck != undefined && endCheck != undefined)
     return (startCheck.length !=2 || endCheck.length !=2 ? false : true)
   }
 
