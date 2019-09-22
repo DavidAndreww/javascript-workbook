@@ -134,9 +134,9 @@ class Game {
 
     // If this.counter is an even number, only white may play a move
     if (this.board.counter % 2 == 1) {
-      return (currentPiece == this.board.whitePiece ? true : (console.log('It is whites turn'), false))
+      return (currentPiece == this.board.whitePiece ? this.board.whitePiece : (console.log('It is whites turn'), false))
     } else if (this.board.counter % 2 == 0) {
-      return (currentPiece == this.board.blackPiece ? true : (console.log('It is blacks turn'), false))
+      return (currentPiece == this.board.blackPiece ? this.board.blackPiece : (console.log('It is blacks turn'), false))
     };
   };
 
@@ -144,6 +144,7 @@ class Game {
   whiteMove(start, end) {
     let startValue = start.split('');
     let endValue = end.split('');
+    console.log(startValue, endValue)
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
     this.board.grid[endValue[0]][endValue[1]] = currentPiece;
     this.board.grid[startValue[0]][startValue[1]] = null;
@@ -185,9 +186,14 @@ class Game {
   }
 
   moveChecker(whichPiece, toWhere) {
-    if (this.validateInput(whichPiece, toWhere) && this.validatePlayerTurn(whichPiece) && this.validateMove(whichPiece, toWhere)) {
-      this.whiteMove(whichPiece, toWhere);
-      this.blackMove(whichPiece, toWhere);
+    if (this.validateInput(whichPiece, toWhere) && this.validateMove(whichPiece, toWhere)) {
+      if(this.validatePlayerTurn(whichPiece, toWhere) == this.board.whitePiece){
+        this.whiteMove(whichPiece, toWhere);
+      } else if(this.validatePlayerTurn(whichPiece, toWhere) == this.board.blackPiece){
+        this.blackMove(whichPiece, toWhere);
+      }
+      
+      
 
 
       this.board.counter++ // FINAL STEP before getPrompt() runs again
