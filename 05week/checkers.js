@@ -108,14 +108,9 @@ class Game {
     let reg = /[0-7]/g;
     let startCheck = startInput.match(reg);
     let endCheck = endInput.match(reg);
-    // Limits user input to integer values between 0 and 7
-    // if (startCheck.length != 2 || endCheck.length != 2) {
-    //   console.log('Select two numbers from 0-7')
-    //   return false;
-    // }
     if(startCheck != undefined && endCheck != undefined)
     return (startCheck.length !=2 || endCheck.length !=2 ? false : true)
-  }
+  };
 
   // Ensures that the move is a valid move
   validateMove(start, end) {
