@@ -18,6 +18,7 @@ class Board {
     this.whitePiece = 'w';
     this.blackPiece = 'b';
   }
+
   // method that creates an 8x8 array, filled with null values
   createGrid() {
     // loop to create the 8 rows
@@ -29,6 +30,8 @@ class Board {
       }
     }
   }
+
+  // method that console logs the board and pieces
   viewGrid() {
     // add our column numbers
     let string = "  0 1 2 3 4 5 6 7\n";
@@ -54,6 +57,7 @@ class Board {
     console.log(string);
   }
 
+  // method that creates the checker pieces to be placed on the board
   createCheckers() {
     // Create black pieces
     for (let row = 0; row < 3; row++) {
@@ -61,7 +65,7 @@ class Board {
         if (row % 2 == 0 && col % 2 == 1 || row % 2 == 1 && col % 2 == 0) this.grid[row][col] = this.blackPiece;
       }
     }
-    
+
     // Create white pieces
     for (let row = 5; row < 8; row++) {
       for (let col = 0; col < 8; col++) {
@@ -74,15 +78,67 @@ class Board {
 class Game {
   constructor() {
     this.board = new Board;
+    this.counter = 1;
   }
+
   start() {
     this.board.createGrid();
     this.board.createCheckers();
   }
-}
+
+  // Tracks turns, allows validatePlayerTurn function to work
+  turnCounter() {
+    console.log(`Turn ${this.counter}`);
+    this.counter++
+  }
+
+  // Tracks number of pieces on the board for each player
+  gamePieceCounter() {
+    let whiteReg = /[w]/g;
+    let blackReg = /[b]/g;
+    let whiteCount = this.board.grid.join('').match(whiteReg).length;
+    let blackCount = this.board.grid.join('').match(blackReg).length;
+    console.log(`White Pieces: ${whiteCount}`);
+    console.log(`Black Pieces: ${blackCount}`);
+    console.log('');
+  }
+
+  validateInput() {
+
+  };
+
+  validatePlayerTurn(pieceCoords) {
+    let startValue = pieceCoords.split('');
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+
+    // If this.counter is odd number, only white may play a move
+    if (this.counter % 2 == 0) {
+      return (currentPiece == this.board.whitePiece ? true : false)
+    }
+    // If this.counter is even number, only black may play a move
+    if (this.counter % 2 == 1) {
+      return (currentPiece == this.board.blackPiece ? true : false);
+    }
+  };
+
+  validatePlayerMove() {
+
+  };
+
+  moveChecker(start, end) {
+
+  }
+};
+
+
+
 
 function getPrompt() {
   game.board.viewGrid();
+  // added turnCounter() to console.log turn and increment immediately after printing grid
+  game.turnCounter();
+  // added gamePieceCounter() to console.log number of pieces left in play
+  game.gamePieceCounter()
   rl.question('which piece?: ', (whichPiece) => {
     rl.question('to where?: ', (toWhere) => {
       game.moveChecker(whichPiece, toWhere);
