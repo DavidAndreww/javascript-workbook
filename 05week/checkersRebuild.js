@@ -78,8 +78,8 @@ class Board {
 
   // Tracks turns, allows validatePlayerTurn function to work
   turnCounter() {
-    console.log(`Turn ${this.counter}`);
-  }
+    console.log(`Turn ${this.counter}`)
+  };
 
   // Tracks number of pieces on the board for each player
   gamePieceCounter() {
@@ -111,7 +111,7 @@ class Game {
   };
 
   // method to make sure that user input looks to select a square that has a piece, and move it to an empty square
-  validateMove(start, end){
+  validateMove(start, end) {
     let startValue = start.split('');
     let endValue = end.split('');
     // selectPiece is equal to square to pick up piece from
@@ -119,7 +119,7 @@ class Game {
     // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
     // if start square is empty, or square to place piece is occupied, return false
-    return (selectPiece == null  || placePiece != null ? false: true)
+    return (selectPiece == null || placePiece != null ? false : true)
   };
 
   // method that if returns true, allows white to move. if returns false, black moves.
@@ -137,8 +137,22 @@ class Game {
     }
   };
 
-  whiteMove() {
+  // method to move white piece
+  whiteMove(start, end) {
+    let startValue = start.split('');
+    let endValue = end.split('');
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+    this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+    this.board.grid[startValue[0]][startValue[1]] = null;
+  };
 
+  // method to move black piece
+  blackMove(start, end) {
+    let startValue = start.split('');
+    let endValue = end.split('');
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
+    this.board.grid[endValue[0]][endValue[1]] = currentPiece;
+    this.board.grid[startValue[0]][startValue[1]] = null
   };
 
   whiteJump() {
@@ -149,15 +163,13 @@ class Game {
 
   };
 
-  blackMove(){
+
+
+  blackJump() {
 
   };
 
-  blackJump(){
-
-  };
-
-  blackDoubleJump(){
+  blackDoubleJump() {
 
   };
 
@@ -165,15 +177,20 @@ class Game {
 
   // Removes checker from board when jumped
   killChecker(start, end) {
-    let start
     this.board.grid[start][end] = null;
     this.board.checkers.length--; // decrements # of checkers to pass test
     return true;
   }
 
-  moveChecker(start, end) {
-    if (this.validateInput()) {
-
+  moveChecker(whichPiece, toWhere) {
+    if (this.validateInput(whichPiece, toWhere)) {
+      if(this.validatePlayerTurn){
+        this.whiteMove(whichPiece, toWhere)
+      } else {
+        this.blackMove(whichPiece, toWhere)
+      }
+    } else {
+      console.log('For each input, enter two numbers from 0-7 to move a piece to an empty square');
     }
     this.board.turnCounter++ // FINAL STEP before getPrompt() runs again
   }
@@ -194,7 +211,7 @@ class Game {
 function getPrompt() {
   game.board.viewGrid();
   // added turnCounter() to console.log turn and increment immediately after printing grid
-  game.board.turnCounter();
+  // game.board.turnCounter();
   // added gamePieceCounter() to console.log number of pieces left in play
   game.board.gamePieceCounter()
   rl.question('which piece?: ', (whichPiece) => {
