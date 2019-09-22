@@ -110,6 +110,18 @@ class Game {
     return (startCheck.length != 2 || endCheck.length != 2 ? false : true)
   };
 
+  // method to make sure that user input looks to select a square that has a piece, and move it to an empty square
+  validateMove(start, end){
+    let startValue = start.split('');
+    let endValue = end.split('');
+    // selectPiece is equal to square to pick up piece from
+    let selectPiece = this.board.grid[startValue[0]][startValue[1]];
+    // placePiece is equal to square to move piece to
+    let placePiece = this.board.grid[endValue[0]][endValue[1]];
+    // if start square is empty, or square to place piece is occupied, return false
+    return (selectPiece == null  || placePiece != null ? false: true)
+  };
+
   // method that if returns true, allows white to move. if returns false, black moves.
   validatePlayerTurn(pieceCoords) {
     let startValue = pieceCoords.split('');
@@ -168,7 +180,7 @@ class Game {
 };
 
 /*
-1: if validateInput() is true, run validatePlayerTurn(). 
+1: if validateInput() and validateMove() is true, run validatePlayerTurn(). 
 2: if true, run whiteMove(). If false, run blackMove(), which perform regular moves. (returnT/F to skip over jump conditions)
 3: whitJump() and blackJump() allow for jumps. returns true or false, 
 4A: if line 3 is true, runs killChecker() to remove piece
