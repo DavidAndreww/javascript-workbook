@@ -19,96 +19,101 @@ let arrayOfNums = strNums.map(stringsToNumbs);
 
 
 // Find the index of the first value that when added to it's index = 512 (#ATX!!)
-const atxIdx = arrayOfNums.reduce((accu, val, index) => {
-  
-  console.log(accu, val, index);
-  return(val + index == 512 ? index : accu); 
-  //<-- works but doens't pull from first matching condition (returns 505 then 512)
+const atxIdx = arrayOfNums.findIndex((val, index) => {
+  return val + index == 512;
+});
 
-  // let sum = val + index;
-  // console.log(sum)
-  // return (sum == 512 ? accu : false); 
+// console.log(`index: ${atxIdx}, value: ${arrayOfNums[atxIdx]}`);
 
-}, 0);
 
-//atxIdx should return value 505
-// console.log(arrayOfNums[505])
+const weather = [
+  {
+    id: 5743823523151872,
+    weather_state_name: "Light Cloud",
+    weather_state_abbr: "lc",
+    wind_direction_compass: "NNE",
+    created: "2018-07-11T20:53:03.251710Z",
+    applicable_date: "2018-07-11",
+    min_temp: 14.43,
+    max_temp: 23.36,
+    the_temp: 22.785,
+    wind_speed: 5.682503989556987,
+    wind_direction: 21.6264939172659,
+    air_pressure: 1024.45,
+    humidity: 58,
+    visibility: 8.683041040324504,
+    predictability: 70
+  },
+  {
+    id: 6188149969518592,
+    weather_state_name: "Heavy Cloud",
+    weather_state_abbr: "hc",
+    wind_direction_compass: "NE",
+    created: "2018-07-11T20:53:03.268190Z",
+    applicable_date: "2018-07-12",
+    min_temp: 14.81,
+    max_temp: 25.52,
+    the_temp: 24.61,
+    wind_speed: 3.2461141472739206,
+    wind_direction: 42.72552812997726,
+    air_pressure: 1024.605,
+    humidity: 54,
+    visibility: 10.633835898353615,
+    predictability: 71
+  },
+  {
+    id: 5742049676492800,
+    weather_state_name: "Showers",
+    weather_state_abbr: "s",
+    wind_direction_compass: "E",
+    created: "2018-07-11T20:53:03.947390Z",
+    applicable_date: "2018-07-13",
+    min_temp: 15.5525,
+    max_temp: 25.3475,
+    the_temp: 24.175,
+    wind_speed: 3.6572546846814604,
+    wind_direction: 90.32910675612557,
+    air_pressure: 1025.385,
+    humidity: 57,
+    visibility: 10.181166984808717,
+    predictability: 73
+  },
+  {
+    id: 6696130918219776,
+    weather_state_name: "Heavy Cloud",
+    weather_state_abbr: "hc",
+    wind_direction_compass: "SSW",
+    created: "2018-07-11T20:53:04.068570Z",
+    applicable_date: "2018-07-14",
+    min_temp: 15.915,
+    max_temp: 27.0925,
+    the_temp: 26.585,
+    wind_speed: 3.649847972759087,
+    wind_direction: 200.04283406736377,
+    air_pressure: 1024.4450000000002,
+    humidity: 57,
+    visibility: 11.14056410562316,
+    predictability: 71
+  },
+]
 
-//EXPECTED value 7 at index 505
-console.log(`index: ${atxIdx}, value: ${arrayOfNums[atxIdx]}`);
+//using a higher order function, create an array of the unique 'weather_state_name' values of the weather array. Your function should return the following array ['Light Cloud', 'Heavy Cloud', 'Showers']
 
-// const weather = [
-//   { id: 5743823523151872,
-//     weather_state_name: "Light Cloud",
-//     weather_state_abbr: "lc",
-//     wind_direction_compass: "NNE",
-//     created: "2018-07-11T20:53:03.251710Z",
-//     applicable_date: "2018-07-11",
-//     min_temp: 14.43,
-//     max_temp: 23.36,
-//     the_temp: 22.785,
-//     wind_speed: 5.682503989556987,
-//     wind_direction: 21.6264939172659,
-//     air_pressure: 1024.45,
-//     humidity: 58,
-//     visibility: 8.683041040324504,
-//     predictability: 70
-//   },
-//   { id: 6188149969518592,
-//     weather_state_name: "Heavy Cloud",
-//     weather_state_abbr: "hc",
-//     wind_direction_compass: "NE",
-//     created: "2018-07-11T20:53:03.268190Z",
-//     applicable_date: "2018-07-12",
-//     min_temp: 14.81,
-//     max_temp: 25.52,
-//     the_temp: 24.61,
-//     wind_speed: 3.2461141472739206,
-//     wind_direction: 42.72552812997726,
-//     air_pressure: 1024.605,
-//     humidity: 54,
-//     visibility: 10.633835898353615,
-//     predictability: 71
-//   },
-//   { id: 5742049676492800,
-//     weather_state_name: "Showers",
-//     weather_state_abbr: "s",
-//     wind_direction_compass: "E",
-//     created: "2018-07-11T20:53:03.947390Z",
-//     applicable_date: "2018-07-13",
-//     min_temp: 15.5525,
-//     max_temp: 25.3475,
-//     the_temp: 24.175,
-//     wind_speed: 3.6572546846814604,
-//     wind_direction: 90.32910675612557,
-//     air_pressure: 1025.385,
-//     humidity: 57,
-//     visibility: 10.181166984808717,
-//     predictability: 73  
-//   },
-//   { id: 6696130918219776,
-//     weather_state_name: "Heavy Cloud",
-//     weather_state_abbr: "hc",
-//     wind_direction_compass: "SSW",
-//     created: "2018-07-11T20:53:04.068570Z",
-//     applicable_date: "2018-07-14",
-//     min_temp: 15.915,
-//     max_temp: 27.0925,
-//     the_temp: 26.585,
-//     wind_speed: 3.649847972759087,
-//     wind_direction: 200.04283406736377,
-//     air_pressure: 1024.4450000000002,
-//     humidity: 52,
-//     visibility: 11.14056410562316,
-//     predictability: 71
-//   },
-// ],
-
-// //using a higher order function, create an array of the unique 'weather_state_name' values of the weather array. Your function should return the following array ['Light Cloud', 'Heavy Cloud', 'Showers']
-// const weatherStates = 
-// console.log(weatherStates)
+const weatherStates = weather.reduce((accu, val, index) => {
+  if (accu.indexOf(val.weather_state_name) == -1) {
+    return accu.concat(val.weather_state_name);
+  } else {
+    return accu;
+  }
+}, []);
+console.log(weatherStates)
 
 // //find the id of the object in weather that has a min_temp of 15.915
 
-// const idealTemp =
-// console.log(idealTemp)
+const idealTemp = weather.reduce((accu, val) => {
+  if(val.min_temp == 15.915){
+    return val.id;
+  }
+}, 0);
+
+console.log(idealTemp)
