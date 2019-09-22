@@ -79,7 +79,6 @@ class Board {
   // Tracks turns, allows validatePlayerTurn function to work
   turnCounter() {
     console.log(`Turn ${this.counter}`)
-    this.counter++;
   };
 
   // Tracks number of pieces on the board for each player
@@ -108,8 +107,8 @@ class Game {
     let reg = /[0-7]/g;
     let startCheck = start.match(reg);
     let endCheck = end.match(reg);
-    if(startCheck != undefined && endCheck != undefined){
-    return (startCheck.length !=2 || endCheck.length !=2 ? (console.log('Select two numbers between 0-7'), false) : true)
+    if (startCheck != undefined && endCheck != undefined) {
+      return (startCheck.length != 2 || endCheck.length != 2 ? (console.log('Select two numbers between 0-7'), false) : true)
     } else {
       console.log('Select two numbers between 0-7');
       return false;
@@ -134,9 +133,9 @@ class Game {
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
     // If this.counter is an even number, only white may play a move
-    if (this.board.counter % 2 == 0){
+    if (this.board.counter % 2 == 1) {
       return (currentPiece == this.board.whitePiece ? true : (console.log('It is whites turn'), false))
-    } else if (this.board.counter % 2 == 1){
+    } else if (this.board.counter % 2 == 0) {
       return (currentPiece == this.board.blackPiece ? true : (console.log('It is blacks turn'), false))
     };
   };
@@ -189,8 +188,10 @@ class Game {
     if (this.validateInput(whichPiece, toWhere) && this.validatePlayerTurn(whichPiece) && this.validateMove(whichPiece, toWhere)) {
       this.whiteMove(whichPiece, toWhere);
       this.blackMove(whichPiece, toWhere);
+
+
+      this.board.counter++ // FINAL STEP before getPrompt() runs again
     }
-    // this.board.turnCounter++ // FINAL STEP before getPrompt() runs again
   }
 };
 
