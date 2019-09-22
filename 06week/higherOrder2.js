@@ -21,12 +21,13 @@ let arrayOfNums = strNums.map(stringsToNumbs);
 // Find the index of the first value that when added to it's index = 512 (#ATX!!)
 const atxIdx = arrayOfNums.reduce((accu, val, index) => {
   
-  // console.log(accu, val, index);
-  // return(val + index == 512? index : accu); <-- works but doens't pull from first matching condition (returns 505 then 512)
+  console.log(accu, val, index);
+  return(val + index == 512 ? index : accu); 
+  //<-- works but doens't pull from first matching condition (returns 505 then 512)
 
-  let sum = val + index;
-  console.log(sum)
-  return (sum == 512 ? accu : false); 
+  // let sum = val + index;
+  // console.log(sum)
+  // return (sum == 512 ? accu : false); 
 
 }, 0);
 
