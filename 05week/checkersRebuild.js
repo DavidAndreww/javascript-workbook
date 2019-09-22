@@ -14,9 +14,11 @@ function Checker() {
 
 class Board {
   constructor() {
-    this.grid = []
+    this.grid = [];
+    this.checkers = [];
     this.whitePiece = 'w';
     this.blackPiece = 'b';
+    this.counter = 1;
   }
 
   // method that creates an 8x8 array, filled with null values
@@ -73,12 +75,27 @@ class Board {
       }
     }
   };
+
+  // Tracks turns, allows validatePlayerTurn function to work
+  turnCounter() {
+    console.log(`Turn ${this.counter}`);
+  }
+
+  // Tracks number of pieces on the board for each player
+  gamePieceCounter() {
+    let whiteReg = /[w]/g;
+    let blackReg = /[b]/g;
+    let whiteCount = this.grid.join('').match(whiteReg).length;
+    let blackCount = this.grid.join('').match(blackReg).length;
+    console.log(`White Pieces: ${whiteCount}`);
+    console.log(`Black Pieces: ${blackCount}`);
+    console.log('');
+  }
 }
 
 class Game {
   constructor() {
     this.board = new Board;
-    this.counter = 1;
   }
 
   start() {
@@ -86,31 +103,14 @@ class Game {
     this.board.createCheckers();
   }
 
-  // Tracks turns, allows validatePlayerTurn function to work
-  turnCounter() {
-    console.log(`Turn ${this.counter}`);
-    this.counter++
-  }
-
-  // Tracks number of pieces on the board for each player
-  gamePieceCounter() {
-    let whiteReg = /[w]/g;
-    let blackReg = /[b]/g;
-    let whiteCount = this.board.grid.join('').match(whiteReg).length;
-    let blackCount = this.board.grid.join('').match(blackReg).length;
-    console.log(`White Pieces: ${whiteCount}`);
-    console.log(`Black Pieces: ${blackCount}`);
-    console.log('');
-  }
-
   validateInput(start, end) {
     let reg = /[0-7]/g;
     let startCheck = start.match(reg);
     let endCheck = end.match(reg);
-    return (startCheck.length !=2 || endCheck.length !=2 ? false : true)
+    return (startCheck.length != 2 || endCheck.length != 2 ? false : true)
   };
 
- // method that if returns true, allows white to move. if returns false, black moves.
+  // method that if returns true, allows white to move. if returns false, black moves.
   validatePlayerTurn(pieceCoords) {
     let startValue = pieceCoords.split('');
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
@@ -125,22 +125,55 @@ class Game {
     }
   };
 
-  validatePlayerMove() {
+  whiteMove() {
 
   };
 
-  moveChecker(start, end) {
+  whiteJump() {
 
-    this.turnCounter++
+  };
+
+  whiteDoubleJump() {
+
+  };
+
+  blackMove(){
+
+  };
+
+  blackJump(){
+
+  };
+
+  blackDoubleJump(){
+
+  };
+
+
+
+  // Removes checker from board when jumped
+  killChecker(start, end) {
+    let start
+    this.board.grid[start][end] = null;
+    this.board.checkers.length--; // decrements # of checkers to pass test
+    return true;
+  }
+
+  moveChecker(start, end) {
+    if (this.validateInput()) {
+
+    }
+    this.board.turnCounter++ // FINAL STEP before getPrompt() runs again
   }
 };
 
-
 /*
 1: if validateInput() is true, run validatePlayerTurn(). 
-2: if true, run whiteMove(). If false, run blackMove().
-3: whiteMove() and blackMove() check for regular moves and jumps. Return true if they jump a piece
-4: if true, whiteDoubleJump() and blackDoubleJump() check to see if a second jump can be made. 
+2: if true, run whiteMove(). If false, run blackMove(), which perform regular moves. (returnT/F to skip over jump conditions)
+3: whitJump() and blackJump() allow for jumps. returns true or false, 
+4A: if line 3 is true, runs killChecker() to remove piece
+4B: if line 3 true, whiteDoubleJump() and blackDoubleJump() check to see if a second jump can be made, and execute
+5: program checks for win. returns true/false. If true, game is over, if false runs turn counter
 5: turn counter increments and getPrompt() runs again
 */
 
@@ -149,9 +182,9 @@ class Game {
 function getPrompt() {
   game.board.viewGrid();
   // added turnCounter() to console.log turn and increment immediately after printing grid
-  game.turnCounter();
+  game.board.turnCounter();
   // added gamePieceCounter() to console.log number of pieces left in play
-  game.gamePieceCounter()
+  game.board.gamePieceCounter()
   rl.question('which piece?: ', (whichPiece) => {
     rl.question('to where?: ', (toWhere) => {
       game.moveChecker(whichPiece, toWhere);
