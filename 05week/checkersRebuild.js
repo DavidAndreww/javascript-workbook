@@ -15,6 +15,8 @@ function Checker() {
 class Board {
   constructor() {
     this.grid = []
+    this.whitePiece = 'w';
+    this.blackPiece = 'b';
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -38,7 +40,7 @@ class Board {
         // if the location is "truthy" (contains a checker piece, in this case)
         if (this.grid[row][column]) {
           // push the symbol of the check in that location into the array
-          rowOfCheckers.push(this.grid[row][column].symbol);
+          rowOfCheckers.push(this.grid[row][column]);
         } else {
           // just push in a blank space
           rowOfCheckers.push(' ');
@@ -52,7 +54,21 @@ class Board {
     console.log(string);
   }
 
-  // Your code here
+  createCheckers() {
+    // Create black pieces
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (row % 2 == 0 && col % 2 == 1 || row % 2 == 1 && col % 2 == 0) this.grid[row][col] = this.blackPiece;
+      }
+    }
+    
+    // Create white pieces
+    for (let row = 5; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (row % 2 == 0 && col % 2 == 1 || row % 2 == 1 && col % 2 == 0) this.grid[row][col] = this.whitePiece;
+      }
+    }
+  };
 }
 
 class Game {
@@ -61,6 +77,7 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers();
   }
 }
 
