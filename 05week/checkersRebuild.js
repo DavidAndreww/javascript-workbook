@@ -134,11 +134,11 @@ class Game {
     let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
     // If this.counter is an even number, only white may play a move
-    if (this.board.counter % 2 == 0 && currentPiece == this.board.whitePiece) {
-      return true;
-    } else if (this.board.counter % 2 == 1 && currentPiece == this.board.blackPiece){
-      return false;
-    }
+    if (this.board.counter % 2 == 0){
+      return (currentPiece == this.board.whitePiece ? true : (console.log('It is whites turn'), false))
+    } else if (this.board.counter % 2 == 1){
+      return (currentPiece == this.board.blackPiece ? true : (console.log('It is blacks turn'), false))
+    };
   };
 
   // method to move white piece
@@ -166,7 +166,6 @@ class Game {
   whiteDoubleJump() {
 
   };
-
 
 
   blackJump() {
