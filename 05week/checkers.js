@@ -162,6 +162,20 @@ class Game {
         return true;
       }
     }
+
+    // Attempts to look for double jump opportunity (currently broken, removes piece that will be double jumped if you enter coordinates again, but piece does not move and get wrong player turn message)
+  // whiteDoubleJump(input){
+  
+  //   if (this.board.grid[input[0] - 2][input[1]] == this.board.blackPiece && this.board.grid[input[0] - 3][input[1] - 1] == null) {
+  //     killChecker([input[0] - 2], [input[1]]);
+  //     this.board.grid[input[0] - 3][input[1] - 1] = this.board.whitePiece;
+  //     return true;
+  //   } else if (this.board.grid[input[0] - 2][input[1] + 2] == this.board.blackPiece && this.board.grid[input[0] - 3][input[1] + 3] == null) {
+  //     killChecker([input[0] - 2], [input[1] + 2]);
+  //     this.board.grid[input[0] - 3][input[1] + 3] = this.board.whitePiece;
+  //     return true;
+  //   }
+  // }
     console.log(`Square ${end} is not a valid move`);
   }
 
@@ -191,6 +205,20 @@ class Game {
         return true;
       }
     }
+
+    // // Attempts to look for double jump opportunity (currently broken, removes piece that will be double jumped if you enter coordinates again, but piece does not move and get wrong player turn message)
+//   blackDoubleJump(input){
+  
+//     if (this.board.grid[input[0] + 2][input[1]] == this.board.whitePiece && this.board.grid[input[0] + 3][input[1] + 1] == null) {
+//       killChecker([input[0] + 2], [input[1]]);
+//       this.board.grid[input[0] + 3][input[1] + 1] = this.board.blackPiece;
+//       return true;
+//     } else if (this.board.grid[input[0] + 2][input[1] - 2] == this.board.whitePiece && this.board.grid[input[0] + 3][input[1] - 3] == null) {
+//       killChecker([input[0] + 2], [input[1] - 2]);
+//       this.board.grid[input[0] + 3][input[1] - 3] = this.board.blackPiece;
+//       return true;
+//     }
+//   }
     console.log(`Square ${end} is not a valid move`);
   }
 
