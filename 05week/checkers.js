@@ -122,14 +122,9 @@ class Game {
     // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
 
-    // Ensures there is a piece to be moved at 'start' location
-    if (selectPiece == null) {
-      console.log(`There is no piece at square ${start}`)
-      return false;
-    }
-    // Ensures that 'end' locations is empty
-    if (placePiece !== null) {
-      console.log(`Square at ${end} is already occupied`);
+    // ensure there is a piece at start location, and that end location is empty
+    if (selectPiece == null || placePiece !== null) {
+      console.log(`${start} to ${end} is not a valid move`);
       return false;
     }
 
@@ -155,23 +150,13 @@ class Game {
 
     // If this.counter is odd number, only white may play a move
     if (this.counter % 2 == 1) {
-      if (currentPiece == this.board.whitePiece){
-        return true
-      } else {
-        console.log('It is whites move')
-        return false;
-      }
-    };
+      return (currentPiece == this.board.whitePiece ? true : (console.log('It is whites move'), false))
+    }
 
     // If this.counter is even number, only black may play a move
     if (this.counter % 2 == 0) {
-      if (currentPiece == this.board.blackPiece){
-        return true;
-      } else {
-        console.log('It is blacks move');
-        return false;
-      }
-    };
+      return (currentPiece == this.board.blackPiece ? true : (console.log('It is blacks move'), false))
+    }
   };
 
   // Checks white move logic before moving (contains jump logic and killChecker function)
