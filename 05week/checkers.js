@@ -58,43 +58,20 @@ class Board {
 
   // Creates checkers at game start and populates board. No return value.
   createCheckers() {
-    //Create white pieces
-    for (let row1 = 0; row1 < 3; row1++) {
-      for (let col1 = 0; col1 < 8; col1++) {
-        if (row1 % 2 == 0 && col1 % 2 == 1) {
-          this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.blackPiece); // only purpose is to pass test
-        }
-      }
-    }
-    for (let row1 = 0; row1 < 3; row1++) {
-      for (let col1 = 0; col1 < 8; col1++) {
-        if (row1 % 2 == 1 && col1 % 2 == 0) {
-          this.grid[row1][col1] = this.blackPiece;
-          this.checkers.push(this.blackPiece); // only purpose is to pass test
-        }
-      }
-    }
-
     // Create black pieces
-    for (let row1 = 5; row1 < 8; row1++) {
-      for (let col1 = 0; col1 < 8; col1++) {
-        if (row1 % 2 == 0 && col1 % 2 == 1) {
-          this.grid[row1][col1] = this.whitePiece;
-          this.checkers.push(this.whitePiece); // only purpose is to pass test
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (row % 2 == 0 && col % 2 == 1 || row % 2 == 1 && col % 2 == 0) this.grid[row][col] = this.blackPiece;
+      }
+    }
 
-        }
+    // Create white pieces
+    for (let row = 5; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (row % 2 == 0 && col % 2 == 1 || row % 2 == 1 && col % 2 == 0) this.grid[row][col] = this.whitePiece;
       }
     }
-    for (let row1 = 5; row1 < 8; row1++) {
-      for (let col1 = 0; col1 < 8; col1++) {
-        if (row1 % 2 == 1 && col1 % 2 == 0) {
-          this.grid[row1][col1] = this.whitePiece;
-          this.checkers.push(this.whitePiece); // only purpose is to pass test
-        }
-      }
-    }
-  }
+  };
 }
 
 class Game {
@@ -245,9 +222,11 @@ class Game {
   checkForWin() {
     if (this.whiteCount == 0) {
       console.log('Black Wins!');
+      game.start()
     }
     if (this.blackCount == 0) {
       console.log('Black Wins');
+      game.start()
     }
   }
 
