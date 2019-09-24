@@ -158,7 +158,7 @@ class Game {
 
     //checks for correct coordinates based on which players turn it is, and executes the move
     if ((this.validatePlayerTurn(start, end) == this.board.whitePiece && coords == 9 || coords == 11) || 
-    (this.validatePlayerTurn(start, end) == this.board.blackPiece && coords == -9 || coords == -11)) {
+        (this.validatePlayerTurn(start, end) == this.board.blackPiece && coords == -9 || coords == -11)) {
 
       //assigns value of player piece to end location, while assigning null value to location it moved from
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
