@@ -134,9 +134,9 @@ class Game {
 
     // If this.counter is an even number, only white may play a move
     if (this.board.counter % 2 == 1) {
-      return (currentPiece == this.board.whitePiece ? this.board.whitePiece : (console.log('It is whites turn'), false))
+      return (currentPiece == this.board.whitePiece ? this.board.whitePiece : console.log('It is Whites turn'))
     } else if (this.board.counter % 2 == 0) {
-      return (currentPiece == this.board.blackPiece ? this.board.blackPiece : (console.log('It is blacks turn'), false))
+      return (currentPiece == this.board.blackPiece ? this.board.blackPiece : console.log('It is Blacks turn'))
     };
   };
 
@@ -150,10 +150,9 @@ class Game {
     let endEntry = parseInt(end)
     //stores startEntry - endEntry to validate move
     let coords = startEntry - endEntry;
-    //stores current piece, either white or black
-    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
-    if ((currentPiece == this.board.whitePiece && coords == 9 || coords == 11) || (currentPiece == this.board.blackPiece && coords == -9 || coords == -11)) {
+    if ((this.validatePlayerTurn(start, end) == this.board.whitePiece && coords == 9 || coords == 11) || 
+    (this.validatePlayerTurn(start, end) == this.board.blackPiece && coords == -9 || coords == -11)) {
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
