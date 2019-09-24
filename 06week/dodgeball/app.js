@@ -1,3 +1,16 @@
+/* -Checkpoint 2 Dodge Ball!
+20pts - Code Plan - Include this in a README.md file in your folder with comment in your code.
+
+20pts - Can add People to Players - When clicked the people are added to the Players column and removed from the People list while getting new values of a player added to them.
+
+20pts - Can add Players to different Teams - When we click on the blue button they Player is added to the blue team and removed from the Player list while also getting the keys color and mascot extended to them when they are moved to a team.
+
+20pts - Uses Class - This is not a hack job. You should use class to add the new properties you need and extend when you need.
+
+20pts - Make a button to remove Players from Teams and back to the Players list.
+Make a button to remove Player from the Players List and move them into the People List. */
+
+// array of players, listed as objects
 const arrOfPeople = [
   {
     id: 2,
@@ -50,6 +63,13 @@ const arrOfPeople = [
   },
 ]
 
+
+
+//push people into listOfPlayers array when able to play, then allow them to be pushed to either blue or red team
+const listOfPlayers = []
+const blueTeam = []
+const redTeam = []
+
 class DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
     this.canThrowBall = canThrowBall;
@@ -59,20 +79,20 @@ class DodgeBallPlayer {
     this.yearsExperience = yearsExperience;
   }
 }
-
-
-const listOfPlayers = []
-const blueTeam = []
-const redTeam = []
-
-class player {
-  constructor(){}
+class blueTeammate extends DodgeBallPlayer{
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
+    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
+    this.teamColor = teamColor;
+    this.mascot = mascot;
+  }
 }
-class blueTeammate {
-  constructor(){}
-}
-class redTeammate {
-  constructor(){}
+
+class redTeammate extends DodgeBallPlayer {
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
+    super(canThrowBAll, canDodgeall, hasPaid, isHealthy, yearsExperience);
+    this.teamColor = teamColor;
+    this.mascot = mascot;
+  }
 }
 
 const listPeopleChoices = () => {
