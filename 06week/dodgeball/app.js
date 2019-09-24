@@ -70,6 +70,7 @@ const listOfPlayers = []
 const blueTeam = []
 const redTeam = []
 
+// template to turn person into a dodgeball player
 class DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
     this.canThrowBall = canThrowBall;
@@ -79,6 +80,8 @@ class DodgeBallPlayer {
     this.yearsExperience = yearsExperience;
   }
 }
+
+// extends player and adds teamColor and mascot for blue team
 class blueTeammate extends DodgeBallPlayer{
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
@@ -87,9 +90,10 @@ class blueTeammate extends DodgeBallPlayer{
   }
 }
 
+// extends player and adds teamColor and mascot for red team
 class redTeammate extends DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
-    super(canThrowBAll, canDodgeall, hasPaid, isHealthy, yearsExperience);
+    super(canThrowBall, canDodgeall, hasPaid, isHealthy, yearsExperience);
     this.teamColor = teamColor;
     this.mascot = mascot;
   }
