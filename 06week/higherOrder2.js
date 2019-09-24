@@ -103,6 +103,7 @@ const weatherStates = weather.reduce((accu, val) => {
   return (accu.indexOf(val.weather_state_name) == -1 ? accu.concat(val.weather_state_name) : accu)
 }, []);
 console.log(weatherStates)
+console.log(weather['weather_state_name'])
 
 // //find the id of the object in weather that has a min_temp of 15.915
 
@@ -111,3 +112,13 @@ const idealTemp = weather.reduce((accu, val) => {
 }, 0);
 
 // console.log(idealTemp)
+
+let stored = []
+
+let x = arrayed.map((val, index) => {
+  if(indexOf(val) == -1){
+    stored.push(val)
+  } else if(val !== -1){
+    stored.push(val)
+  }
+})
