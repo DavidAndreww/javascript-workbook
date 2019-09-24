@@ -141,35 +141,25 @@ class Game {
   };
 
   // method to move white piece
-  whiteMove(start, end) {
+  standardMove(start, end) {
+    //splits start and end into array to use for index values
     let startValue = start.split('');
     let endValue = end.split('');
+    //turns start and end from string to number data type
     let startEntry = parseInt(start);
     let endEntry = parseInt(end)
-    if (startEntry - endEntry == 9 || startEntry - endEntry == 11) {
-      let currentPiece = this.board.grid[startValue[0]][startValue[1]];
-      this.board.grid[endValue[0]][endValue[1]] = currentPiece;
-      this.board.grid[startValue[0]][startValue[1]] = null;
-      return true;
-    } else {
-      console.log('Please play a valid move for white');
-      return false;
-    }
-  };
+    //stores startEntry - endEntry to validate move
+    let coords = startEntry - endEntry;
+    //stores current piece, either white or black
+    let currentPiece = this.board.grid[startValue[0]][startValue[1]];
 
-  // method to move black piece
-  blackMove(start, end) {
-    let startValue = start.split('');
-    let endValue = end.split('');
-    let startEntry = parseInt(start);
-    let endEntry = parseInt(end)
-    if (startEntry - endEntry == -9 || startEntry - endEntry == -11) {
+    if ((currentPiece == this.board.whitePiece && coords == 9 || coords == 11) || (currentPiece == this.board.blackPiece && coords == -9 || coords == -11)) {
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
       return true;
     } else {
-      console.log('Please play a valid move for black');
+      console.log(`Please play a valid move for player ${currentPiece}`);
       return false;
     }
   };
@@ -200,14 +190,14 @@ class Game {
     return true;
   }
 
-  moveChecker(whichPiece, toWhere) {
-    if (this.validateInput(whichPiece, toWhere) && this.validateMove(whichPiece, toWhere)) {
-      if (this.validatePlayerTurn(whichPiece, toWhere) == this.board.whitePiece) {
-        if (this.whiteMove(whichPiece, toWhere)) {
+  moveChecker(x, y) {
+    if (this.validateInput(x, y) && this.validateMove(x, y)) {
+      if (this.validatePlayerTurn(x, y) == this.board.whitePiece) {
+        if (this.standardMove(x, y)) {
           this.board.counter++
         }
-      } else if (this.validatePlayerTurn(whichPiece, toWhere) == this.board.blackPiece) {
-        if (this.blackMove(whichPiece, toWhere)) {
+      } else if (this.validatePlayerTurn(x, y) == this.board.blackPiece) {
+        if (this.standardMove(x, y)) {
           this.board.counter++
         }
       }
