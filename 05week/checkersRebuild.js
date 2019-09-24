@@ -119,10 +119,13 @@ class Game {
   validateMove(start, end) {
     let startValue = start.split('');
     let endValue = end.split('');
+
     // selectPiece is equal to square to pick up piece from
     let selectPiece = this.board.grid[startValue[0]][startValue[1]];
+
     // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
+    
     // if start square is empty, or square to place piece is occupied, return false
     return (selectPiece == null || placePiece != null ? (console.log('Select valid piece and move to empty square'), false) : true)
   };
@@ -145,20 +148,25 @@ class Game {
     //splits start and end into array to use for index values
     let startValue = start.split('');
     let endValue = end.split('');
+
     //turns start and end from string to number data type
     let startEntry = parseInt(start);
     let endEntry = parseInt(end)
+
     //stores startEntry - endEntry to validate move
     let coords = startEntry - endEntry;
 
+    //checks for correct coordinates based on which players turn it is, and executes the move
     if ((this.validatePlayerTurn(start, end) == this.board.whitePiece && coords == 9 || coords == 11) || 
     (this.validatePlayerTurn(start, end) == this.board.blackPiece && coords == -9 || coords == -11)) {
+
+      //assigns value of player piece to end location, while assigning null value to location it moved from
       let currentPiece = this.board.grid[startValue[0]][startValue[1]];
       this.board.grid[endValue[0]][endValue[1]] = currentPiece;
       this.board.grid[startValue[0]][startValue[1]] = null;
       return true;
     } else {
-      console.log(`Please play a valid move for player ${currentPiece}`);
+      console.log(`Please play a valid move for player ${this.validatePlayerTurn(start, end)}`);
       return false;
     }
   };
