@@ -102,7 +102,7 @@ class Game {
     this.board.createGrid();
     this.board.createCheckers();
   }
-
+  //method to make sure that two numbers are being entered, and that they are between 0-7
   validateInput(start, end) {
     let reg = /[0-7]/g;
     let startCheck = start.match(reg);
@@ -125,7 +125,7 @@ class Game {
 
     // placePiece is equal to square to move piece to
     let placePiece = this.board.grid[endValue[0]][endValue[1]];
-    
+
     // if start square is empty, or square to place piece is occupied, return false
     return (selectPiece == null || placePiece != null ? (console.log('Select valid piece and move to empty square'), false) : true)
   };
@@ -187,8 +187,6 @@ class Game {
   blackDoubleJump() {
 
   };
-
-
 
   // Removes checker from board when jumped
   killChecker(start, end) {
