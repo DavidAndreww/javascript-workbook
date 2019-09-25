@@ -30,3 +30,19 @@ const displayPost = () => {
 }
 
 // Your job now is to follow the functions above and use them as templates to build the functionality the buttons in the index.html file already have laid out in it. This way you can learn how to build fetch requests and work with other apis and become a real developer!!
+
+const fetchPosts = () => {
+  fetch('https://jsonplaceholder.typicode.com/posts')
+  .then(response => response.json())
+  .then(json => console.log(json))
+}
+const fetchComments = () => {
+  fetch('https://jsonplaceholder.typicode.com/comments')
+  .then(response => response.json())
+  .then(json => console.log(json))
+}
+const fetchUsers = () => {
+  fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(json => console.log(json))
+}
