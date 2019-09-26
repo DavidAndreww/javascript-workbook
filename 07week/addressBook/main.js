@@ -1,6 +1,5 @@
 'use strict'
-let arrayOfUsers = [];
-console.log(typeof arrayOfUsers)
+let arrayOfUsers;
 window.onload = function() {
   getUsers()
 }
@@ -8,7 +7,7 @@ window.onload = function() {
 const getUsers = () => {
   fetch('https://randomuser.me/api/?results=5')
   .then(res => res.json())
-  .then(user1 => arrayOfUsers = user1)
+  .then(user1 => arrayOfUsers.push(user1))
 }
 
 // let newPerson = Object.values(arrayOfUSers)
