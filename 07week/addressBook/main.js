@@ -1,5 +1,7 @@
 'use strict'
-let arrayOfUsers;
+let arrayOfUsers = null;
+
+
 window.onload = function() {
   getUsers()
 }
@@ -7,21 +9,24 @@ window.onload = function() {
 const getUsers = () => {
   fetch('https://randomuser.me/api/?results=5')
   .then(res => res.json())
-  .then(user1 => arrayOfUsers.push(user1))
+  .then(user1 => arrayOfUsers = user1)
 }
 
-// let newPerson = Object.values(arrayOfUSers)
-
-// arrayofusers is not an ARRAY
+const consoleUsers = () => {
+  console.log(arrayOfUsers.results[1].name.first)
+  console.log(arrayOfUsers.results[1].name.last)
+  console.log(arrayOfUsers.results[1].picture.large)
+}
 
 const displayUsers = () => {
   const allUsers = document.getElementById('address-book')
-  arrayOfUsers.map((user1) => {
+  for (let i = 0; i < arrayOfUsers.results.length; i++){
     const userList = document.createElement('li')
-    const userText = document.createTextNode(`Name:${user1.name} - Picture: ${user1.picture}`)
-    userList.appendChild(userText)
-    allUsers.append(userList)
-  })
+    const userField = document.createTextNode(`Name:${arrayOfUsers.results[i].name.first} ${arrayOfUsers.results[1].name.last} - Picture:${arrayOfUsers.results[i].picture.large}`)
+    userList.appendChild(userField) // check this, could be wrong
+    allUsers.append(userList) // check this, could be wrong
+   }
+  
 }
 
 
