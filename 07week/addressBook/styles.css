@@ -8,3 +8,20 @@ body {
   height: 100%;
   width: 100%;
 }
+
+#header {
+  text-align: center;
+}
+
+.buttonWrap {
+  text-align: center;
+}
+
+#textDisplay {
+  background-color: blue;
+  height: 300px;
+  width: 80%;
+}
+
+
+
