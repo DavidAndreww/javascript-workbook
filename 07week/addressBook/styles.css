@@ -28,6 +28,9 @@ body {
 
 #personInfo {
   border: 2px solid yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 #name{
