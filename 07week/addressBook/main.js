@@ -1,23 +1,69 @@
 'use strict'
 
-// creates an array to store JSON file
-let arrayOfUsers;
+// // creates an array to store JSON file
+// let arrayOfUsers;
 
-// action to take when window loads - call the getUsers() function
-window.onload = function () {
-  getUsers()
-}
+// // action to take when window loads - call the getUsers() function
+// window.onload = function () {
+//   getUsers()
+// }
 
-// defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
-const getUsers = () => {
-  fetch('https://randomuser.me/api/?results=5')
-    .then(res => res.json())
-    .then(user1 => arrayOfUsers = user1)
-}
+// // defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
+// const getUsers = () => {
+//   fetch('https://randomuser.me/api/?results=5')
+//     .then(res => res.json())
+//     .then(user1 => arrayOfUsers = user1)
+// }
 
-const consoleUsers = () => {
-  console.log(arrayOfUsers.results)
-}
+
+
+
+// ---------------------- Promises?!?!-----------------------------
+// let userObj1;
+// let userObj2;
+// let userObj3;
+// let userObj4;
+
+
+// window.onload = () => {
+//   getUsers()
+// }
+
+// const getUsers = (url) => {
+//   return fetch(url)
+//     .then(res => res.json())
+// }
+
+// getUsers('https://randomuser.me/api/')
+//   .then(userData1 => userObj1 = userData1)
+// getUsers('https://randomuser.me/api/')
+//   .then(userData2 => UserObj2 = userData2)
+// getUsers('https://randomuser.me/api/')
+//   .then(userData3 => UserObj3 = userData3)
+// getUsers('https://randomuser.me/api/')
+//   .then(userData4 => UserObj4 = userData4)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// May need to use this syntax for proper alignment in DOM?
 
 // const displayUsers = () => {
 //   const allUsers = document.getElementById('address-book')
@@ -36,6 +82,8 @@ const consoleUsers = () => {
 //    }
 // }
 
+
+// -------------------Current Working Code------------------------
 const displayUsers = () => {
   // define the div that holds the content
   const parentDiv = document.getElementById('personInfo');
@@ -56,7 +104,5 @@ const displayUsers = () => {
     parentDiv.append(imgElem)
     parentDiv.append(name_Para)
     parentDiv.append(buttonElem)
-
   }
 }
-
