@@ -17,10 +17,48 @@ body {
   text-align: center;
 }
 
-#textDisplay {
-  background-color: blue;
-  height: 300px;
-  width: 80%;
+#textWrap {
+  background-color: rgb(139, 139, 236);
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  width: 100%;
+  display: flex;
+}
+
+#personInfo {
+  border: 2px solid yellow;
+}
+
+#name{
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  width: 70vw;
+}
+
+#img {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+#funcButt {
+  border-radius: 20px;
+  height: 50px;
+  width: 80px;
+}
+
+#button {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+
+button {
+  width: 75px;
+  height: 20px;
 }
 
 
