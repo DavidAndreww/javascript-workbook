@@ -1,5 +1,5 @@
 'use strict'
-let arrayOfUsers = null;
+let arrayOfUsers;
 
 
 window.onload = function() {
@@ -15,39 +15,23 @@ const getUsers = () => {
 const consoleUsers = () => {
   console.log(arrayOfUsers)
   console.log(arrayOfUsers.results)
-  console.log(arrayOfUsers.results[1].name.first)
-  console.log(arrayOfUsers.results[1].name.last)
-  console.log(arrayOfUsers.results[1].picture.large)
 }
 
 const displayUsers = () => {
   const allUsers = document.getElementById('address-book')
+  const userImage = document.getElementById('div')
+  const userButton = document.getElementById('button')
   for (let i = 0; i < arrayOfUsers.results.length; i++){
     const userList = document.createElement('li')
-    const userField = document.createTextNode(`Name:${arrayOfUsers.results[i].name.first} ${arrayOfUsers.results[1].name.last} - <img src="${arrayOfUsers.results[i].picture.large}">`)
-    userList.appendChild(userField) // check this, could be wrong
-    allUsers.append(userList) // check this, could be wrong
+    const userImg = document.createElement('img')
+    const userBtn = document.createElement('button')
+    const userField = document.createTextNode(`Name:${arrayOfUsers.results[i].name.first} ${arrayOfUsers.results[i].name.last}`)
+    userImg.src = arrayOfUsers.results[i].picture.large;
+    userImage.append(userImg)
+    userList.appendChild(userField) 
+    allUsers.append(userList) 
+    userButton.append(userBtn)
    }
-  
 }
-
-
-
-
-
-
-
-// const getUsers = () => {
-// Promise.all([
-//   fetch('https://randomuser.me/api/'),
-//   fetch('https://randomuser.me/api/'),
-//   fetch('https://randomuser.me/api/'),
-//   fetch('https://randomuser.me/api/')
-// ])
-// .then(res => res.json())
-// .then(users => arrayOfUsers.push(users))
-// }
-
-// console.log(arrayOfUsers)
 
 
