@@ -29,7 +29,7 @@ const displayUsers = () => {
     // textNode is put inside of the <p>, and <img> src attribute is defined
     name_Para.appendChild(nameTextNode)
     imgElem.src = arrayOfUsers.results[i].picture.large;
-    // the <p>, <img>, <button> and textNode are put inside the dive
+    // the <p>, <img>, <button> and textNode are put inside the div
     parentDiv.append(imgElem)
     parentDiv.append(name_Para)
     parentDiv.append(buttonElem)
