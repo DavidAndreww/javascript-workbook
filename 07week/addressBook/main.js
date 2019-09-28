@@ -36,17 +36,15 @@ const displayUsers = () => {
     nameDiv.append(name_Para)
     photoDiv.append(imgElem)
     buttonDiv.append(buttonElem)
-    
-    
-    
-    // Will this work?
-    // buttonElem.addEventListener("click", expandInfo())
-
-    // Or maybe this will work
-    // document.getElementsByTagName("button").setAttribute("class", "expandClass")
-    // document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
   }
 }
+
+// Will this work?
+// buttonElem.addEventListener("click", expandInfo())
+
+// Or maybe this will work
+// document.getElementsByTagName("button").setAttribute("class", "expandClass")
+// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
 
 const expandInfo = () => {
   // define dlement that holds expanded info
@@ -55,9 +53,10 @@ const expandInfo = () => {
   const expandedAgeDiv = document.getElementById('expandAge');
   // for each item in array, create <p> and textNode
   for (let j = 0; j < arrayOfUsers.results.length; j++) {
-    let expandedLocation = document.createElement('sp')
-    let expandedEmail = document.createElement('span')
-    let expandedAge = document.createElement('span')
+    // create divs for textNodes
+    let expandedLocation = document.createElement('div')
+    let expandedEmail = document.createElement('div')
+    let expandedAge = document.createElement('div')
     // create textNodes
     let expandedLocationNode = document.createTextNode(`Location:${arrayOfUsers.results[j].location.city}`)
     let expandedEmailNode = document.createTextNode(`Email ${arrayOfUsers.results[j].email}`)
@@ -74,20 +73,11 @@ const expandInfo = () => {
 }
 
 
-
-
-
-
-
-
-
-
 // ---------------------- Promises?!?!-----------------------------
 // let userObj1;
 // let userObj2;
 // let userObj3;
 // let userObj4;
-
 
 // window.onload = () => {
 //   getUsers()
@@ -106,29 +96,3 @@ const expandInfo = () => {
 //   .then(userData3 => UserObj3 = userData3)
 // getUsers('https://randomuser.me/api/')
 //   .then(userData4 => UserObj4 = userData4)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
