@@ -82,8 +82,8 @@ const expandInfo = () => {
   expandedPhone.appendChild(expandedPhoneNode)
   // puts <p> inside of expandInfo div
   nameDiv.append(expandedAge)
-  nameDiv.append(expandedPhone)
   nameDiv.append(expandedLocation)
+  nameDiv.append(expandedPhone)
   nameDiv.append(expandedEmail)
   backGround.append(nameDiv)
 }
