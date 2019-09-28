@@ -39,11 +39,11 @@ body {
   display: flex;
   flex-direction: column;
   height: 400px;
-  width: 70vw;
+  width: auto;
 }
 
 .storageDivs {
-  /* border: 1px solid green; */
+  border: 1px solid green;
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
