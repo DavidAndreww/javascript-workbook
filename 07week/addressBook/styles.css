@@ -37,26 +37,15 @@ body {
   border: 2px solid yellow;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  height: 450px;
+  height: 400px;
+  width: 70vw;
 }
 
-#name,
-#photo,
-#button,
-#expandLocation,
-#expandEmail,
-#expandAge {
-  margin-top: 15px;
+.storageDivs {
+  border: 1px solid green;
   display: flex;
   justify-content: space-around;
-  width: 70vw;
-  border: 1px solid red;
-  /*delete height */
-  height: 50px; 
 }
-
-
 
 button {
   width: 75px;
