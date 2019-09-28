@@ -35,12 +35,12 @@ body {
   
 }
 
-#userInfo {
-  border: 2px solid yellow;
+.userInfo {
+  /* border: 2px solid yellow; */
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 250px;
+  height: 450px;
   width: 200px;
 }
 

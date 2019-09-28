@@ -6,8 +6,6 @@ let arrayOfUsers;
 // action to take when window loads - call the getUsers() function
 window.onload = () => {
   getUsers()
-  // displayUsers() // why doesn't this load userlist without butto click?
-
 }
 
 // defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
@@ -24,14 +22,21 @@ let random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// add click function to displayButton to display users
+document.getElementById("displayButton").addEventListener("click", function(){
+  displayUsers()
+})
+
 // function that displays random user on click
 const displayUsers = () => {
   // random number
   let randomIndex = random(0, 100)
   // define the divs that holds the content
   const backGround = document.getElementById('background')
-  const nameDiv = document.getElementById('userInfo');
+  // const nameDiv = document.getElementById('userInfo');
   // define the <p>, <img>, <button> and textNode
+  const nameDiv = document.createElement('div')
+  nameDiv.setAttribute('class', 'userInfo')
   const name_Para = document.createElement('h3')
   const imgElem = document.createElement('img')
   const buttonElem = document.createElement('button')
@@ -40,31 +45,27 @@ const displayUsers = () => {
   name_Para.appendChild(nameTextNode)
   imgElem.src = arrayOfUsers.results[randomIndex].picture.large;
   // appends name, image, and button to the userInfo div, which is appended to the backGround display
+  buttonElem.innerHTML = 'Expand'
   backGround.append(nameDiv)
   nameDiv.append(name_Para)
   nameDiv.append(imgElem)
   nameDiv.append(buttonElem)
-  buttonElem.setAttribute('class', 'expandClass')
-  buttonElem.addEventListener("click", expandInfo())
+  // buttonElem.setAttribute('class', 'expandClass')
+  buttonElem.addEventListener("click", function(){
+    expandInfo(randomIndex)
+    console.log('whatdup')
+  })
 }
 
 
-// Why won't this work for main display button?
-// document.getElementById("displayButton").addEventListener("click", displayUsers())
-// document.querySelector('displayButton').addEventListener('click', displayUsers())
 
-// Will this work?
-// buttonElem.addEventListener("click", expandInfo())
 
-// Or maybe this will work
-// document.querySelector('expandClass').addEventListener('click', expandInfo())
 
-const expandInfo = () => {
-  // define dlement that holds expanded info
-  let randomIndex = random(0, 100) // need to get the random index from getUsers(function)
+
+const expandInfo = (randomIndex) => {
   // define the divs that holds the content
   const backGround = document.getElementById('background')
-  const nameDiv = document.getElementById('userInfo');
+  const nameDiv = document.getElementsByClassName('userInfo');
   // create divs for textNodes
   let expandedLocation = document.createElement('p')
   let expandedEmail = document.createElement('p')
@@ -89,22 +90,6 @@ const expandInfo = () => {
 }
 
 // ------------------WORKING CODE ABOVE-----------------//
-
-
-
-
-// Will this work?
-// buttonElem.addEventListener("click", expandInfo())
-
-// Or maybe this will work
-// document.getElementsByTagName("button").setAttribute("class", "expandClass")
-// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
-
-
-
-
-
-
 
 
 
