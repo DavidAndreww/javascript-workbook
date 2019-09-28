@@ -36,8 +36,13 @@ const displayUsers = () => {
     nameDiv.append(name_Para)
     photoDiv.append(imgElem)
     buttonDiv.append(buttonElem)
-    
+
+    // Will this work?
     // buttonElem.addEventListener("click", expandInfo())
+
+    // Or maybe this will work
+    document.getElementsByTagName("button").setAttribute("class", "expandClass")
+    document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
   }
 }
 
@@ -52,11 +57,6 @@ const expandInfo = () => {
     expandedDiv.append(expandedInfo)
   }
 }
-
-
-// buttonElem(addEventListener)
-// document.getElementById("myBtn").addEventListener("click", function()
-// document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
 
 
 
