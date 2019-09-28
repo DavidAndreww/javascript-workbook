@@ -44,12 +44,6 @@ body {
   width: 200px;
 }
 
-/* .storageDivs {
-  border: 1px solid green;
-  display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
-} */
 p {
   font-size: 10px;
   font-weight: 600
