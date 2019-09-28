@@ -37,7 +37,7 @@ const displayUsers = () => {
   // textNode is put inside of the <p>, and <img> src attribute is defined
   name_Para.appendChild(nameTextNode)
   imgElem.src = arrayOfUsers.results[randomIndex].picture.large;
-  //
+  // appends name, image, and button to the userInfo div, which is appended to the backGround display
   backGround.append(nameDiv)
   nameDiv.append(name_Para)
   nameDiv.append(imgElem)
