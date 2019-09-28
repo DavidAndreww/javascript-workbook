@@ -7,6 +7,7 @@ let arrayOfUsers;
 window.onload = () => {
   getUsers()
   // displayUsers() // why doesn't this load userlist without butto click?
+
 }
 
 // defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
@@ -15,6 +16,7 @@ const getUsers = () => {
     .then(res => res.json())
     .then(user1 => arrayOfUsers = user1)
 }
+
 // generates random number to display user
 let random = (min, max) => {
   min = Math.ceil(min);
@@ -30,7 +32,7 @@ const displayUsers = () => {
   const backGround = document.getElementById('background')
   const nameDiv = document.getElementById('userInfo');
   // define the <p>, <img>, <button> and textNode
-  const name_Para = document.createElement('p')
+  const name_Para = document.createElement('h3')
   const imgElem = document.createElement('img')
   const buttonElem = document.createElement('button')
   let nameTextNode = document.createTextNode(`${arrayOfUsers.results[randomIndex].name.first} ${arrayOfUsers.results[randomIndex].name.last}`)
@@ -42,40 +44,45 @@ const displayUsers = () => {
   nameDiv.append(name_Para)
   nameDiv.append(imgElem)
   nameDiv.append(buttonElem)
+  buttonElem.addEventListener("click", expandInfo())
 }
+
+
+// Why won't this work for main display button?
+//document.getElementById("displayButton").addEventListener("click", displayUsers())
 
 // Will this work?
 // buttonElem.addEventListener("click", expandInfo())
 
 // Or maybe this will work
 // document.getElementsByTagName("button").setAttribute("class", "expandClass")
-// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
 
-const expandInfo = () => {
-  // define dlement that holds expanded info
-  const expandedLocationDiv = document.getElementById('expandLocation');
-  const expandedEmailDiv = document.getElementById('expandEmail');
-  const expandedAgeDiv = document.getElementById('expandAge');
-  // for each item in array, create <p> and textNode
-  for (let j = 0; j < arrayOfUsers.results.length; j++) {
-    // create divs for textNodes
-    let expandedLocation = document.createElement('div')
-    let expandedEmail = document.createElement('div')
-    let expandedAge = document.createElement('div')
-    // create textNodes
-    let expandedLocationNode = document.createTextNode(`Location:${arrayOfUsers.results[j].location.city}`)
-    let expandedEmailNode = document.createTextNode(`Email ${arrayOfUsers.results[j].email}`)
-    let expandedAgeNode = document.createTextNode(`Age ${arrayOfUsers.results[j].dob.age}`)
-    // puts textNode inside of the <p>
-    expandedLocation.appendChild(expandedLocationNode)
-    expandedEmail.appendChild(expandedEmailNode)
-    expandedAge.appendChild(expandedAgeNode)
-    // puts <p> inside of expandInfo div
-    expandedLocationDiv.append(expandedLocation)
-    expandedEmailDiv.append(expandedEmail)
-    expandedAgeDiv.append(expandedAge)
-  }
-}
+
+// const expandInfo = () => {
+//   // define dlement that holds expanded info
+//   const expandedLocationDiv = document.getElementById('expandLocation');
+//   const expandedEmailDiv = document.getElementById('expandEmail');
+//   const expandedAgeDiv = document.getElementById('expandAge');
+//   // for each item in array, create <p> and textNode
+//   for (let j = 0; j < arrayOfUsers.results.length; j++) {
+//     // create divs for textNodes
+//     let expandedLocation = document.createElement('div')
+//     let expandedEmail = document.createElement('div')
+//     let expandedAge = document.createElement('div')
+//     // create textNodes
+//     let expandedLocationNode = document.createTextNode(`Location:${arrayOfUsers.results[j].location.city}`)
+//     let expandedEmailNode = document.createTextNode(`Email ${arrayOfUsers.results[j].email}`)
+//     let expandedAgeNode = document.createTextNode(`Age ${arrayOfUsers.results[j].dob.age}`)
+//     // puts textNode inside of the <p>
+//     expandedLocation.appendChild(expandedLocationNode)
+//     expandedEmail.appendChild(expandedEmailNode)
+//     expandedAge.appendChild(expandedAgeNode)
+//     // puts <p> inside of expandInfo div
+//     expandedLocationDiv.append(expandedLocation)
+//     expandedEmailDiv.append(expandedEmail)
+//     expandedAgeDiv.append(expandedAge)
+//   }
+// }
 // ------------------WORKING CODE ABOVE-----------------//
 
 
@@ -87,6 +94,40 @@ const expandInfo = () => {
 // Or maybe this will work
 // document.getElementsByTagName("button").setAttribute("class", "expandClass")
 // document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
+
+
+
+const expandInfo = () => {
+  // define dlement that holds expanded info
+  let randomIndex = random(0, 100) // need to get the random index from getUsers(function)
+  // define the divs that holds the content
+  const backGround = document.getElementById('background')
+  const nameDiv = document.getElementById('userInfo');
+  // create divs for textNodes
+  let expandedLocation = document.createElement('p')
+  let expandedEmail = document.createElement('p')
+  let expandedAge = document.createElement('p')
+  let expandedPhone = document.createElement('p')
+  // create textNodes
+  let expandedLocationNode = document.createTextNode(`Location: ${arrayOfUsers.results[randomIndex].location.city}`)
+  let expandedEmailNode = document.createTextNode(`Email: ${arrayOfUsers.results[randomIndex].email}`)
+  let expandedAgeNode = document.createTextNode(`Age: ${arrayOfUsers.results[randomIndex].dob.age}`)
+  let expandedPhoneNode = document.createTextNode(`Phone: ${arrayOfUsers.results[randomIndex].cell}`)
+  // puts textNode inside of the <p>
+  expandedLocation.appendChild(expandedLocationNode)
+  expandedEmail.appendChild(expandedEmailNode)
+  expandedAge.appendChild(expandedAgeNode)
+  expandedPhone.appendChild(expandedPhoneNode)
+  // puts <p> inside of expandInfo div
+  nameDiv.append(expandedAge)
+  nameDiv.append(expandedPhone)
+  nameDiv.append(expandedLocation)
+  nameDiv.append(expandedEmail)
+  backGround.append(nameDiv)
+}
+
+
+
 
 
 
