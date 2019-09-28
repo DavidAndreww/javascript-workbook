@@ -11,32 +11,38 @@ window.onload = () => {
 
 // defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
 const getUsers = () => {
-  fetch('https://randomuser.me/api/?results=5')
+  fetch('https://randomuser.me/api/?results=500')
     .then(res => res.json())
     .then(user1 => arrayOfUsers = user1)
 }
+// generates random number to display user
+let random = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-// function that gets users
+// function that displays users
 const displayUsers = () => {
+  // random number
+  let randomIndex = random(0, 100)
   // define the divs that holds the content
   const nameDiv = document.getElementById('name');
   const photoDiv = document.getElementById('photo');
   const buttonDiv = document.getElementById('button');
-  // for each index (user) in the array, create <p>, <img>, <button> and textNode
-  for (let i = 0; i < arrayOfUsers.results.length; i++) {
-    // define the <p>, <img>, <button> and textNode
-    const name_Para = document.createElement('p')
-    const imgElem = document.createElement('img')
-    const buttonElem = document.createElement('button')
-    let nameTextNode = document.createTextNode(`${arrayOfUsers.results[i].name.first} ${arrayOfUsers.results[i].name.last}`)
-    // textNode is put inside of the <p>, and <img> src attribute is defined
-    name_Para.appendChild(nameTextNode)
-    imgElem.src = arrayOfUsers.results[i].picture.large;
-    // the <p>, <img>, <button> and textNode are put inside the div
-    nameDiv.append(name_Para)
-    photoDiv.append(imgElem)
-    buttonDiv.append(buttonElem)
-  }
+  // define the <p>, <img>, <button> and textNode
+  const name_Para = document.createElement('p')
+  const imgElem = document.createElement('img')
+  const buttonElem = document.createElement('button')
+  let nameTextNode = document.createTextNode(`${arrayOfUsers.results[randomIndex].name.first} ${arrayOfUsers.results[randomIndex].name.last}`)
+  // textNode is put inside of the <p>, and <img> src attribute is defined
+  name_Para.appendChild(nameTextNode)
+  imgElem.src = arrayOfUsers.results[randomIndex].picture.large;
+  // the <p>, <img>, <button> and textNode are put inside the div
+  nameDiv.append(name_Para)
+  photoDiv.append(imgElem)
+  buttonDiv.append(buttonElem)
+
 }
 
 // Will this work?
@@ -71,6 +77,14 @@ const expandInfo = () => {
     expandedAgeDiv.append(expandedAge)
   }
 }
+// ------------------WORKING CODE ABOVE-----------------//
+
+
+
+
+
+
+
 
 
 // ---------------------- Promises?!?!-----------------------------
