@@ -6,7 +6,7 @@ let arrayOfUsers;
 // action to take when window loads - call the getUsers() function
 window.onload = function () {
   getUsers()
-  displayUsers() // why doesn't this load userlist without butto click?
+  // displayUsers() // why doesn't this load userlist without butto click?
 }
 
 // defines a function that fetches API, stores as a JSON file, and then gives its value to arrayOfUsers
@@ -18,28 +18,45 @@ const getUsers = () => {
 
 // function that gets users
 const displayUsers = () => {
-  // define the div that holds the content
-  const parentDiv = document.getElementById('personInfo');
+  // define the divs that holds the content
+  // const parentDiv = document.getElementById('personInfo');
+  const nameDiv = document.getElementById('name');
+  const photoDiv = document.getElementById('photo');
+  const buttonDiv = document.getElementById('button');
   // for each index (user) in the array, create <p>, <img>, <button> and textNode
   for (let i = 0; i < arrayOfUsers.results.length; i++) {
-    const name_Para = document.createElement('p')
-    const imgElem = document.createElement('img')
-    const buttonElem = document.createElement('button')
+    let name_Para = document.createElement('p')
+    let imgElem = document.createElement('img')
+    let buttonElem = document.createElement('button')
     const nameTextNode = document.createTextNode(`${arrayOfUsers.results[i].name.first} ${arrayOfUsers.results[i].name.last}`)
     // textNode is put inside of the <p>, and <img> src attribute is defined
     name_Para.appendChild(nameTextNode)
     imgElem.src = arrayOfUsers.results[i].picture.large;
     // the <p>, <img>, <button> and textNode are put inside the div
-    parentDiv.append(imgElem)
-    parentDiv.append(name_Para)
-    parentDiv.append(buttonElem)
+    nameDiv.append(name_Para)
+    photoDiv.append(imgElem)
+    buttonDiv.append(buttonElem)
+    
+    // buttonElem.addEventListener("click", expandInfo())
+  }
+}
+
+const expandInfo = () => {
+  const expandedDiv = document.getElementById('expandInfo');
+  for (let j = 0; j < arrayOfUsers.results.length; j++){
+    let expandedInfo = document.createElement('p')
+    let expandedTextNode = document.createTextNode(`${arrayOfUsers.results[j].location.city}, ${arrayOfUsers.results[j].location.state} <br> ${arrayOfUsers.results[j].email} <br> ${arrayOfUsers.results[j].dob}`)
+    // puts textNode inside of the <p>
+    expandedInfo.appendChild(expandedTextNode)
+    // puts <p> inside of expandInfo div
+    expandedDiv.append(expandedInfo)
   }
 }
 
 
-
-
-
+// buttonElem(addEventListener)
+// document.getElementById("myBtn").addEventListener("click", function()
+// document.getElementsByTagName("H1")[0].setAttribute("class", "democlass");
 
 
 

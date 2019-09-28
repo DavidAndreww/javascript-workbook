@@ -17,6 +17,13 @@ body {
   text-align: center;
 }
 
+#displayButton {
+  border-radius: 20px;
+  height: 50px;
+  width: 80px;
+  text-align: center;
+}
+
 #background {
   background-color: rgb(139, 139, 236);
   align-items: center;
@@ -29,33 +36,18 @@ body {
 #personInfo {
   border: 2px solid yellow;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  height: 450px;
 }
 
-#name{
-  border: 1px solid red;
+#name,
+#photo,
+#button,
+#expandInfo {
+  margin-top: 15px;
   display: flex;
   justify-content: space-around;
-  height: 50px;
   width: 70vw;
-}
-
-#img {
-  border: 1px solid black;
-  display: flex;
-  justify-content: space-around;
-}
-
-#funcButt {
-  border-radius: 20px;
-  height: 50px;
-  width: 80px;
-}
-
-#button {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 5px;
 }
 
 button {
