@@ -53,19 +53,14 @@ const displayUsers = () => {
   // buttonElem.setAttribute('class', 'expandClass')
   buttonElem.addEventListener("click", function(){
     expandInfo(randomIndex)
-    console.log('whatdup')
   })
 }
-
-
-
-
 
 
 const expandInfo = (randomIndex) => {
   // define the divs that holds the content
   const backGround = document.getElementById('background')
-  const nameDiv = document.getElementsByClassName('userInfo');
+  const nameDiv = document.getElementById('userInfo');
   // create divs for textNodes
   let expandedLocation = document.createElement('p')
   let expandedEmail = document.createElement('p')
