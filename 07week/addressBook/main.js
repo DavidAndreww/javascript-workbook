@@ -44,58 +44,20 @@ const displayUsers = () => {
   nameDiv.append(name_Para)
   nameDiv.append(imgElem)
   nameDiv.append(buttonElem)
+  buttonElem.setAttribute('class', 'expandClass')
   buttonElem.addEventListener("click", expandInfo())
 }
 
 
 // Why won't this work for main display button?
-//document.getElementById("displayButton").addEventListener("click", displayUsers())
+// document.getElementById("displayButton").addEventListener("click", displayUsers())
+// document.querySelector('displayButton').addEventListener('click', displayUsers())
 
 // Will this work?
 // buttonElem.addEventListener("click", expandInfo())
 
 // Or maybe this will work
-// document.getElementsByTagName("button").setAttribute("class", "expandClass")
-
-
-// const expandInfo = () => {
-//   // define dlement that holds expanded info
-//   const expandedLocationDiv = document.getElementById('expandLocation');
-//   const expandedEmailDiv = document.getElementById('expandEmail');
-//   const expandedAgeDiv = document.getElementById('expandAge');
-//   // for each item in array, create <p> and textNode
-//   for (let j = 0; j < arrayOfUsers.results.length; j++) {
-//     // create divs for textNodes
-//     let expandedLocation = document.createElement('div')
-//     let expandedEmail = document.createElement('div')
-//     let expandedAge = document.createElement('div')
-//     // create textNodes
-//     let expandedLocationNode = document.createTextNode(`Location:${arrayOfUsers.results[j].location.city}`)
-//     let expandedEmailNode = document.createTextNode(`Email ${arrayOfUsers.results[j].email}`)
-//     let expandedAgeNode = document.createTextNode(`Age ${arrayOfUsers.results[j].dob.age}`)
-//     // puts textNode inside of the <p>
-//     expandedLocation.appendChild(expandedLocationNode)
-//     expandedEmail.appendChild(expandedEmailNode)
-//     expandedAge.appendChild(expandedAgeNode)
-//     // puts <p> inside of expandInfo div
-//     expandedLocationDiv.append(expandedLocation)
-//     expandedEmailDiv.append(expandedEmail)
-//     expandedAgeDiv.append(expandedAge)
-//   }
-// }
-// ------------------WORKING CODE ABOVE-----------------//
-
-
-
-
-// Will this work?
-// buttonElem.addEventListener("click", expandInfo())
-
-// Or maybe this will work
-// document.getElementsByTagName("button").setAttribute("class", "expandClass")
-// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
-
-
+// document.querySelector('expandClass').addEventListener('click', expandInfo())
 
 const expandInfo = () => {
   // define dlement that holds expanded info
@@ -125,6 +87,22 @@ const expandInfo = () => {
   nameDiv.append(expandedEmail)
   backGround.append(nameDiv)
 }
+
+// ------------------WORKING CODE ABOVE-----------------//
+
+
+
+
+// Will this work?
+// buttonElem.addEventListener("click", expandInfo())
+
+// Or maybe this will work
+// document.getElementsByTagName("button").setAttribute("class", "expandClass")
+// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
+
+
+
+
 
 
 
