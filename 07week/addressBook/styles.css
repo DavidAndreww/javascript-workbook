@@ -27,29 +27,41 @@ body {
 
 #background {
   background-color: rgb(139, 139, 236);
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 500px;
   width: 100%;
-  display: flex;
+  
 }
 
-#personInfo {
+#userInfo {
   border: 2px solid yellow;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  height: 400px;
-  width: auto;
+  height: 250px;
+  width: 200px;
 }
 
-.storageDivs {
+/* .storageDivs {
   border: 1px solid green;
   display: flex;
   justify-content: space-around;
   margin-top: 10px;
+} */
+p {
+  font-size: 20px;
+  font-weight: 600
+}
+
+img {
+  margin-top: 10px;
 }
 
 button {
+  margin-top: 10px;
+  margin-bottom: 10px;
   width: 75px;
   height: 20px;
 }

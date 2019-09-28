@@ -22,14 +22,13 @@ let random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// function that displays users
+// function that displays random user on click
 const displayUsers = () => {
   // random number
   let randomIndex = random(0, 100)
   // define the divs that holds the content
-  const nameDiv = document.getElementById('name');
-  const photoDiv = document.getElementById('photo');
-  const buttonDiv = document.getElementById('button');
+  const backGround = document.getElementById('background')
+  const nameDiv = document.getElementById('userInfo');
   // define the <p>, <img>, <button> and textNode
   const name_Para = document.createElement('p')
   const imgElem = document.createElement('img')
@@ -38,11 +37,11 @@ const displayUsers = () => {
   // textNode is put inside of the <p>, and <img> src attribute is defined
   name_Para.appendChild(nameTextNode)
   imgElem.src = arrayOfUsers.results[randomIndex].picture.large;
-  // the <p>, <img>, <button> and textNode are put inside the div
+  //
+  backGround.append(nameDiv)
   nameDiv.append(name_Para)
-  photoDiv.append(imgElem)
-  buttonDiv.append(buttonElem)
-
+  nameDiv.append(imgElem)
+  nameDiv.append(buttonElem)
 }
 
 // Will this work?
@@ -82,6 +81,12 @@ const expandInfo = () => {
 
 
 
+// Will this work?
+// buttonElem.addEventListener("click", expandInfo())
+
+// Or maybe this will work
+// document.getElementsByTagName("button").setAttribute("class", "expandClass")
+// document.getElementsByClassName("expandClass").addEventListener("click", expandInfo())
 
 
 
