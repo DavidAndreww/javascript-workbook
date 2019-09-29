@@ -64,7 +64,6 @@ const arrOfPeople = [
 ]
 
 
-
 //push people into listOfPlayers array when able to play, then allow them to be pushed to either blue or red team
 const listOfPlayers = []
 const blueTeam = []
@@ -73,11 +72,11 @@ const redTeam = []
 // template to turn person into a dodgeball player
 class DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
-    this.canThrowBall = canThrowBall;
-    this.canDodgeBall - canDodgeBall;
-    this.hasPaid = hasPaid;
-    this.isHealthy = isHealthy;
-    this.yearsExperience = yearsExperience;
+    this.canThrowBall = true;
+    this.canDodgeBall - true;
+    this.hasPaid = true;
+    this.isHealthy = true;
+    this.yearsExperience = true;
   }
 }
 
@@ -85,8 +84,8 @@ class DodgeBallPlayer {
 class blueTeammate extends DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
-    this.teamColor = teamColor;
-    this.mascot = mascot;
+    this.teamColor = blue;
+    this.mascot = Baracudas;
   }
 }
 
@@ -94,11 +93,10 @@ class blueTeammate extends DodgeBallPlayer {
 class redTeammate extends DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
-    this.teamColor = teamColor;
-    this.mascot = mascot;
+    this.teamColor = red;
+    this.mascot = Jaguars;
   }
 }
-
 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
@@ -131,12 +129,17 @@ const makePlayer = (id) => {
   playerList.appendChild(addBlue)
   playerList.appendChild(addRed)
   playerList.append(arrOfPeople[id - 2].name)
+
 }
 
 const addToBlue = (id) => {
-
+console.log(id)
+let playerList = document.querySelector('#players')
+const blueTeam = document.querySelector('#blue')
+blueTeam.append(arrOfPeople[id - 2].name)
+playerList.remove(arrOfPeople[id -2 ])
 }
 
 const addToRed = (id) => {
-
+console.log(id)
 }
