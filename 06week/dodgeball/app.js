@@ -72,7 +72,7 @@ const redTeam = []
 
 // template to turn person into a dodgeball player
 class DodgeBallPlayer {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience){
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
     this.canThrowBall = canThrowBall;
     this.canDodgeBall - canDodgeBall;
     this.hasPaid = hasPaid;
@@ -82,8 +82,8 @@ class DodgeBallPlayer {
 }
 
 // extends player and adds teamColor and mascot for blue team
-class blueTeammate extends DodgeBallPlayer{
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
+class blueTeammate extends DodgeBallPlayer {
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
     this.teamColor = teamColor;
     this.mascot = mascot;
@@ -92,12 +92,13 @@ class blueTeammate extends DodgeBallPlayer{
 
 // extends player and adds teamColor and mascot for red team
 class redTeammate extends DodgeBallPlayer {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot){
-    super(canThrowBall, canDodgeall, hasPaid, isHealthy, yearsExperience);
+  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
+    super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
     this.teamColor = teamColor;
     this.mascot = mascot;
   }
 }
+
 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
@@ -105,13 +106,37 @@ const listPeopleChoices = () => {
     const li = document.createElement("li")
     const button = document.createElement("button")
     button.innerHTML = "Make Player"
-    button.addEventListener('click', function() {makePlayer(person.id)} )
+    button.addEventListener('click', function () { makePlayer(person.id) })
     li.appendChild(button)
-    li.appendChild(document.createTextNode(person.name + " - " + person.skillSet))
+    li.appendChild(document.createTextNode(`${person.name} - ${person.skillSet}`))
     listElement.append(li)
   })
 }
 
 const makePlayer = (id) => {
   console.log(`li ${id} was clicked!`)
+  console.log(arrOfPeople[id - 2])
+
+  const playerList = document.querySelector('#players')
+  const addBlue = document.createElement('button')
+  const addRed = document.createElement('button')
+
+  addBlue.innerHTML = 'Add to Blue'
+  addRed.innerHTML = 'Add to Red'
+  
+  addBlue.addEventListener('click', function () { addToBlue(id) })
+  addRed.addEventListener('click', function () { addToRed(id) })
+
+
+  playerList.appendChild(addBlue)
+  playerList.appendChild(addRed)
+  playerList.append(arrOfPeople[id - 2].name)
+}
+
+const addToBlue = (id) => {
+
+}
+
+const addToRed = (id) => {
+
 }
