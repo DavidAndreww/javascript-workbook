@@ -23,7 +23,7 @@ let random = (min, max) => {
 }
 
 // add click function to displayButton to display users
-document.getElementById("displayButton").addEventListener("click", function(){
+document.getElementById("displayButton").addEventListener("click", function () {
   displayUsers()
 })
 
@@ -33,7 +33,6 @@ const displayUsers = () => {
   let randomIndex = random(0, 100)
   // define the divs that holds the content
   const backGround = document.getElementById('background')
-  // const nameDiv = document.getElementById('userInfo');
   // define the <p>, <img>, <button> and textNode
   const nameDiv = document.createElement('div')
   nameDiv.setAttribute('class', 'userInfo')
@@ -50,17 +49,15 @@ const displayUsers = () => {
   nameDiv.append(name_Para)
   nameDiv.append(imgElem)
   nameDiv.append(buttonElem)
-  // buttonElem.setAttribute('class', 'expandClass')
-  buttonElem.addEventListener("click", function(){
-    expandInfo(randomIndex)
+  buttonElem.addEventListener("click", function () {
+    expandInfo(randomIndex, nameDiv)
   })
 }
 
 
-const expandInfo = (randomIndex) => {
+const expandInfo = (randomIndex, nameDiv) => {
   // define the divs that holds the content
   const backGround = document.getElementById('background')
-  const nameDiv = document.getElementById('userInfo');
   // create divs for textNodes
   let expandedLocation = document.createElement('p')
   let expandedEmail = document.createElement('p')
