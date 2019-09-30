@@ -63,7 +63,6 @@ const arrOfPeople = [
   },
 ]
 
-
 //push people into listOfPlayers array when able to play, then allow them to be pushed to either blue or red team
 const listOfPlayers = []
 const blueTeam = []
@@ -71,7 +70,12 @@ const redTeam = []
 
 // template to turn person into a dodgeball player
 class DodgeBallPlayer {
-  constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
+  constructor(person) {
+    this.id = id;
+    this.name = name;
+    this.age = age;
+    this.skillSet = skillSet;
+    this.placeBorn = placeBorn;
     this.canThrowBall = true;
     this.canDodgeBall - true;
     this.hasPaid = true;
@@ -100,6 +104,8 @@ class redTeammate extends DodgeBallPlayer {
 
 const listPeopleChoices = () => {
   const listElement = document.getElementById('people')
+  console.log(listElement)
+
   arrOfPeople.map(person => {
     const li = document.createElement("li")
     const button = document.createElement("button")
@@ -111,35 +117,44 @@ const listPeopleChoices = () => {
   })
 }
 
-const makePlayer = (id) => {
-  console.log(`li ${id} was clicked!`)
-  console.log(arrOfPeople[id - 2])
 
+const makePlayer = (id) => {
   const playerList = document.querySelector('#players')
   const addBlue = document.createElement('button')
   const addRed = document.createElement('button')
 
   addBlue.innerHTML = 'Add to Blue'
   addRed.innerHTML = 'Add to Red'
-  
+
   addBlue.addEventListener('click', function () { addToBlue(id) })
   addRed.addEventListener('click', function () { addToRed(id) })
 
-
+  // adds two team selector buttons and name to playerList
   playerList.appendChild(addBlue)
   playerList.appendChild(addRed)
   playerList.append(arrOfPeople[id - 2].name)
 
+//working on this
+let one = arrOfPeople.splice(id, 1)
+  console.log(arrOfPeople)
+  console.log(one)
+  listOfPlayers.push(one)
+  console.log(listOfPlayers)
+  listElement = ''
+  listPeopleChoices()
+
+
 }
 
 const addToBlue = (id) => {
-console.log(id)
-let playerList = document.querySelector('#players')
-const blueTeam = document.querySelector('#blue')
-blueTeam.append(arrOfPeople[id - 2].name)
-playerList.remove(arrOfPeople[id -2 ])
+  console.log(id)
+  const blueTeam = document.querySelector('#blue')
+  blueTeam.append(arrOfPeople[id - 2].name)
 }
 
 const addToRed = (id) => {
-console.log(id)
+  console.log(id)
+  const redTeam = document.querySelector('#red')
+  redTeam.append(arrOfPeople[id - 2].name)
+
 }
