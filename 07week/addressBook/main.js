@@ -15,7 +15,7 @@ const getUsers = () => {
     .then(user1 => arrayOfUsers = user1)
 }
 
-// generates random number to display user
+// generates random number to display random user by index
 let random = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -40,7 +40,7 @@ const displayUsers = () => {
   const imgElem = document.createElement('img')
   const buttonElem = document.createElement('button')
   let nameTextNode = document.createTextNode(`${arrayOfUsers.results[randomIndex].name.first} ${arrayOfUsers.results[randomIndex].name.last}`)
-  // textNode is put inside of the <p>, and <img> src attribute is defined
+  // textNode is put inside of the <p>, and the <img> src attribute is defined
   name_Para.appendChild(nameTextNode)
   imgElem.src = arrayOfUsers.results[randomIndex].picture.large;
   // appends name, image, and button to the userInfo div, which is appended to the backGround display
@@ -54,7 +54,7 @@ const displayUsers = () => {
   })
 }
 
-
+// function that allows info to be expanded on button click
 const expandInfo = (randomIndex, nameDiv) => {
   // define the divs that holds the content
   const backGround = document.getElementById('background')
@@ -68,7 +68,7 @@ const expandInfo = (randomIndex, nameDiv) => {
   let expandedEmailNode = document.createTextNode(`Email: ${arrayOfUsers.results[randomIndex].email}`)
   let expandedAgeNode = document.createTextNode(`Age: ${arrayOfUsers.results[randomIndex].dob.age}`)
   let expandedPhoneNode = document.createTextNode(`Phone: ${arrayOfUsers.results[randomIndex].cell}`)
-  // puts textNode inside of the <p>
+  // puts textNodes inside of the corresponding <p> element
   expandedLocation.appendChild(expandedLocationNode)
   expandedEmail.appendChild(expandedEmailNode)
   expandedAge.appendChild(expandedAgeNode)
