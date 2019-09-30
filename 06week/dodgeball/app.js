@@ -63,6 +63,11 @@ const arrOfPeople = [
   },
 ]
 
+arrOfPeople.map((person, index) => {
+  person.id = person.id - 2;
+})
+console.log(arrOfPeople)
+
 //push people into listOfPlayers array when able to play, then allow them to be pushed to either blue or red team
 const listOfPlayers = []
 const blueTeam = []
@@ -103,9 +108,9 @@ class redTeammate extends DodgeBallPlayer {
 }
 
 const listPeopleChoices = () => {
+  // selects <ul> to display list of people
   const listElement = document.getElementById('people')
-  console.log(listElement)
-
+  // iterates through array of people and prints them to the DOM with a button that if clicked, adds that individual to the list of players
   arrOfPeople.map(person => {
     const li = document.createElement("li")
     const button = document.createElement("button")
@@ -117,33 +122,36 @@ const listPeopleChoices = () => {
   })
 }
 
-
+// function that turns player into a DodgeBallPlayer
 const makePlayer = (id) => {
+  // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
-  const addBlue = document.createElement('button')
-  const addRed = document.createElement('button')
 
-  addBlue.innerHTML = 'Add to Blue'
-  addRed.innerHTML = 'Add to Red'
+  // --------------Need to splice proper person based off of Id: number-------
+  let spliced = arrOfPeople.splice(id, 1);
+  listOfPlayers.push(spliced)
+  
+  listOfPlayers.map(person => {
+    
+    const listElem = document.createElement('li')
+    // creates buttons to let new players be added to either blue or red team
+    const addBlue = document.createElement('button')
+    const addRed = document.createElement('button')
+    addBlue.innerHTML = 'Add to Blue'
+    addRed.innerHTML = 'Add to Red'
+    // set eventListener to buttons which will move player to appropriate team when clicked
+    addBlue.addEventListener('click', function () { addToBlue(id) })
+    addRed.addEventListener('click', function () { addToRed(id) })
 
-  addBlue.addEventListener('click', function () { addToBlue(id) })
-  addRed.addEventListener('click', function () { addToRed(id) })
-
-  // adds two team selector buttons and name to playerList
-  playerList.appendChild(addBlue)
-  playerList.appendChild(addRed)
-  playerList.append(arrOfPeople[id - 2].name)
-
-//working on this
-let one = arrOfPeople.splice(id, 1)
-  console.log(arrOfPeople)
-  console.log(one)
-  listOfPlayers.push(one)
-  console.log(listOfPlayers)
-  listElement = ''
-  listPeopleChoices()
-
-
+    // appends buttons and textNode to <li>, then appends <li >to the <ul>
+    listElem.appendChild(addBlue)
+    listElem.appendChild(addRed)
+    listElem.appendChild(document.createTextNode(`${person.name} - ${person.skillSet}`))
+    playerList.append(listElem)
+    //run listPeopleChoices to reprint remaining array to people list
+    //also need to clear list before re-printing, so as not to add the two arrays
+    listPeopleChoices()
+  })
 }
 
 const addToBlue = (id) => {
