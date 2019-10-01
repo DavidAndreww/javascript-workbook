@@ -63,11 +63,6 @@ const arrOfPeople = [
   },
 ]
 
-arrOfPeople.map((person, index) => {
-  person.id = person.id - 2;
-})
-console.log(arrOfPeople)
-
 //push people into listOfPlayers array when able to play, then allow them to be pushed to either blue or red team
 const listOfPlayers = []
 const blueTeam = []
@@ -75,7 +70,7 @@ const redTeam = []
 
 // template to turn person into a dodgeball player
 class DodgeBallPlayer {
-  constructor(person) {
+  constructor(person) { // is this correct?
     this.id = id;
     this.name = name;
     this.age = age;
@@ -109,7 +104,7 @@ class redTeammate extends DodgeBallPlayer {
 
 const listPeopleChoices = () => {
   // selects <ul> to display list of people
-  const listElement = document.getElementById('people')
+  const peopleList = document.getElementById('people')
   // iterates through array of people and prints them to the DOM with a button that if clicked, adds that individual to the list of players
   arrOfPeople.map(person => {
     const li = document.createElement("li")
@@ -118,7 +113,7 @@ const listPeopleChoices = () => {
     button.addEventListener('click', function () { makePlayer(person.id) })
     li.appendChild(button)
     li.appendChild(document.createTextNode(`${person.name} - ${person.skillSet}`))
-    listElement.append(li)
+    peopleList.append(li)
   })
 }
 
@@ -127,12 +122,18 @@ const makePlayer = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
 
-  // --------------Need to splice proper person based off of Id: number-------
-  let spliced = arrOfPeople.splice(id, 1);
-  listOfPlayers.push(spliced)
+  // --------------Need to splice proper person based off of Id number-------
+  let spliced = arrOfPeople.splice(arrOfPeople[id -2], 1);
+  // listOfPlayers.push(spliced)
+  listOfPlayers.splice(0, 1 ,spliced)
+  console.log(listOfPlayers)
   
-  listOfPlayers.map(person => {
-    
+  
+
+  listOfPlayers.map((person, index) => {
+    console.log('"person" in player array:')
+    console.log(person)
+
     const listElem = document.createElement('li')
     // creates buttons to let new players be added to either blue or red team
     const addBlue = document.createElement('button')
@@ -146,23 +147,58 @@ const makePlayer = (id) => {
     // appends buttons and textNode to <li>, then appends <li >to the <ul>
     listElem.appendChild(addBlue)
     listElem.appendChild(addRed)
-    listElem.appendChild(document.createTextNode(`${person.name} - ${person.skillSet}`))
+    listElem.appendChild(document.createTextNode(`${person[0].name} - ${person[0].skillSet}`))
     playerList.append(listElem)
+
     //run listPeopleChoices to reprint remaining array to people list
     //also need to clear list before re-printing, so as not to add the two arrays
-    listPeopleChoices()
   })
+  // refreshes DOM
+  // listPeopleChoices()
 }
 
 const addToBlue = (id) => {
   console.log(id)
-  const blueTeam = document.querySelector('#blue')
-  blueTeam.append(arrOfPeople[id - 2].name)
+
+  // splice selected player from players array and splice into blue team array
+  let spliced = listOfPlayers.splice() // need proper array index
+  blueTeam.splice()
+
+  // access blue team <ul> in DOM
+  const blueTeamUl = document.querySelector('#blue')
+  // for each player in blueTeam array, print player and remove button to the DOM
+  blueTeam.map(player => {
+    const li = document.createElement('li')
+    const btn_removeBlue = document.createElement('button')
+    btn_removeBlue.innerHTML = 'Remove'
+    btn_removeBlue.addEventListener('click', function () { removeBluePlayer() })
+    li.appendChild(btn_removeBlue)
+    li.appendChild(document.createTextNode(`${player[0].name}`)) // correct player inserted here
+    blueTeamUl.append(li)
+  })
+  // refreshes DOM
+  // makePlayer()
 }
 
 const addToRed = (id) => {
   console.log(id)
-  const redTeam = document.querySelector('#red')
-  redTeam.append(arrOfPeople[id - 2].name)
 
+  // splice selected player from players array and splice into red team array
+  let spliced = listOfPlayers.splice()
+  redTeam.splice()
+
+  // acces red team <ul> in the DOM 
+  const redTeamUl = document.querySelector('#red')
+  // for each player in redTeam array, print palye rand remove button to the DOM
+  redTeam.map(player => {
+    const li = document.createElement('li')
+    const btn_removeRed = document.createElement('button')
+    btn_removeRed.innerHTML = 'Remove'
+    btn_removeRed.addEventListener('click', function () { removeRedPlayer() })
+    li.appendChild(btn_removeRed)
+    li.appendChild(document.createTextNode(`${player[0].name}`)) // correct player inserted here
+    redTeamUl.append(li)
+  })
+  // refreshes DOM
+  // makePlayer()
 }
