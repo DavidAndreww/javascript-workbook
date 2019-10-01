@@ -70,7 +70,7 @@ const redTeam = []
 
 // template to turn person into a dodgeball player
 class DodgeBallPlayer {
-  constructor(id, name, age, skillSet, placeBorn, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) { // is this correct?
+  constructor(id, name, age, skillSet, placeBorn, canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience) {
     this.id = id;
     this.name = name;
     this.age = age;
@@ -120,23 +120,19 @@ const listPeopleChoices = () => {
   })
 }
 
-// function that turns player into a DodgeBallPlayer
+// instantiates dodgeballplayer from person
 const makePlayer = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
-
+  // return array value (object) if the player ID matches
   let idMatch = arrOfPeople.find(player => {
     return player.id == id;
   })
-
-
-  // for each person in player array, pushes them to DOM with buttons to add to blue or red team
+  // get index of the player (object) we accessed above
   let positionMatch = arrOfPeople.indexOf(idMatch)
-  console.log(positionMatch)
+  
 
-
-
-
+  // instantiates new DodgeBallPlayer
   const newPlayer = new DodgeBallPlayer(
     idMatch.id,
     idMatch.name,
@@ -149,10 +145,12 @@ const makePlayer = (id) => {
     isHealthy = true,
     yearsExperience = 51
   )
+  // pushing new player to player list
   listOfPlayers.push(newPlayer)
+  // removes player from people list
   arrOfPeople.splice(positionMatch, 1)
   const listElem = document.createElement('li')
-  // creates buttons to let new players be added to either blue or red team
+  
   const addBlue = document.createElement('button')
   addBlue.innerHTML = 'Add to Blue'
   addBlue.addEventListener('click', function () {
@@ -162,24 +160,22 @@ const makePlayer = (id) => {
 
   const addRed = document.createElement('button')
   addRed.innerHTML = 'Add to Red'
-  addRed.addEventListener('click', function () { 
-    addToRed(newPlayer.id) 
+  addRed.addEventListener('click', function () {
+    addToRed(newPlayer.id)
     playerList.removeChild(listElem)
   })
-  // set eventListener to buttons which will move player to appropriate team when clicked
+  
 
   // appends buttons and textNode to <li>, then appends <li >to the <ul>
   listElem.appendChild(addBlue)
   listElem.appendChild(addRed)
-  listElem.appendChild(document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Has paid:${newPlayer.hasPaid}`))
+  listElem.appendChild(document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall}`))
   playerList.append(listElem)
-
-
-  // refreshes DOM
-  // listPeopleChoices()
-
-  //need to also clear List of people in DOM so it can be reprinted
 }
+
+
+
+
 
 const addToBlue = (id) => {
   console.log('selected players ID:')
@@ -206,7 +202,7 @@ const addToBlue = (id) => {
     isHealthy = true,
     yearsExperience = 51,
     blueMatch.teamColor = 'blue',
-    blueMatch.mascot = 'baracuda'
+    blueMatch.mascot = 'baracudas'
   )
 
   // splice selected player from players array and splice into blue team array
