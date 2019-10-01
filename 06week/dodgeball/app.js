@@ -85,31 +85,32 @@ class DodgeBallPlayer {
 }
 
 // extends player and adds teamColor and mascot for blue team
-class blueTeammate extends DodgeBallPlayer {
+class BlueTeammate extends DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
-    this.teamColor = teamColor;
-    this.mascot = mascot;
+    this.teamColor = 'Blue';
+    this.mascot = 'Blue Baracudas';
   }
 }
 
 // extends player and adds teamColor and mascot for red team
-class redTeammate extends DodgeBallPlayer {
+class RedTeammate extends DodgeBallPlayer {
   constructor(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience, teamColor, mascot) {
     super(canThrowBall, canDodgeBall, hasPaid, isHealthy, yearsExperience);
-    this.teamColor = teamColor;
-    this.mascot = mascot;
+    this.teamColor = 'Red';
+    this.mascot = 'Red Jaguars';
   }
 }
-
+// prints list of people to the DOM
 const listPeopleChoices = () => {
   // selects <ul> to display list of people
   const peopleList = document.getElementById('people')
-  // iterates through array of people and prints them to the DOM with a button that if clicked, adds that individual to the list of players
+  // adds makePlayer button and player name and skillset for each player in the array of people
   arrOfPeople.map(person => {
     const li = document.createElement("li")
     const button = document.createElement("button")
     button.innerHTML = "Make Player"
+    // event listener that removes person from person list and adds them to player list
     button.addEventListener('click', function () {
       makePlayer(person.id);
       peopleList.removeChild(li)
@@ -124,14 +125,12 @@ const listPeopleChoices = () => {
 const makePlayer = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
-  // return array value (object) if the player ID matches
+  // return array value (object) of selected player if the player ID matches
   let idMatch = arrOfPeople.find(player => {
     return player.id == id;
   })
   // get index of the player (object) we accessed above
   let positionMatch = arrOfPeople.indexOf(idMatch)
-  
-
   // instantiates new DodgeBallPlayer
   const newPlayer = new DodgeBallPlayer(
     idMatch.id,
@@ -149,48 +148,39 @@ const makePlayer = (id) => {
   listOfPlayers.push(newPlayer)
   // removes player from people list
   arrOfPeople.splice(positionMatch, 1)
+  // creates <li> to hold buttons and textNode
   const listElem = document.createElement('li')
-  
+  // creates button with function of adding player to blueTeam and removing from player list
   const addBlue = document.createElement('button')
   addBlue.innerHTML = 'Add to Blue'
   addBlue.addEventListener('click', function () {
     addToBlue(newPlayer.id)
     playerList.removeChild(listElem)
   })
-
+  // creates button with function of adding player to redTeam and removing from player list
   const addRed = document.createElement('button')
   addRed.innerHTML = 'Add to Red'
   addRed.addEventListener('click', function () {
     addToRed(newPlayer.id)
     playerList.removeChild(listElem)
   })
-  
-
-  // appends buttons and textNode to <li>, then appends <li >to the <ul>
+  // appends both buttons and textNode to <li>, then appends <li >to the <ul>
   listElem.appendChild(addBlue)
   listElem.appendChild(addRed)
   listElem.appendChild(document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall}`))
   playerList.append(listElem)
 }
 
-
-
-
-
+// adds player to blue team
 const addToBlue = (id) => {
-  console.log('selected players ID:')
-  console.log(id)
-
-  //find ID and index of Location, instantiate new blueteammate
-
+  // sets variable equal to player (object) who has matching ID
   let blueMatch = listOfPlayers.find(player => {
     return player.id == id;
   })
-
+  // sets variable equal to index of blueMatch
   let positionMatch = listOfPlayers.indexOf(blueMatch)
-  console.log(positionMatch)
-
-  let newBlue = new blueTeammate(
+  // instantiates new blueTeammate
+  let newBlue = new BlueTeammate(
     blueMatch.id,
     blueMatch.name,
     blueMatch.age,
@@ -201,54 +191,62 @@ const addToBlue = (id) => {
     hasPaid = true,
     isHealthy = true,
     yearsExperience = 51,
-    blueMatch.teamColor = 'blue',
-    blueMatch.mascot = 'baracudas'
+    blueMatch.teamColor,
+    blueMatch.mascot
   )
-
-  // splice selected player from players array and splice into blue team array
-  blueTeam.push(newBlue)
+  // splice selected player from players array and push into blue team array
   listOfPlayers.splice(positionMatch, 1)
-
+  blueTeam.push(newBlue)
   // access blue team <ul> in DOM
-  const blueTeamUl = document.querySelector('#blue')
-  // for each player in blueTeam array, print player and remove button to the DOM
-  blueTeam.map(player => {
-    const li = document.createElement('li')
-    const btn_removeBlue = document.createElement('button')
-    btn_removeBlue.innerHTML = 'Remove'
-    btn_removeBlue.addEventListener('click', function () { removeBluePlayer() })
-    li.appendChild(btn_removeBlue)
-    li.appendChild(document.createTextNode(`${newBlue.name}`)) // correct player inserted here
-    blueTeamUl.append(li)
-  })
-  // refreshes DOM
-  // makePlayer()
-
-  //need to also clear List of people in DOM so it can be reprinted
+  const ul = document.querySelector('#blue')
+  // create <li>, <button> and textNode 
+  const li = document.createElement('li')
+  const node = document.createTextNode(`${newBlue.name} - ${newBlue.mascot}`)
+  const button = document.createElement('button')
+  button.innerHTML = 'Remove'
+  // event listener to remove player from blue team, and push back onto player list
+  button.addEventListener('click', function () { removeBluePlayer() })
+  // appending elements to the DOM
+  li.appendChild(button)
+  li.appendChild(node)
+  ul.append(li)
 }
 
+// adds player to red team
 const addToRed = (id) => {
-  console.log('selected players ID:')
-  console.log(id)
-
-  // splice selected player from players array and splice into red team array
-  let spliced = listOfPlayers.splice()
-  redTeam.splice()
-
-  // acces red team <ul> in the DOM 
-  const redTeamUl = document.querySelector('#red')
-  // for each player in redTeam array, print palye rand remove button to the DOM
-  redTeam.map(player => {
-    const li = document.createElement('li')
-    const btn_removeRed = document.createElement('button')
-    btn_removeRed.innerHTML = 'Remove'
-    btn_removeRed.addEventListener('click', function () { removeRedPlayer() })
-    li.appendChild(btn_removeRed)
-    li.appendChild(document.createTextNode(`${player[0].name}`)) // correct player inserted here
-    redTeamUl.append(li)
+  const redMatch = listOfPlayers.find(player => {
+    return player.id == id
   })
-  // refreshes DOM
-  // makePlayer()
+  const positionMatch = listOfPlayers.indexOf(redMatch);
 
-  //need to also clear List of people in DOM so it can be reprinted
+  let newRed = new RedTeammate(
+    redMatch.id,
+    redMatch.name,
+    redMatch.age,
+    redMatch.skillSet,
+    redMatch.placeBorn,
+    canThrowBall = true,
+    canDodgeBall = true,
+    hasPaid = true,
+    isHealthy = true,
+    yearsExperience = 51,
+    redMatch.teamColor,
+    redMatch.mascot
+  )
+  // splice selected player from players array and push into red team array
+  listOfPlayers.splice(positionMatch, 1)
+  redTeam.push(newRed)
+  // acces red team <ul> in the DOM 
+  const ul = document.querySelector('#red')
+  // create <li>, <button> and textNode
+  const li = document.createElement('li')
+  const node = document.createTextNode(`${newRed.name} - ${newRed.mascot}`)
+  const button = document.createElement('button')
+  button.innerHTML = 'Remove'
+  // event listener to remove player from blue team, and push back onto player list
+  button.addEventListener('click', function () { removeRedPlayer() })
+  // appending elements to the DOM
+  li.appendChild(button)
+  li.appendChild(node)
+  ul.append(li)
 }
