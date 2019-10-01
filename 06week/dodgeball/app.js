@@ -214,11 +214,13 @@ const addToBlue = (id) => {
 
 // adds player to red team
 const addToRed = (id) => {
+  // sets variable equal to player (object) who has matching ID
   const redMatch = listOfPlayers.find(player => {
     return player.id == id
   })
+  // sets variable equal to index of blueMatch
   const positionMatch = listOfPlayers.indexOf(redMatch);
-
+  // instantiates new red teammate
   let newRed = new RedTeammate(
     redMatch.id,
     redMatch.name,
