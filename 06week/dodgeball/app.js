@@ -122,16 +122,18 @@ const makePlayer = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
 
-  // --------------Need to splice proper person based off of Id number-------
-  let spliced = arrOfPeople.splice(arrOfPeople[id -2], 1);
-  // listOfPlayers.push(spliced)
-  listOfPlayers.splice(0, 1 ,spliced)
-  console.log(listOfPlayers)
-  
-  
+  // splices player from people list, pushes them to player list
+  let spliced = arrOfPeople.splice(arrOfPeople[id - 2], 1);          //
+  listOfPlayers.push(spliced)
 
+  console.log('listOfPeople arr')
+  console.log(arrOfPeople)
+
+
+  // for each person in player array, pushes them to DOM with buttons to add to blue or red team
   listOfPlayers.map((person, index) => {
-    console.log('"person" in player array:')
+
+    console.log('"person" in listOfPlayers array:')
     console.log(person)
 
     const listElem = document.createElement('li')
@@ -149,15 +151,15 @@ const makePlayer = (id) => {
     listElem.appendChild(addRed)
     listElem.appendChild(document.createTextNode(`${person[0].name} - ${person[0].skillSet}`))
     playerList.append(listElem)
-
-    //run listPeopleChoices to reprint remaining array to people list
-    //also need to clear list before re-printing, so as not to add the two arrays
   })
   // refreshes DOM
   // listPeopleChoices()
+
+  //need to also clear List of people in DOM so it can be reprinted
 }
 
 const addToBlue = (id) => {
+  console.log('selected players ID:')
   console.log(id)
 
   // splice selected player from players array and splice into blue team array
@@ -178,9 +180,12 @@ const addToBlue = (id) => {
   })
   // refreshes DOM
   // makePlayer()
+
+  //need to also clear List of people in DOM so it can be reprinted
 }
 
 const addToRed = (id) => {
+  console.log('selected players ID:')
   console.log(id)
 
   // splice selected player from players array and splice into red team array
@@ -201,4 +206,6 @@ const addToRed = (id) => {
   })
   // refreshes DOM
   // makePlayer()
+
+  //need to also clear List of people in DOM so it can be reprinted
 }
