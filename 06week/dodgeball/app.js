@@ -116,7 +116,7 @@ const listPeopleChoices = () => {
       peopleList.removeChild(li)
     })
     li.appendChild(button)
-    li.appendChild(document.createTextNode(`${person.name} - ${person.skillSet}`))
+    li.appendChild(document.createTextNode(` ${person.name} - ${person.skillSet} `))
     peopleList.append(li)
   })
 }
@@ -129,6 +129,7 @@ const makePlayer = (id) => {
   let idMatch = arrOfPeople.find(player => {
     return player.id == id;
   })
+  console.log(idMatch)
   // get index of the player (object) we accessed above
   let positionMatch = arrOfPeople.indexOf(idMatch)
   // instantiates new DodgeBallPlayer
@@ -164,20 +165,63 @@ const makePlayer = (id) => {
     addToRed(newPlayer.id)
     playerList.removeChild(li)
   })
-
-  const removePlayer = document.createElement('button')
-  removePlayer.innerHTML = 'Remove'
-  removePlayer.addEventListener('click', function () {
-    listOfPlayers.splice(positionMatch, 1)
-    arrOfPeople.push(newPlayer)
+  // creates button to remove player from player list and put them back to person list
+  const button = document.createElement('button')
+  button.innerHTML = 'Remove'
+  button.addEventListener('click', function () {
+    removePlayer(id)
+    playerList.removeChild(li)
   })
   // appends both buttons and textNode to <li>, then appends <li >to the <ul>
   li.appendChild(addBlue)
   li.appendChild(addRed)
-  li.appendChild(document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall}`))
-  li.appendChild(removePlayer)
+  li.appendChild(document.createTextNode(` ${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall} `))
+  li.appendChild(button)
   playerList.append(li)
 }
+
+
+const removePlayer = (id) => {
+  const playerMatch = listOfPlayers.find(player => {
+    return player.id == id
+  })
+  const positionMatch = listOfPlayers.indexOf(playerMatch)
+
+  listOfPlayers.splice(positionMatch, 1)
+  arrOfPeople.push(playerMatch) // NEEDS TO BE ADDRESSED
+
+  const peopleList = document.querySelector('#people')
+  const li = document.createElement('li')
+  const node = document.createTextNode(` ${playerMatch.name} - ${playerMatch.skillSet} `) // NEED TO BE ADDRESSED
+  const button1 = document.createElement('button')
+  button1.innerHTML = "Make Player"
+  button1.addEventListener('click', function () {
+    makePlayer(id) // needs to be ADDRESSED
+    peopleList.removeChild(li)
+  })
+  li.appendChild(button1)
+  li.appendChild(node)
+  peopleList.append(li)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // adds player to blue team
 const addToBlue = (id) => {
@@ -209,12 +253,11 @@ const addToBlue = (id) => {
   const ul = document.querySelector('#blue')
   // create <li>, <button> and textNode 
   const li = document.createElement('li')
-  const node = document.createTextNode(`${newBlue.name} - ${newBlue.mascot}`)
+  const node = document.createTextNode(` ${newBlue.name} - ${newBlue.mascot} `)
   const button = document.createElement('button')
   button.innerHTML = 'Remove'
   // event listener to remove player from blue team, and push back onto player list
   button.addEventListener('click', function () {
-    console.log('clicked blue Remove')
     removeBlue(newBlue.id)
     ul.removeChild(li)
   })
@@ -255,7 +298,7 @@ const addToRed = (id) => {
   const ul = document.querySelector('#red')
   // create <li>, <button> and textNode
   const li = document.createElement('li')
-  const node = document.createTextNode(`${newRed.name} - ${newRed.mascot}`)
+  const node = document.createTextNode(` ${newRed.name} - ${newRed.mascot} `)
   const button = document.createElement('button')
   button.innerHTML = 'Remove'
   // event listener to remove player from blue team, and push back onto player list
@@ -296,7 +339,7 @@ const removeBlue = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
   const li = document.createElement('li')
-  const node = document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall}`)
+  const node = document.createTextNode(` ${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall} `)
   // creates button with function of adding player to blueTeam and removing from player list
   const addBlue = document.createElement('button')
   addBlue.innerHTML = 'Add to Blue'
@@ -352,7 +395,7 @@ const removeRed = (id) => {
   // create <ul>, <li> and textNode to display player back in playerList
   const playerList = document.querySelector('#players')
   const li = document.createElement('li')
-  const node = document.createTextNode(`${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall}`)
+  const node = document.createTextNode(` ${newPlayer.name} - ${newPlayer.skillSet} - Can throw: ${newPlayer.canThrowBall} `)
   // creates button with function of adding player to blueTeam and removing from player list
   const addBlue = document.createElement('button')
   addBlue.innerHTML = 'Add to Blue'
