@@ -354,10 +354,17 @@ const removeBlue = (id) => {
     addToRed(newPlayer.id)
     playerList.removeChild(li)
   })
+  const button = document.createElement('button')
+  button.innerHTML = 'Remove'
+  button.addEventListener('click', function () {
+    removePlayer(id)
+    playerList.removeChild(li)
+  })
   // appends all elements to the DOM
   li.append(addBlue)
   li.append(addRed)
   li.append(node)
+  li.append(button)
   playerList.append(li)
 }
 
@@ -410,10 +417,17 @@ const removeRed = (id) => {
     addToRed(newPlayer.id)
     playerList.removeChild(li)
   })
+  const button = document.createElement('button')
+  button.innerHTML = 'Remove'
+  button.addEventListener('click', function () {
+    removePlayer(id)
+    playerList.removeChild(li)
+  })
   // appends all elements to the DOM
   li.append(addBlue)
   li.append(addRed)
   li.append(node)
+  li.append(button)
   playerList.append(li)
 }
 
