@@ -101,6 +101,7 @@ class RedTeammate extends DodgeBallPlayer {
     this.mascot = 'Red Jaguars';
   }
 }
+
 // prints list of people to the DOM
 const listPeopleChoices = () => {
   // selects <ul> to display list of people
@@ -115,6 +116,7 @@ const listPeopleChoices = () => {
       makePlayer(person.id);
       peopleList.removeChild(li)
     })
+    // appends elements to the DOM
     li.appendChild(button)
     li.appendChild(document.createTextNode(` ${person.name} - ${person.skillSet} `))
     peopleList.append(li)
@@ -125,12 +127,11 @@ const listPeopleChoices = () => {
 const makePlayer = (id) => {
   // select dodgeball players <ul> to add new players to
   const playerList = document.querySelector('#players')
-  // return array value (object) of selected player if the player ID matches
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   let idMatch = arrOfPeople.find(player => {
     return player.id == id;
   })
-  console.log(idMatch)
-  // get index of the player (object) we accessed above
+  // set variable equal to the index of the player (object) we accessed above
   let positionMatch = arrOfPeople.indexOf(idMatch)
   // instantiates new DodgeBallPlayer
   const newPlayer = new DodgeBallPlayer(
@@ -145,9 +146,8 @@ const makePlayer = (id) => {
     isHealthy = true,
     yearsExperience = 5
   )
-  // pushing new player to player list
+  // push new player to player list & removes them from people list
   listOfPlayers.push(newPlayer)
-  // removes player from people list
   arrOfPeople.splice(positionMatch, 1)
   // creates <li> to hold buttons and textNode
   const li = document.createElement('li')
@@ -180,56 +180,42 @@ const makePlayer = (id) => {
   playerList.append(li)
 }
 
-
+// function that removes player from player list & moves them back to person list
 const removePlayer = (id) => {
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   const playerMatch = listOfPlayers.find(player => {
     return player.id == id
   })
+  // set variable equal to the index of the player (object) we accessed above
   const positionMatch = listOfPlayers.indexOf(playerMatch)
-
+  // push player to people list & removes them from player list
   listOfPlayers.splice(positionMatch, 1)
-  arrOfPeople.push(playerMatch) // NEEDS TO BE ADDRESSED
-
+  arrOfPeople.push(playerMatch)
+  // selected list of people <ul> to push players into
   const peopleList = document.querySelector('#people')
+  // create <li> and textNode
   const li = document.createElement('li')
-  const node = document.createTextNode(` ${playerMatch.name} - ${playerMatch.skillSet} `) // NEED TO BE ADDRESSED
+  const node = document.createTextNode(` ${playerMatch.name} - ${playerMatch.skillSet} `)
+  // creates a <button> with function of making a person into player and removing them from people list 
   const button1 = document.createElement('button')
   button1.innerHTML = "Make Player"
   button1.addEventListener('click', function () {
-    makePlayer(id) // needs to be ADDRESSED
+    makePlayer(id)
     peopleList.removeChild(li)
   })
+  // appends all elements to the DOM
   li.appendChild(button1)
   li.appendChild(node)
   peopleList.append(li)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // adds player to blue team
 const addToBlue = (id) => {
-  // sets variable equal to player (object) who has matching ID
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   let blueMatch = listOfPlayers.find(player => {
     return player.id == id;
   })
-  // sets variable equal to index of blueMatch
+  // set variable equal to the index of the player (object) we accessed above
   let positionMatch = listOfPlayers.indexOf(blueMatch)
   // instantiates new blueTeammate
   let newBlue = new BlueTeammate(
@@ -246,7 +232,7 @@ const addToBlue = (id) => {
     blueMatch.teamColor,
     blueMatch.mascot
   )
-  // splice selected player from players array and push into blue team array
+  // splice selected player from players array & push into blue team array
   listOfPlayers.splice(positionMatch, 1)
   blueTeam.push(newBlue)
   // access blue team <ul> in DOM
@@ -265,16 +251,15 @@ const addToBlue = (id) => {
   li.appendChild(button)
   li.appendChild(node)
   ul.append(li)
-  console.log(blueTeam)
 }
 
 // adds player to red team
 const addToRed = (id) => {
-  // sets variable equal to player (object) who has matching ID
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   const redMatch = listOfPlayers.find(player => {
     return player.id == id
   })
-  // sets variable equal to index of blueMatch
+  // set variable equal to the index of the player (object) we accessed above
   const positionMatch = listOfPlayers.indexOf(redMatch);
   // instantiates new red teammate
   let newRed = new RedTeammate(
@@ -291,17 +276,17 @@ const addToRed = (id) => {
     redMatch.teamColor,
     redMatch.mascot
   )
-  // splice selected player from players array and push into red team array
+  // splice selected player from players array & push into red team array
   listOfPlayers.splice(positionMatch, 1)
   redTeam.push(newRed)
-  // acces red team <ul> in the DOM 
+  // access red team <ul> in the DOM 
   const ul = document.querySelector('#red')
   // create <li>, <button> and textNode
   const li = document.createElement('li')
   const node = document.createTextNode(` ${newRed.name} - ${newRed.mascot} `)
   const button = document.createElement('button')
   button.innerHTML = 'Remove'
-  // event listener to remove player from blue team, and push back onto player list
+  // event listener to remove player from red team, and push back onto player list
   button.addEventListener('click', function () {
     removeRed(newRed.id)
     ul.removeChild(li)
@@ -314,11 +299,11 @@ const addToRed = (id) => {
 
 // removes player from blue team and puts them back into player list
 const removeBlue = (id) => {
-  // sets variable equal to player (object) who has matching ID
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   const blueMatch = blueTeam.find(player => {
     return player.id == id;
   })
-  // sets variable equal to index of blueMatch
+  // set variable equal to the index of the player (object) we accessed above
   let positionMatch = blueTeam.indexOf(blueMatch)
   // returns to dodgeball player
   const newPlayer = new DodgeBallPlayer(
@@ -354,6 +339,7 @@ const removeBlue = (id) => {
     addToRed(newPlayer.id)
     playerList.removeChild(li)
   })
+  // adds event listener to remove player from player list & push them to people list
   const button = document.createElement('button')
   button.innerHTML = 'Remove'
   button.addEventListener('click', function () {
@@ -376,11 +362,11 @@ const removeBlue = (id) => {
 
 
 const removeRed = (id) => {
-  // sets variable equal to player (object) who has matching ID
+  // return the array value (object) of selected player if the player ID matches and store it as a variable
   let redMatch = redTeam.find(player => {
     return player.id == id;
   })
-  // sets variable equal to index of redMatch
+  // set variable equal to the index of the player (object) we accessed above
   let positionMatch = redTeam.indexOf(redMatch)
   // returns to dodgeball player
   const newPlayer = new DodgeBallPlayer(
@@ -395,7 +381,6 @@ const removeRed = (id) => {
     isHealthy = true,
     yearsExperience = 5
   )
-
   // splice selected player from red array and push back to players array
   redTeam.splice(positionMatch, 1)
   listOfPlayers.push(newPlayer)
@@ -417,6 +402,7 @@ const removeRed = (id) => {
     addToRed(newPlayer.id)
     playerList.removeChild(li)
   })
+  // adds event listener to remove player from player list & push them to people list
   const button = document.createElement('button')
   button.innerHTML = 'Remove'
   button.addEventListener('click', function () {
@@ -434,16 +420,3 @@ const removeRed = (id) => {
 
 
 
-const addBlue = document.createElement('button')
-addBlue.innerHTML = 'Add to Blue'
-addBlue.addEventListener('click', function () {
-  addToBlue(newPlayer.id)
-  playerList.removeChild(listElem)
-})
-// creates button with function of adding player to redTeam and removing from player list
-const addRed = document.createElement('button')
-addRed.innerHTML = 'Add to Red'
-addRed.addEventListener('click', function () {
-  addToRed(newPlayer.id)
-  playerList.removeChild(listElem)
-})
