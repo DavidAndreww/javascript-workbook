@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fetch</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div id="fetch"></div>
 
-<button onclick="getPoke()">console log pokemon</button>
-<button onclick="getPokemon()">load pokemon</button>
+<body>
+  <h1>BATTLE ARENA</h1>
+
+  <div id="buttonWrap">
+    <button onclick="getPoke()">console log pokemon</button>
+    <button onclick="getPokemon()">load pokemon</button>
+  </div>
+  <div id="flex">
+    <div id="pokeLeft"></div>
+    <div id="pokeRight"></div>
+  </div>
+
 
 
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.23.1/babel.min.js"></script>
@@ -18,4 +27,5 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.0/react-dom.js"></script> -->
   <script src="./script.js"></script>
 </body>
+
 </html>

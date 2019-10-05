@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box
+}
+body {
+  background-image: url(./background.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+h1 {
+  color: white;
+  text-align: center;
+}
+#buttonWrap {
+  text-align: center;
+}
+#flex {
+  margin-top: 45vh;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid yellow;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  
+}
+#pokeLeft,
+#pokeRight {
+  height: 150px;
+  width: 150px;
+  background-color: white;
+}
