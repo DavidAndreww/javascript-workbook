@@ -1,16 +1,5 @@
 'use strict';
-// const dotenv = require('dotenv').config()
 
-// https://swapi.co/
-
-/*
-
-Just turn the url into a variable and put it in front of the API key like so
-const proxy = "https://cors-anywhere.herokuapp.com/";
-
-const api = `${proxy}https://whateverthesite
-
-    */
 let pokemon = []
 
 
@@ -34,7 +23,8 @@ let pokemon = []
   
   const getPoke = () => {
     if(pokemon){
-      console.log(pokemon)
+      console.log(pokemon[0].name, pokemon[0].sprites.front_default)
+      console.log(pokemon[1].name, pokemon[0].sprites.front_default)
     }
   }
 
