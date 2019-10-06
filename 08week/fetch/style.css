@@ -17,17 +17,30 @@ h1 {
 }
 button{
   margin: 2px;
+  max-width: 100px;
+}
+#displayBoard{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  height: 250px;
+  width: 400px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  
 }
 #pokemonWrap {
-  margin-top: 35vh;
+  margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-  /* border: 1px solid yellow; */
+  border: 1px solid yellow;
   width: 800px;
   display: flex;
   justify-content: space-between;
 }
-
 #pokeLeft,
 #pokeRight {
   height: 170px;
@@ -41,4 +54,8 @@ img {
 }
 p {
   background-color: white;
+}
+h6 {
+  color: white;
+  margin-bottom: -25px;
 }
