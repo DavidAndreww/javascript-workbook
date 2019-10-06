@@ -5,15 +5,15 @@
 window.onload = () => {
   const div = document.querySelector('#displayBoard')
   const h4Load = document.createElement('h4')
-  h4Load.setAttribute('class', 'loading')  
-  h4Load.innerHTML = `Generate two pokemon <br> and <br> FIGHT!`  
+  h4Load.setAttribute('class', 'loading')
+  h4Load.innerHTML = `Generate two pokemon <br> and <br> FIGHT!`
   div.appendChild(h4Load)
 }
 
 
 let pokemon = []
 
-let getPokemon = () => {
+let getPokemonL = () => {
   fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 150)}`)
     .then(res => res.json())
     .then(info => {
@@ -21,6 +21,15 @@ let getPokemon = () => {
       pokemon.push(info)
       const displayBoard = document.querySelector('#displayBoard')
       displayBoard.removeChild(document.querySelector('.loading'))
+    })
+}
+
+let getPokemonR = () => {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 150)}`)
+    .then(res => res.json())
+    .then(info => {
+      console.log(info)
+      pokemon.push(info)
     })
 }
 
@@ -68,21 +77,17 @@ const battle = () => {
   textHolderR.appendChild(txtNodeR)
   rightDiv.appendChild(textHolderR)
 
-  let left = `${pokemon[0].stats[randomLeft1].base_stat}`
-  let right = `${pokemon[1].stats[randomRight1].base_stat}`
-  console.log(left, right)
-
   const leftWin = () => {
     const div = document.querySelector('#displayBoard')
     const h1 = document.createElement('h1')
     h1.innerHTML = `${pokemon[0].name}`
     const h4 = document.createElement('h4')
+    h4.innerHTML = 'WINS!'
     const button = document.createElement('button')
     button.innerHTML = 'Play Again?'
     button.addEventListener('click', function () {
       location.reload(true)
     })
-    h4.innerHTML = 'WINS!'
     div.appendChild(h1)
     div.appendChild(h4)
     div.appendChild(button)
@@ -93,12 +98,12 @@ const battle = () => {
     const h1 = document.createElement('h1')
     h1.innerHTML = `${pokemon[1].name}`
     const h4 = document.createElement('h4')
+    h4.innerHTML = 'WINS!'
     const button = document.createElement('button')
     button.innerHTML = 'Play Again?'
     button.addEventListener('click', function () {
       location.reload(true)
     })
-    h4.innerHTML = 'WINS!'
     div.appendChild(h1)
     div.appendChild(h4)
     div.appendChild(button)
@@ -119,6 +124,7 @@ const battle = () => {
     div.appendChild(button)
   }
 
+  console.log(`Left:${leftDmg}, Rigth:${rightDmg}`)
   if (leftDmg > rightDmg) {
     leftWin()
   }
@@ -136,18 +142,12 @@ const battle = () => {
 
 
 
-//  // not sure why this method will not work
+// Why are my variables coming back undefined?
+
+
+// generates random number to use in URL to select pokemon
 //  let index1 = Math.floor(Math.random() * 150)
 //  let index2 = Math.floor(Math.random() * 150)
-//  var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
-//  var pokemon2 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index2}`)
-
-
-// if I do not push pokemon to an array, and instead just generage two, and then gather info from variables as below, variables come back undefined
-
-
-let index1 = Math.floor(Math.random() * 150)
-let api = `https://pokeapi.co/api/v2/pokemon/${index1}`;
 
 // let getPokemon = (api) => {
 //   fetch(api)
