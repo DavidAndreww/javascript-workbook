@@ -15,19 +15,30 @@ h1 {
 #buttonWrap {
   text-align: center;
 }
-#flex {
-  margin-top: 45vh;
+button{
+  margin: 2px;
+}
+#pokemonWrap {
+  margin-top: 35vh;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid yellow;
+  /* border: 1px solid yellow; */
   width: 800px;
   display: flex;
   justify-content: space-between;
-  
 }
+
 #pokeLeft,
 #pokeRight {
-  height: 150px;
-  width: 150px;
+  height: 170px;
+  width: 170px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700
+}
+img {
+  height: 110%;
+}
+p {
   background-color: white;
 }
