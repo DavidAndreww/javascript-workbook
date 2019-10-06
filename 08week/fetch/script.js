@@ -37,6 +37,16 @@ let getPokemonR = () => {
 // 1: loads DOM with pokemon
 // 2: compares damage output and signals the winner
 const battle = () => {
+  // prints pokemon on left side
+  printLeftPoke()
+  // prints pokemon on right side
+  printRightPoke()
+  // finds the winner
+  findWinner()
+}
+
+// generates random pokemon, move name and damage output, and appends to DOM
+const printLeftPoke = () => {
   // generates random numbers to randomize left pokemon selection, move choice and damage output
   let randomLeft = Math.floor(Math.random() * 20)
   let randomLeft1 = Math.floor(Math.random() * 3)
@@ -53,8 +63,10 @@ const battle = () => {
   leftDiv.appendChild(imgL)
   textHolderL.appendChild(txtNodeL)
   leftDiv.appendChild(textHolderL)
+}
 
-
+// generates random pokemon, move name and damage output, and appends to DOM
+const printRightPoke = () => {
   // generates random numbers to randomize right pokemon selection, move choice and damage output
   let randomRight = Math.floor(Math.random() * 20)
   let randomRight1 = Math.floor(Math.random() * 3)
@@ -71,7 +83,10 @@ const battle = () => {
   rightDiv.appendChild(imgR)
   textHolderR.appendChild(txtNodeR)
   rightDiv.appendChild(textHolderR)
+}
 
+// function that determines winner based off of randomly assigned damage number
+const findWinner = () => {
   // function that displays text if left pokemon wins
   const leftWin = () => {
     // create elements to hold data for left win
@@ -130,6 +145,8 @@ const battle = () => {
   }
 
   // assigns damage counts to variables to be used in the conditional statement below
+  let randomLeft1 = Math.floor(Math.random() * 3)
+  let randomRight1 = Math.floor(Math.random() * 3)
   let leftDmg = `${pokemon[0].stats[randomLeft1].base_stat}`
   let rightDmg = `${pokemon[1].stats[randomRight1].base_stat}`
 
@@ -141,7 +158,13 @@ const battle = () => {
   } else if (leftDmg == rightDmg) {
     draw()
   }
+
 }
+
+
+
+
+
 
 
 
