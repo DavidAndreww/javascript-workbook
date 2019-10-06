@@ -6,7 +6,13 @@
 //  var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
 //  var pokemon2 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index2}`)
 
-
+window.onload = () => {
+  const div = document.querySelector('#displayBoard')
+  const h4Load = document.createElement('h4')
+  h4Load.setAttribute('class', 'loading')  
+  h4Load.innerHTML = `Generate two pokemon <br> and <br> FIGHT!`  
+  div.appendChild(h4Load)
+}
 
 
 let pokemon = []
@@ -17,6 +23,8 @@ let getPokemon = () => {
     .then(info => {
       console.log(info)
       pokemon.push(info)
+      const displayBoard = document.querySelector('#displayBoard')
+      displayBoard.removeChild(document.querySelector('.loading'))
     })
 }
 
@@ -66,7 +74,7 @@ const battle = () => {
 
   let left = `${pokemon[0].stats[randomLeft1].base_stat}`
   let right = `${pokemon[1].stats[randomRight1].base_stat}`
-  console.log(left, right) 
+  console.log(left, right)
 
   const leftWin = () => {
     const div = document.querySelector('#displayBoard')
@@ -75,7 +83,7 @@ const battle = () => {
     const h4 = document.createElement('h4')
     const button = document.createElement('button')
     button.innerHTML = 'Play Again?'
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       location.reload(true)
     })
     h4.innerHTML = 'WINS!'
@@ -91,7 +99,7 @@ const battle = () => {
     const h4 = document.createElement('h4')
     const button = document.createElement('button')
     button.innerHTML = 'Play Again?'
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       location.reload(true)
     })
     h4.innerHTML = 'WINS!'
@@ -104,10 +112,10 @@ const battle = () => {
     const div = document.querySelector('#displayBoard')
     const h1 = document.createElement('h1')
     h1.innerHTML = `DRAW`
-    
+
     const button = document.createElement('button')
     button.innerHTML = 'Play Again?'
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
       location.reload(true)
     })
     h4.innerHTML = 'WINS!'
@@ -115,13 +123,13 @@ const battle = () => {
     div.appendChild(button)
   }
 
-  if (leftDmg > rightDmg){
+  if (leftDmg > rightDmg) {
     leftWin()
   }
-  if (leftDmg < rightDmg){
+  if (leftDmg < rightDmg) {
     rightWin()
   }
-  if (leftDmg == rightDmg){
+  if (leftDmg == rightDmg) {
     draw()
   }
 
