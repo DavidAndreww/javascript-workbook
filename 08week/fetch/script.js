@@ -1,10 +1,6 @@
 'use strict';
 
-//  // not sure why this method will not work
-//  let index1 = Math.floor(Math.random() * 150)
-//  let index2 = Math.floor(Math.random() * 150)
-//  var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
-//  var pokemon2 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index2}`)
+
 
 window.onload = () => {
   const div = document.querySelector('#displayBoard')
@@ -136,43 +132,24 @@ const battle = () => {
 }
 
 
-// leftWin = () => {
-//   const div = document.querySelector('#displayBoard')
-//   const h1 = document.createElement('h1')
-//   h1.innerHTML = 'yo'
-//   const h4 = document.createElement('h4')
-//   const
-// }
-
-// rightWin = () => {
-//   const div = document.querySelector('#displayBoard')
-// }
-
-// draw = () => {
-//   const div = document.querySelector('#displayBoard')
-// }
-
-// if (leftDmg > rightDmg) {
-//   leftWin();
-// } else if (leftDmg < rightDmg) {
-//   rightWin();
-// } else if (leftDmg == rightDmg) {
-//   draw();
-// }
 
 
 
 
+//  // not sure why this method will not work
+//  let index1 = Math.floor(Math.random() * 150)
+//  let index2 = Math.floor(Math.random() * 150)
+//  var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
+//  var pokemon2 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index2}`)
 
 
+// if I do not push pokemon to an array, and instead just generage two, and then gather info from variables as below, variables come back undefined
 
 
+let index1 = Math.floor(Math.random() * 150)
+let api = `https://pokeapi.co/api/v2/pokemon/${index1}`;
 
-
-
-
-
-// let getPokemon = (`https://pokeapi.co/api/v2/pokemon/${index1}`) => {
+// let getPokemon = (api) => {
 //   fetch(api)
 //     .then(res => res.json())
 //     .then(info => {
@@ -180,7 +157,7 @@ const battle = () => {
 //       return info
 //     })
 // }
-
+//  let index1 = Math.floor(Math.random() * 15
 // let index2 = Math.floor(Math.random() * 150)
 
 // var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
