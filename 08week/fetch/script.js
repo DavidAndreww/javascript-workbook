@@ -1,4 +1,4 @@
-// occasionally declares wrong winner and I cannot figure out why. I declared variables on lines 18 and 19 to store random value, and pass it through functions to keep that number equal throughout code. I Console logged values at each function they are passed into, and they are equal the entire way through, yet still occasionally calls wrong winner...
+// occasionally declares wrong winner and I cannot figure out why. I declared variables on lines 18 and 19 to store random value, and pass it through functions to keep that number equal throughout code. I Console logged values at each function they are passed into, and they are equal the entire way through, yet still occasionally calls wrong winner...damage values to be passed into winner selector on lines 196 and 197
 
 'use strict';
 
@@ -61,6 +61,11 @@ let getPokemonR = () => {
 // 1: loads DOM with pokemon
 // 2: compares damage output and signals the winner
 const battle = (randStatL, randStatR) => {
+  // if pokemon selection is duplicated, restarts program and alerts player
+  if (pokemon[0].name == pokemon[1].name){
+    window.alert('Pokemon was duplicated!')
+    location.reload(true)
+  }
   console.log(`battleL: ${randStatL}, battleR: ${randStatR}`)
   // removes loading images from DOM to make space for pokemon
   const leftDiv = document.querySelector('#pokeLeft')
