@@ -1,4 +1,5 @@
 'use strict';
+// Game occasionally calls winner for the wrong side and I cannot figure out why...
 
 
 // loads instructional text to DOM on page load
@@ -20,8 +21,15 @@ let getPokemonL = () => {
     .then(info => {
       pokemon.push(info)
     })
+  // removes window.onload instructions from displayboard after button is clicked
   const displayBoard = document.querySelector('#displayBoard')
   displayBoard.removeChild(document.querySelector('.loading'))
+  // creates waiting image and appends to DOM
+  const leftDiv = document.querySelector('#pokeLeft')
+  const img = document.createElement('img')
+  img.setAttribute('class', 'emoji')
+  img.src = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thinking_Face_Emoji_large.png?v=1480481060';
+  leftDiv.appendChild(img)
 }
 
 // assigned as an on-click function that generates data for a random pokemon
@@ -31,12 +39,24 @@ let getPokemonR = () => {
     .then(info => {
       pokemon.push(info)
     })
+  // creates waiting image and appends to DOM
+  const rightDiv = document.querySelector('#pokeRight')
+  const img = document.createElement('img')
+  img.setAttribute('class', 'emoji')
+  img.src = 'https://cdn.shopify.com/s/files/1/1061/1924/products/Thinking_Face_Emoji_large.png?v=1480481060';
+  rightDiv.appendChild(img)
 }
 
 // assigned as an on-click function that:
 // 1: loads DOM with pokemon
 // 2: compares damage output and signals the winner
 const battle = () => {
+  // removes loading images from DOM to make space for pokemon
+  const leftDiv = document.querySelector('#pokeLeft')
+  const rightDiv = document.querySelector('#pokeRight')
+  leftDiv.removeChild(document.querySelector('.emoji'))
+  rightDiv.removeChild(document.querySelector('.emoji'))
+
   // prints pokemon on left side
   printLeftPoke()
   // prints pokemon on right side
@@ -48,8 +68,8 @@ const battle = () => {
 // generates random pokemon, move name and damage output, and appends to DOM
 const printLeftPoke = () => {
   // generates random numbers to randomize left pokemon selection, move choice and damage output
-  let randomLeft = Math.floor(Math.random() * 20)
-  let randomLeft1 = Math.floor(Math.random() * 3)
+  let random = Math.floor(Math.random() * 20)
+  let randStatsL = Math.floor(Math.random() * 3)
   // create elements to display data for left pokemon
   const leftDiv = document.querySelector('#pokeLeft')
   const leftName = document.createElement('h6')
@@ -57,7 +77,7 @@ const printLeftPoke = () => {
   const imgL = document.createElement('img')
   imgL.src = `${pokemon[0].sprites.front_default}`
   const textHolderL = document.createElement('p')
-  const txtNodeL = document.createTextNode(`${pokemon[0].moves[randomLeft].move.name}: ${pokemon[0].stats[randomLeft1].base_stat} damage!`)
+  const txtNodeL = document.createTextNode(`${pokemon[0].moves[random].move.name}: ${pokemon[0].stats[randStatsL].base_stat} damage!`)
   // append elements to DOM
   leftDiv.appendChild(leftName)
   leftDiv.appendChild(imgL)
@@ -68,8 +88,8 @@ const printLeftPoke = () => {
 // generates random pokemon, move name and damage output, and appends to DOM
 const printRightPoke = () => {
   // generates random numbers to randomize right pokemon selection, move choice and damage output
-  let randomRight = Math.floor(Math.random() * 20)
-  let randomRight1 = Math.floor(Math.random() * 3)
+  let random = Math.floor(Math.random() * 20)
+  let randStatR = Math.floor(Math.random() * 3)
   // create elements to hold data on rigth side
   const rightDiv = document.querySelector('#pokeRight')
   const rightName = document.createElement('h6')
@@ -77,7 +97,8 @@ const printRightPoke = () => {
   const imgR = document.createElement('img')
   imgR.src = `${pokemon[1].sprites.front_default}`
   const textHolderR = document.createElement('p')
-  const txtNodeR = document.createTextNode(`${pokemon[1].moves[randomRight].move.name}: ${pokemon[1].stats[randomRight1].base_stat} damage!`)
+  const txtNodeR = document.createTextNode(`${pokemon[1].moves[random].move.name}: ${pokemon[1].stats[randStatR].base_stat} damage!`)
+  
   // append elements to DOM
   rightDiv.appendChild(rightName)
   rightDiv.appendChild(imgR)
@@ -145,10 +166,12 @@ const findWinner = () => {
   }
 
   // assigns damage counts to variables to be used in the conditional statement below
-  let randomLeft1 = Math.floor(Math.random() * 3)
-  let randomRight1 = Math.floor(Math.random() * 3)
-  let leftDmg = `${pokemon[0].stats[randomLeft1].base_stat}`
-  let rightDmg = `${pokemon[1].stats[randomRight1].base_stat}`
+  let randStatsL = Math.floor(Math.random() * 3)
+  let randStatR = Math.floor(Math.random() * 3)
+  let leftDmg = `${pokemon[0].stats[randStatsL].base_stat}`
+  let rightDmg = `${pokemon[1].stats[randStatR].base_stat}`
+  console.log(`leftDmg: ${leftDmg}`)
+  console.log(`rightDmg: ${rightDmg}`)
 
   //  conditional that determines which win function to run
   if (leftDmg > rightDmg) {
