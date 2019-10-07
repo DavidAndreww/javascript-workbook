@@ -1,5 +1,3 @@
-// occasionally declares wrong winner and I cannot figure out why. I declared variables on lines 18 and 19 to store random value, and pass it through functions to keep that number equal throughout code. I Console logged values at each function they are passed into, and they are equal the entire way through, yet still occasionally calls wrong winner...damage values to be passed into winner selector on lines 196 and 197
-
 'use strict';
 
 // loads instructional text to DOM on page load
@@ -17,7 +15,6 @@ let pokemon = []
 // declare variables to hold random number to be used to generate pokemon damage output. passed into battle(), printLeftPoke(), printRightPoke() and findWinner() functions
 let randStatL = Math.floor(Math.random() * 3)
 let randStatR = Math.floor(Math.random() * 3)
-console.log(`base randStatL: ${randStatL}, base randStatR: ${randStatR}`)
 // run battle() function when FIGHT button is clicked
 const fight = document.querySelector('#fight')
 fight.addEventListener('click', function () {
@@ -66,7 +63,6 @@ const battle = (randStatL, randStatR) => {
     window.alert('Pokemon was duplicated!')
     location.reload(true)
   }
-  console.log(`battleL: ${randStatL}, battleR: ${randStatR}`)
   // removes loading images from DOM to make space for pokemon
   const leftDiv = document.querySelector('#pokeLeft')
   const rightDiv = document.querySelector('#pokeRight')
@@ -83,7 +79,6 @@ const battle = (randStatL, randStatR) => {
 
 // generates random pokemon, move name and damage output, and appends to DOM
 const printLeftPoke = (randStatL) => {
-  console.log(`printLeftPoke: ${randStatL}`)
   // generates random numbers to randomize left pokemon selection, move choice and damage output
   let random = Math.floor(Math.random() * 20)
   // create elements to display data for left pokemon
@@ -106,7 +101,6 @@ const printLeftPoke = (randStatL) => {
 
 // generates random pokemon, move name and damage output, and appends to DOM
 const printRightPoke = (randStatR) => {
-  console.log(`pringRightPoke: ${randStatR}`)
   // generates random numbers to randomize right pokemon selection, move choice and damage output
   let random = Math.floor(Math.random() * 20)
   // let randStatR = Math.floor(Math.random() * 3)
@@ -130,8 +124,6 @@ const printRightPoke = (randStatR) => {
 
 // function that determines winner based off of randomly assigned damage number
 const findWinner = (randStatL, randStatR) => {
-  console.log(`winnerL: ${randStatL}, winnerR: ${randStatR}`)
-
   // function that displays text if left pokemon wins
   const leftWin = () => {
     // create elements to hold data for left win
@@ -193,10 +185,8 @@ const findWinner = (randStatL, randStatR) => {
   }
 
   // assigns damage counts to variables to be used in the conditional statement below
-  let leftDmg = `${pokemon[0].stats[randStatL].base_stat}`
-  let rightDmg = `${pokemon[1].stats[randStatR].base_stat}`
-  console.log(`leftDmg: ${leftDmg}`)
-  console.log(`rightDmg: ${rightDmg}`)
+  let leftDmg = parseInt(`${pokemon[0].stats[randStatL].base_stat}`)
+  let rightDmg = parseInt(`${pokemon[1].stats[randStatR].base_stat}`)
   //  conditional that determines which win function to run
   if (leftDmg > rightDmg) {
     leftWin()
