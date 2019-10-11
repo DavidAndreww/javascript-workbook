@@ -207,21 +207,23 @@ const findWinner = (randStatL, randStatR) => {
 
 
 
-// Why are my variables coming back undefined?
+// // Why are my variables coming back undefined?
 
 
-// generates random number to use in URL to select pokemon
-//  let index1 = Math.floor(Math.random() * 150)
-//  let index2 = Math.floor(Math.random() * 150)
+// // generates random number to use in URL to select pokemon
+// let index1 = Math.floor(Math.random() * 150)
+// let index2 = Math.floor(Math.random() * 150)
 
-// let getPokemon = (api) => {
-//   fetch(api)
-//     .then(res => res.json())
-//     .then(info => {
-//       console.log(info)
-//       return info
-//     })
+// async function getPokemon(api) {
+//   const response = await fetch(api);
+//   const json = await response.json();
+//   return json;
+
 // }
 
-// var pokemon1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
-// var pokemon2 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index2}`)
+// let poke1 = getPokemon(`https://pokeapi.co/api/v2/pokemon/${index1}`)
+// console.log(poke1)
+
+
+
+
