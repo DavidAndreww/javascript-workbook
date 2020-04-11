@@ -9,8 +9,13 @@ const rl = readline.createInterface({
 
 
 function pigLatin(word) {
-
-  // Your code here
+  const vowels = ['a', 'e', 'i', 'o', 'u']
+  let split = word.split('')
+  for (let i = 0; i < word.length; i++){
+    if(split[i].includes(vowels)){
+      return 
+    }
+  }
 
 }
 
